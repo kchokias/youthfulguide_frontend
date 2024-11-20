@@ -88,12 +88,21 @@
   text-align: center;
 }
 
-.sidenav-nav-link-text {
+.sidenav-link-text {
   margin-left: 1.5rem;
 }
 
 .sidenav-nav-item:hover .sidenav-nav-link {
   background-color: #fff;
+  color: #000;
+}
+
+.active {
+  background-color: #fff;
+}
+
+.active .sidenav-link-icon,
+.active .sidenav-link-text {
   color: #000;
 }
 
