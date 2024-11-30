@@ -13,6 +13,7 @@ import { BodyComponent } from './pages/body/body.component';
 import { MediaComponent } from './pages/media/media.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { HeaderComponent } from './pages/header/header.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HeaderComponent } from './pages/header/header.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
