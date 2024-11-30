@@ -12,6 +12,7 @@ import { SidenavComponent } from './pages/sidenav/sidenav.component';
 import { BodyComponent } from './pages/body/body.component';
 import { MediaComponent } from './pages/media/media.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { HeaderComponent } from './pages/header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
     BodyComponent,
     DashboardComponent,
     MediaComponent,
-    SettingsComponent
+    SettingsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
