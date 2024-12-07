@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ export class RegisterComponent implements OnInit {
   public registerForm: FormGroup = new FormGroup({});
   private componentName: string = `RegisterComponent`;
 
-  public constructor(private formBuilder: FormBuilder) {
+  public constructor(private formBuilder: FormBuilder, private router: Router) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -28,6 +29,10 @@ export class RegisterComponent implements OnInit {
     const functionName: string = `onSubmit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
     console.log(`${logPath}/ @Login form.value`, this.registerForm.value);
+  }
+
+  public goBack(): void {
+    this.router.navigate(['/login']);
   }
 
   public formSetup(): void {

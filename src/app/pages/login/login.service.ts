@@ -2,31 +2,40 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+const AUTH_API = 'https://youthfulguides.app/api/User/';//Login
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   private serviceName: string = `LoginService`;
-  private serverUrl: string =  `https://youthfulguides.app`
-  private loginUrl: string = `/api/User/Login`;
 
   constructor(private http: HttpClient) { }
 
-  public getDeviceTokenRequest(data: {email: string, password: string}): Observable<any> {
-    const functionName: string = `getDeviceTokenRequest`;
+  public login(data: {email: string, password: string}): Observable<any> {
+    const functionName: string = `login`;
     const logPath: string = `/${this.serviceName}/${functionName}()`;
-    console.log(`${logPath}/ data $0`, data);
-    console.log('Request URL: $0', this.serverUrl + this.loginUrl);
+    // console.log(`${logPath}/ data`, data);
 
-    return this.http.get<any>(
-      this.serverUrl+this.loginUrl,
-      // `${environment.apiUrl}/api/v0/staff/web/user/device-token?name=angular`,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'Application/json',
-          // 'Authorization': 'Basic ' + btoa(`${data.email}:${data.password}`),
-        }),
-      }
+    return this.http.post(
+      AUTH_API + 'Login',data,httpOptions
     );
+  }
+
+  public register(data: {username: string, email: string, password: string}): Observable<any> {
+    const functionName: string = `register`;
+    const logPath: string = `/${this.serviceName}/${functionName}()`;
+    // console.log(`${logPath}/ data`, data);
+    return this.http.post(
+      AUTH_API + 'signup',data,httpOptions
+    );
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(AUTH_API + 'signout', { }, httpOptions);
   }
 }

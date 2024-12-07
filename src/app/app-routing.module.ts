@@ -9,8 +9,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
 const routes: Routes = [
   // {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  // {path: 'register', component: RegisterComponent}
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: 'register', component: RegisterComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'media', component: MediaComponent},
   {path: 'settings', component: SettingsComponent}

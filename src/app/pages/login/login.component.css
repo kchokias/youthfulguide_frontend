@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
+    font-family: "Aclonica", serif;
+  }
 
 .parent {
     display: flex;
@@ -98,7 +96,8 @@ h2 {
 }
 
 .input-box input:focus~label,
-.input-box input:valid~label {
+.input-box input:valid~label,
+.input-box input.ng-dirty + label {
     top: 1px;
     font-size: .8em;
     background: #e9de1d;

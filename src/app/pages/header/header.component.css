@@ -5,10 +5,10 @@
   z-index: 1;
   transition: all .5 ease;
   background: #f4f7fa;
-  /* background: pink; */
   padding: 1rem 1.5rem 0 1.5rem;
   position: fixed;
   top: 0;
+  border-bottom: 1px solid #c9dbed;
 }
 
 .head-trimmed {
@@ -19,4 +19,15 @@
 .head-md-screen {
   width: calc(100% - 5rem);
   margin-left: 5rem;
+}
+
+.logo {
+  width: 11rem;
+  margin-bottom: 0.8rem;
+}
+
+.logo-2 {
+  margin-left: 1rem;
+  width: 3.75rem;
+  margin-bottom: 0.5rem;
 }

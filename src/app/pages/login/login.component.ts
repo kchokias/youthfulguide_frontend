@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public constructor(private loginService: LoginService) {}
 
-
   public ngOnInit(): void {
     const lifecycleName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
@@ -42,7 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const logPath: string = `/${this.componentName}/${functionName}()`;
     console.log(`${logPath}/ @Login form.value`, this.loginForm.value);
 
-    this.loginService.getDeviceTokenRequest(this.loginForm.value)
+    this.loginService.login(this.loginForm.value)
     .subscribe(
       (response: any) => console.log('HTTP Response:', response),
       (error: any) => console.log('HTTP Error:', error),

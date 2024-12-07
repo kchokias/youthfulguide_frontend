@@ -27,15 +27,15 @@
             <div class="input-box" style="margin:0">
               <mat-form-field appearance="outline" class="custom-select">
                 <mat-label>Choose an option</mat-label>
-                <mat-select formControlName="role">
+                <mat-select formControlName="role"  panelClass="register-panel">
                   <mat-option value="traveler">Traveler</mat-option>
                   <mat-option value="guide">Guide</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
 
-            <button type="submit" class="btn" [disabled]="registerForm.disabled || registerForm.invalid">SignUp</button>
-            <button class="btn">Back</button>
+            <button type="submit" class="btn" [disabled]="registerForm.disabled || registerForm.invalid">Signup</button>
+            <button class="btn" (click)="goBack()">Back</button>
           </form>
       </div>
   </div>

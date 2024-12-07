@@ -14,6 +14,7 @@ import { MediaComponent } from './pages/media/media.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './helpers/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-
 * {
   margin: 0;
   padding: 0;
@@ -35,7 +32,7 @@ h2 {
   width: 100%;
   height: 50px;
   background: transparent;
-  border: 2px solid #626262;
+  border: 2px solid #020202;
   outline: none;
   border-radius: 40px;
   font-size: 1em;
@@ -61,6 +58,7 @@ h2 {
 }
 
 .input-box input:focus~label,
+.input-box input.ng-dirty + label,
 .input-box input:valid~label {
   top: 1px;
   font-size: .8em;
@@ -96,9 +94,10 @@ h2 {
   color: #e9de1d;
   font-weight: 600;
   margin-bottom: 2vh;
+  font-family: "Aclonica", serif;
+  letter-spacing: 1.5px;
 }
 
-/* Input Box Container */
 .input-box {
   position: relative;
   margin: 25px 0;
@@ -106,5 +105,22 @@ h2 {
 
 .custom-select {
   width: 100%;
+}
+
+mat-label, mat-option {
+  font-family: "Aclonica", serif;
+}
+
+::ng-deep .register-panel {
+  background-color: #e9de1d!important;
+}
+
+mat-option:hover {
+  background-color: #020202!important;
+  color: #e9de1d;
+}
+
+:host ::ng-deep .custom-select .mat-mdc-select-value {
+  font-family: "Aclonica", serif;
 }
 
