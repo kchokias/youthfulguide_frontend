@@ -15,6 +15,9 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './helpers/http.interceptor';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { BookingsModule } from './pages/bookings/bookings.module';
+import { SharedModule } from './pages/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { httpInterceptorProviders } from './helpers/http.interceptor';
     DashboardComponent,
     MediaComponent,
     SettingsComponent,
-    HeaderComponent
+    HeaderComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ import { httpInterceptorProviders } from './helpers/http.interceptor';
     ReactiveFormsModule,
     MaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BookingsModule,
+    SharedModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

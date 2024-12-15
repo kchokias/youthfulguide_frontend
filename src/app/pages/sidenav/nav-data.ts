@@ -1,17 +1,22 @@
 export const navbarData = [
   {
-    routeLink: 'dashboard',
-    icon:'fas fa-home',
-    label: 'Dashboard'
+    routeLink: 'bookings',
+    icon:'fa fa-plus',
+    label: 'New Booking'
   },
   {
-    routeLink: 'media',
-    icon:'fa-brands fa-medium',
-    label: 'Media'
+    routeLink: 'history',
+    icon:'fa-solid fa-timeline',
+    label: 'History'
   },
   {
-    routeLink: 'settings',
-    icon:'fas fa-cog',
-    label: 'Settings'
+    routeLink: 'profile',
+    icon:'fa-solid fa-id-card',
+    label: 'Profile'
+  },
+  {
+    routeLink: 'faq',
+    icon:'fa solid fa-question',
+    label: 'FAQ'
   },
 ]
