@@ -1,0 +1,34 @@
+<mat-form-field appearance="fill" class="location-select">
+  <mat-select [formControl]="location" multiple [panelClass]="'location-panel'">
+    <mat-select-trigger>
+      <div class="trigg" fxLayout="row">
+
+        <div
+          class="filter-button"
+          fxLayout="row"
+          [ngStyle]="{ 'background-color': getFilterColor(location.value?.[0]) }" >
+
+          <span class="filter-value">
+            {{location.value ? location.value[0] : ''}}
+          </span>
+
+          <i class="bi bi-x-lg cut-icon" (click)="deselectFirstFilter($event)"></i>
+
+        </div>
+
+        <span
+          *ngIf="location.value?.length > 1"
+          class="counter-length">
+          <span class="counter-value"> +{{location.value.length - 1}}</span>
+        </span>
+
+      </div>
+
+    </mat-select-trigger>
+
+    <mat-option *ngFor="let location of locations" [value]="location">
+      {{location}}
+    </mat-option>
+
+  </mat-select>
+</mat-form-field>

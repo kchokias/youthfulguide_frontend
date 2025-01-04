@@ -1,0 +1,143 @@
+.location-select {
+  width: 260px;
+  max-width: none;
+  box-sizing: border-box;
+  top: 1px;
+}
+
+:host ::ng-deep .location-select .mat-mdc-form-field-flex {
+  padding: 0 12px 0 5px;
+  border-radius: 4px;
+  border: solid 1px #ced4da;
+  background-color: white;
+  box-sizing: border-box;
+  height: 40px;
+}
+
+:host ::ng-deep .location-select.invalid-input .mat-mdc-form-field-flex {
+  border: 1px solid #dc3545 !important;
+}
+
+:host ::ng-deep .location-select .mat-mdc-form-field-focus-overlay {
+  background-color: transparent;
+}
+
+:host ::ng-deep .location-select.valid-input .mat-mdc-form-field-flex {
+  border: 1px solid #198754 !important;
+}
+
+:host ::ng-deep .location-select .mdc-text-field--filled {
+  --mdc-filled-text-field-active-indicator-height: 0px;
+}
+
+:host ::ng-deep .mat-mdc-select-arrow-wrapper {
+  transform: translateY(-10px)!important;
+}
+
+:host ::ng-deep .location-select .mat-mdc-text-field-wrapper {
+  padding-bottom: 0!important;
+}
+
+::ng-deep .location-panel .mat-mdc-option {
+  font-family: "Aclonica", serif;
+  border: 1px solid #ced4da;
+  border-radius: 2px;
+  font-size: 16px!important;
+  line-height: 1.5;
+  height: auto;
+  padding: 0 0 0 8px;
+  color: #6c757d;
+}
+
+::ng-deep .location-select .mat-mdc-select-value-text {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px !important;
+  color: #000;
+}
+
+::ng-deep .location-select .mat-mdc-select-value {
+  transform: translateY(-10px);
+  overflow: visible;
+}
+
+::ng-deep .mat-mdc-select-panel-wrap {
+  flex-basis: 98%!important;
+  color: #6c757d;
+}
+
+:host ::ng-deep .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  visibility: hidden;
+}
+
+:host ::ng-deep .location-select:hover .mat-mdc-form-field-flex {
+  background-color: #F2F4F6;
+  border-color: #041f4e;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+:host ::ng-deep .location-select .mat-form-field-required-marker {
+  visibility: hidden;
+}
+
+.custom-arrow {
+  font-size: 16px;
+}
+
+mat-icon {
+  color:#6c757d;
+  line-height: 1.25!important;
+  font-size: 32px!important;
+}
+
+mat-option  {
+  line-height: 40px!important;
+  height: 40px!important;
+}
+
+::ng-deep .location-panel mat-pseudo-checkbox {
+  border-radius: 4px!important;
+}
+
+::ng-deep .location-panel .mat-pseudo-checkbox-checked {
+  background: #2498e5!important;
+}
+
+.filter-button {
+  background-color:#74569d;
+  border-radius: 2px;
+  height: 27px;
+  padding-right: 8px;
+}
+
+.filter-value {
+  top: 3px;
+  left: 8px;
+  position: relative;
+  color: white;
+}
+
+.cut-icon {
+  font-size: 14px;
+  margin-left: 13px;
+  margin-top: 5px;
+  color: white;
+}
+
+.counter-length {
+  background-color: #ced4da;
+  width: 35px;
+  height: 27px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-left: 8px;
+}
+
+.counter-value {
+  font-size: 16px;
+  color: #041f4e;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #6c757d;
+}

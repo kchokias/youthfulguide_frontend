@@ -1,0 +1,30 @@
+:host ::ng-deep .date-picker .mat-mdc-select-value {
+  font-family: "Aclonica", serif;
+}
+
+:host ::ng-deep .date-picker .mdc-text-field--filled {
+  --mdc-filled-text-field-active-indicator-height: 0px;
+}
+
+:host ::ng-deep .date-picker .mat-mdc-form-field-flex {
+  background-color: white;
+  padding: 0 24px;
+  border-radius: 15px;
+}
+
+.mat-datepicker-toggle {
+  color: black;
+}
+
+:host ::ng-deep .date-picker .mat-mdc-form-field-focus-overlay {
+  background-color: transparent;
+}
+
+:host ::ng-deep .date-picker mat-label {
+  font-family: "Aclonica", serif;
+}
+
+:host ::ng-deep .date-picker mat-date-range-input {
+  font-family: "Aclonica", serif;
+}
+
