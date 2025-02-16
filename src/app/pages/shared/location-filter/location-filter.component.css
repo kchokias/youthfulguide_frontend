@@ -1,12 +1,12 @@
 .location-select {
-  width: 260px;
+  width: max-content;
   max-width: none;
   box-sizing: border-box;
   top: 1px;
 }
 
 :host ::ng-deep .location-select .mat-mdc-form-field-flex {
-  padding: 0 12px 0 5px;
+  padding: 0 30px 0 5px;
   border-radius: 4px;
   border: solid 1px #ced4da;
   background-color: white;
@@ -31,7 +31,7 @@
 }
 
 :host ::ng-deep .mat-mdc-select-arrow-wrapper {
-  transform: translateY(-10px)!important;
+  transform: translate(10px, -45%)!important;
 }
 
 :host ::ng-deep .location-select .mat-mdc-text-field-wrapper {

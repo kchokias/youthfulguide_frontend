@@ -2,7 +2,7 @@
 
   <div class="title">Guides List</div>
 
-  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="24px">
+  <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
 
     <app-datepicker></app-datepicker>
 
@@ -11,7 +11,7 @@
     <mat-form-field class="search-field">
       <mat-label>Search by Last name</mat-label>
       <input matInput type="text" [(ngModel)]="searchName"(ngModelChange)=" searchByLastName($event)">
-      <button *ngIf="searchName" matSuffix mat-icon-button>
+      <button *ngIf="searchName" matSuffix mat-icon-button aria-label="Clear" (click)="searchName=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>

@@ -8,7 +8,7 @@
 
 :host ::ng-deep .date-picker .mat-mdc-form-field-flex {
   background-color: white;
-  padding: 0 24px;
+  padding: 0 10px;
   border-radius: 15px;
 }
 
@@ -26,5 +26,13 @@
 
 :host ::ng-deep .date-picker mat-date-range-input {
   font-family: "Aclonica", serif;
+  font-size: 14px;
 }
 
+:host ::ng-deep .date-picker .mdc-text-field {
+  padding: 0!important;
+}
+
+:host ::ng-deep .date-picker .mat-mdc-form-field-infix {
+  width: 13.6rem;
+}

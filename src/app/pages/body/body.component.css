@@ -1,6 +1,6 @@
 .body {
   width: calc(100% - 5rem);
-  margin-left: 5rem;
+  margin-left: 3.5rem;
   margin-top: 3.5rem;
   z-index: 0;
   position: relative;
@@ -11,8 +11,8 @@
 }
 
 .body-trimmed {
-  width: calc(100% - 16.5625rem);
-  margin-left: 16.5625rem;
+  width: calc(100% - 15rem);
+  margin-left: 15rem;
 }
 
 .body-md-screen {

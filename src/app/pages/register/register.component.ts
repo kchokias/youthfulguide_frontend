@@ -7,7 +7,15 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
+
+  public regions: any[] = [
+    { viewValue: 'Central Greece', value: 'central_greece' },
+    { viewValue: 'Macedonia', value: 'macedonia' },
+    { viewValue: 'Crete', value: 'crete' },
+    { viewValue: 'Thrace', value: 'thrace' }
+  ];
 
   public registerForm: FormGroup = new FormGroup({});
   private componentName: string = `RegisterComponent`;
@@ -46,8 +54,9 @@ export class RegisterComponent implements OnInit {
       'email':  [undefined, [Validators.required, Validators.email]],
       'password':[undefined, [Validators.required]],
       'password2': [undefined, [Validators.required]],
-      'role':[undefined, [Validators.required]]
+      'role':[undefined, [Validators.required]],
+      'country':['greece', [Validators.required]],
+      'region':[undefined, [Validators.required]],
     });
   }
-
 }
