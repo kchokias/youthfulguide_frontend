@@ -12,6 +12,10 @@
               <label>Surname</label>
             </div>
             <div class="input-box">
+              <input type="text" formControlName="username" required>
+              <label>Username</label>
+            </div>
+            <div class="input-box">
               <input type="email" autocomplete="email" formControlName="email" required>
               <label>Email</label>
             </div>
@@ -20,7 +24,7 @@
               <label>Password</label>
             </div>
             <div class="input-box">
-              <input type="password" autocomplete="current-password" formControlName="password2" required>
+              <input type="password" autocomplete="current-password" required>
               <label>Confirm Password</label>
             </div>
 
@@ -30,6 +34,7 @@
                 <mat-select formControlName="role"  panelClass="register-panel">
                   <mat-option value="traveler">Traveler</mat-option>
                   <mat-option value="guide">Guide</mat-option>
+                  <mat-option value="visitor">Visitor</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -38,7 +43,7 @@
               <mat-form-field appearance="outline" class="custom-select">
                 <mat-label>Choose a country</mat-label>
                 <mat-select formControlName="country"  panelClass="register-panel">
-                  <mat-option value="greece">Greece</mat-option>
+                  <mat-option value="Greece">Greece</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>

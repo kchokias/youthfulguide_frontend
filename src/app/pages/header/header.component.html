@@ -6,10 +6,23 @@
     </div>
     <div class="head-content-right">
       <div class="head-user-avatar-container">
-        <div class="head-user-avatar">
+        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
           <img src="../../../assets/images/user.png" alt="user" class="user-avatar">
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #userOverlay>
+  <div class="overlay overlay-user overlay-fall" cdkMenu>
+    <ul>
+      <li *ngFor="let item of userItems">
+        <a>
+          <i class="icon" [ngClass]="item.icon"></i>
+          <span>{{item.label}}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</ng-template>

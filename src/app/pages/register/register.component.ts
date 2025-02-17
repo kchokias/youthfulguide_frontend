@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-register',
@@ -13,14 +14,14 @@ export class RegisterComponent implements OnInit {
   public regions: any[] = [
     { viewValue: 'Central Greece', value: 'central_greece' },
     { viewValue: 'Macedonia', value: 'macedonia' },
-    { viewValue: 'Crete', value: 'crete' },
+    { viewValue: 'Crete', value: 'Crete' },
     { viewValue: 'Thrace', value: 'thrace' }
   ];
 
   public registerForm: FormGroup = new FormGroup({});
   private componentName: string = `RegisterComponent`;
 
-  public constructor(private formBuilder: FormBuilder, private router: Router) {
+  public constructor(private formBuilder: FormBuilder, private router: Router,private loginService: LoginService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -36,7 +37,13 @@ export class RegisterComponent implements OnInit {
   public onSubmit(): void {
     const functionName: string = `onSubmit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
-    console.log(`${logPath}/ @Login form.value`, this.registerForm.value);
+    console.log(`${logPath}/ @registerForm form.value $0`, this.registerForm.value);
+
+    this.loginService.register(this.registerForm.value).subscribe({
+      next: (response: any) => console.log('HTTP Response:', response),
+      error: (error: any) => console.log('HTTP Error:', error),
+      complete: () => console.log('HTTP Complete')
+    });
   }
 
   public goBack(): void {
@@ -51,9 +58,10 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       'name': [undefined, [Validators.required]],
       'surname': [undefined, [Validators.required]],
+      'username': [undefined, [Validators.required]],
       'email':  [undefined, [Validators.required, Validators.email]],
       'password':[undefined, [Validators.required]],
-      'password2': [undefined, [Validators.required]],
+      // 'password2': [undefined, [Validators.required]],
       'role':[undefined, [Validators.required]],
       'country':['greece', [Validators.required]],
       'region':[undefined, [Validators.required]],

@@ -26,12 +26,12 @@ export class LoginService {
     );
   }
 
-  public register(data: {username: string, email: string, password: string}): Observable<any> {
+  public register(data: any): Observable<any> {
     const functionName: string = `register`;
     const logPath: string = `/${this.serviceName}/${functionName}()`;
     // console.log(`${logPath}/ data`, data);
     return this.http.post(
-      AUTH_API + 'signup',data,httpOptions
+      AUTH_API + 'CreateNewUser',data,httpOptions
     );
   }
 

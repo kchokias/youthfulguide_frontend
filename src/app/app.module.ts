@@ -18,6 +18,9 @@ import { httpInterceptorProviders } from './helpers/http.interceptor';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { BookingsModule } from './pages/bookings/bookings.module';
 import { SharedModule } from './pages/shared/shared.module';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkMenuModule } from '@angular/cdk/menu';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { SharedModule } from './pages/shared/shared.module';
     FormsModule,
     HttpClientModule,
     BookingsModule,
-    SharedModule
+    SharedModule,
+    OverlayModule,
+    CdkMenuModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

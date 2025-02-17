@@ -7,6 +7,7 @@ import { MediaComponent } from './pages/media/media.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
+import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'media', component: MediaComponent},
+  {path: 'profile', component: UserProfileComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'bookings', component: BookingsComponent}
 ];
