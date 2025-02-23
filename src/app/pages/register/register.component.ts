@@ -12,10 +12,10 @@ import { LoginService } from '../login/login.service';
 export class RegisterComponent implements OnInit {
 
   public regions: any[] = [
-    { viewValue: 'Central Greece', value: 'central_greece' },
-    { viewValue: 'Macedonia', value: 'macedonia' },
+    { viewValue: 'Central Greece', value: 'Central_Greece' },
+    { viewValue: 'Macedonia', value: 'Μacedonia' },
     { viewValue: 'Crete', value: 'Crete' },
-    { viewValue: 'Thrace', value: 'thrace' }
+    { viewValue: 'Thrace', value: 'Τhrace' }
   ];
 
   public registerForm: FormGroup = new FormGroup({});

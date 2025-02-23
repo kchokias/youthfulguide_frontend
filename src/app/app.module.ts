@@ -20,6 +20,8 @@ import { BookingsModule } from './pages/bookings/bookings.module';
 import { SharedModule } from './pages/shared/shared.module';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
+import { CommonModule } from '@angular/common';
+import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     MediaComponent,
     SettingsComponent,
     HeaderComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MaterialModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
     BookingsModule,

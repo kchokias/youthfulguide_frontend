@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const AUTH_API = 'https://youthfulguides.app/api/User/';//Login
+const AUTH_API = 'https://youthfulguides.app/api/User/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -11,7 +11,9 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
+
 export class LoginService {
+
   private serviceName: string = `LoginService`;
 
   constructor(private http: HttpClient) { }
