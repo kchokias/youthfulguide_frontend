@@ -1,14 +1,17 @@
 export const userItems = [
   {
     icon: 'far fa-user',
-    label: 'Profile'
+    label: 'Profile',
+    action: 'profile'
   },
   {
-    icon: 'far fa-cog',
-    label: 'Settings'
+    icon: 'fas fa-gear',
+    label: 'Settings',
+    action: 'settings'
   },
   {
-    icon: 'far fa-power-off',
-    label: 'Logout'
+    icon: 'fas fa-right-from-bracket',
+    label: 'Logout',
+    action: 'logout'
   }
-]
+];

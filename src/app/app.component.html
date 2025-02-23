@@ -1,23 +1,14 @@
-<!-- <div id="container">
-  <div id="sidebar"></div>
-  <div id="content">
-      <div id="header">
-        <div id="logo">Youthful Guides</div>
-        <div id="menu">
-          <a href="#">Home</a>
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Logout</a>
-        </div>
-      </div>
-  </div>
-</div> -->
-<app-sidenav (onToggleSidenav)="onToggleSideNav($event)"></app-sidenav>
-<app-header
-  [collapsed]="isSideNavCollapsed"
-  [screenWidth]="screenWidth">
-</app-header>
-<app-body
-  [collapsed] = 'isSideNavCollapsed'
-  [screenWidth]="screenWidth">
-</app-body>
+<div class="full-container">
+  <ng-container *ngIf="!hideSidebarAndHeader">
+    <app-sidenav (onToggleSidenav)="onToggleSideNav($event)"></app-sidenav>
+    <app-header
+      [collapsed]="isSideNavCollapsed"
+      [screenWidth]="screenWidth">
+    </app-header>
+  </ng-container>
+
+  <app-body
+    [collapsed]="isSideNavCollapsed"
+    [screenWidth]="screenWidth">
+  </app-body>
+</div>

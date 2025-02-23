@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { LoginService } from './login.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from 'src/app/helpers/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public formReady: boolean = false;
 
-  public constructor(private loginService: LoginService) {}
+  public constructor(private loginService: LoginService, private authService: AuthService) {}
 
   public ngOnInit(): void {
     const lifecycleName: string = `ngOnInit`;
@@ -41,11 +42,18 @@ export class LoginComponent implements OnInit, OnDestroy {
     const logPath: string = `/${this.componentName}/${functionName}()`;
     console.log(`${logPath}/ @Login form.value`, this.loginForm.value);
 
-    this.loginService.login(this.loginForm.value)
-    .subscribe(
-      (response: any) => console.log('HTTP Response:', response),
-      (error: any) => console.log('HTTP Error:', error),
-      () => console.log('HTTP Complete')
+    this.subscriptions.push
+      (this.loginService.login(this.loginForm.value)
+      .subscribe({
+        next: (response) => {
+          console.log(`${logPath}/ @loginForm response $0`, response);
+          const token = response.token;
+          this.authService.login(token);
+        },
+        error: (error) => {
+          let loginError = 'Invalid login credentials';
+        }
+      })
     );
   }
 

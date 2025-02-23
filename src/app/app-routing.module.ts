@@ -8,6 +8,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
+import { authGuard } from './helpers/auth.guard';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -15,11 +16,11 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'forgot', component: ForgotPasswordComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'media', component: MediaComponent},
-  {path: 'profile', component: UserProfileComponent},
-  {path: 'settings', component: SettingsComponent},
-  {path: 'bookings', component: BookingsComponent}
+  {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  {path: 'media', component: MediaComponent, canActivate: [authGuard] },
+  {path: 'profile', component: UserProfileComponent, canActivate: [authGuard] },
+  {path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
+  {path: 'bookings', component: BookingsComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({

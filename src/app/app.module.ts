@@ -13,7 +13,7 @@ import { BodyComponent } from './pages/body/body.component';
 import { MediaComponent } from './pages/media/media.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { HeaderComponent } from './pages/header/header.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './helpers/http.interceptor';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { BookingsModule } from './pages/bookings/bookings.module';
@@ -22,6 +22,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
+import { AuthInterceptor } from './helpers/auth.interceptor';
 
 
 @NgModule({
@@ -52,7 +53,9 @@ import { UserProfileComponent } from './pages/user/user-profile/user-profile.com
     OverlayModule,
     CdkMenuModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [
+    httpInterceptorProviders,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -37,10 +37,13 @@ export class RegisterComponent implements OnInit {
   public onSubmit(): void {
     const functionName: string = `onSubmit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
-    console.log(`${logPath}/ @registerForm form.value $0`, this.registerForm.value);
+    console.log(`${logPath}/ @registerForm form.value`, this.registerForm.value);
 
     this.loginService.register(this.registerForm.value).subscribe({
-      next: (response: any) => console.log('HTTP Response:', response),
+      next: (response: any) => {
+        console.log('HTTP Response:', response);
+        this.goBack();
+      },
       error: (error: any) => console.log('HTTP Error:', error),
       complete: () => console.log('HTTP Complete')
     });

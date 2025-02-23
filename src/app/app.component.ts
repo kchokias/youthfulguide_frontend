@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -15,8 +16,9 @@ export class AppComponent implements OnInit {
   private componentName: string = `AppComponent`;
   public screenWidth: number = 0
   public isSideNavCollapsed = false;
+  public hideSidebarAndHeader = false;
 
-  public constructor() {
+  public constructor(private router: Router) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -26,6 +28,11 @@ export class AppComponent implements OnInit {
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
     // console.log(`${logPath}/ @App`);
 
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.hideSidebarAndHeader = ['/login', '/register', '/forgot'].includes(this.router.url);
+      }
+    });
   }
 
   public onToggleSideNav(data: SideNavToggle): void {

@@ -1,5 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { userItems } from './header-dummy-data';
+import { AuthService } from 'src/app/helpers/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   public userItems = userItems;
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -54,10 +56,30 @@ export class HeaderComponent implements OnInit {
   }
 
   public checkCanShowSearchAsOverlay(innerWidth: number) : void {
+    const lifecycleName: string = `checkCanShowSearchAsOverlay`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
     if(innerWidth < 845) {
       this.canShowSearchAsOverlay = true;
     } else {
       this.canShowSearchAsOverlay = false;
+    }
+  }
+
+  onUserItemClick(action: string) {
+    const lifecycleName: string = `onUserItemClick`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    switch (action) {
+      case 'profile':
+        this.router.navigate(['/profile']);
+        break;
+      case 'settings':
+        // this.router.navigate(['/settings']);
+        break;
+      case 'logout':
+        this.authService.logout();
+        this.router.navigate(['/login']);
+        break;
     }
   }
 

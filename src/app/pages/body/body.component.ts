@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-body',
@@ -11,25 +12,23 @@ export class BodyComponent implements OnInit {
   @Input() collapsed = false;
   @Input() screenWidth = 0;
 
-  public constructor() {
-    const functionName: string = `constructor`;
-    const logPath: string = `/${this.componentName}/${functionName}()`;
-  }
+  constructor(private router: Router) {}
 
-  public ngOnInit(): void {
-    const lifecycleName: string = `ngOnInit`;
-    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
-    // console.log(`${logPath}/ @Body`);
+  ngOnInit(): void {}
 
-  }
   public getBodyClass(): string {
-    let styleClass = '';
-    if(this.collapsed && this.screenWidth > 768) {
-      styleClass = 'body-trimmed';
-    } else if(this.collapsed && this.screenWidth <= 768 && this.screenWidth > 0) {
-      styleClass = 'body-md-screen';
+    const authRoutes = ['/login', '/register', '/forgot'];
+
+    if (authRoutes.includes(this.router.url)) {
+      return 'body-auth';
     }
 
-    return styleClass;
+    if (this.collapsed && this.screenWidth > 768) {
+      return 'body-trimmed';
+    } else if (this.collapsed && this.screenWidth <= 768 && this.screenWidth > 0) {
+      return 'body-md-screen';
+    }
+
+    return '';
   }
 }
