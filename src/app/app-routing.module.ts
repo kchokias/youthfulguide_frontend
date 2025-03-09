@@ -9,6 +9,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 import { authGuard } from './helpers/auth.guard';
+import { GuideProfileComponent } from './pages/guide/guide-profile/guide-profile.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   {path: 'media', component: MediaComponent, canActivate: [authGuard] },
-  {path: 'profile', component: UserProfileComponent, canActivate: [authGuard] },
+  {path: 'profile', component: GuideProfileComponent, canActivate: [authGuard] },
+  {path: 'profile-settings', component: UserProfileComponent, canActivate: [authGuard] },
   {path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
   {path: 'bookings', component: BookingsComponent, canActivate: [authGuard] }
 ];

@@ -7,11 +7,16 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { LocationFilters } from "./location-filter/location-filter.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ImageCropperDgComponent } from "./image-cropper/image-cropper.component";
+
 
 @NgModule({
   declarations: [
     DatepickerComponent,
-    LocationFilters
+    LocationFilters,
+    ImageCropperDgComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +26,14 @@ import { LocationFilters } from "./location-filter/location-filter.component";
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
+    ImageCropperModule
   ],
   providers: [],
   exports: [
     DatepickerComponent,
-    LocationFilters]
+    LocationFilters,
+    ImageCropperDgComponent
+  ]
 })
 export class SharedModule { }

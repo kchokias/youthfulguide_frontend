@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
 
     switch (action) {
       case 'profile':
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/profile-settings']);
         break;
       case 'settings':
         // this.router.navigate(['/settings']);

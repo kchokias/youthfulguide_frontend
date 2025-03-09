@@ -1,0 +1,22 @@
+<div
+  fxFill
+  fxLayout="row"
+  fxLayoutAlign="space-between center">
+  <h1 mat-dialog-title>Resize Image</h1>
+  <div mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="saveImage()">Save</button>
+    <button mat-stroked-button color="warn" (click)="closeDialog()">Close</button>
+  </div>
+</div>
+<div mat-dialog-content>
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1/1"
+    [resizeToWidth]="150"
+    [resizeToHeight]="150"
+    [roundCropper]="true"
+    (imageCropped)="imageCropped($event)">
+  </image-cropper>
+</div>
+

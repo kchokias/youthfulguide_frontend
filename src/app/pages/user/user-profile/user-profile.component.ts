@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UserService } from '../user.service';
@@ -10,7 +10,7 @@ import { ObjectHelper } from 'src/app/helpers/object-helper.class';
   styleUrls: ['./user-profile.component.css']
 })
 
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
 
   private componentName: string = `UserProfileComponent`;
   public profileForm: FormGroup = new FormGroup({});
@@ -39,6 +39,7 @@ export class UserProfileComponent implements OnInit {
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
     // console.log(`${logPath}/ @Login`);
 
+    await this.getUserId();
     await this.getUserProfile(this.userId);
 
     this.formSetup();
@@ -97,18 +98,42 @@ export class UserProfileComponent implements OnInit {
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
     return new Promise<void>((resolve, reject) => {
-      this.userService.getUserById(_id).subscribe({
-        next: (response) => {
-          this.selectedUser = response.data;
-          console.log(`${logPath}/@User response $7`, response);
-          resolve();
-        },
-        error: (err) => {
-          // this.error = err; // Handle errors
-          console.log(`${logPath}/@User error $7`, err);
-          reject(err);
-        }
-      });
+      this.subscriptions.push(
+        this.userService.getUserProfileById(_id).subscribe({
+          next: (response) => {
+            this.selectedUser = response.data;
+            console.log(`${logPath}/@User response`, response);
+            resolve();
+          },
+          error: (err) => {
+            // this.error = err; // Handle errors
+            console.log(`${logPath}/@User error`, err);
+            reject(err);
+          }
+        })
+      );
+    });
+  }
+
+  public async getUserId(): Promise<void> {
+    const lifecycleName: string = `getUserId`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    return new Promise<void>((resolve, reject) => {
+      this.subscriptions.push(
+        this.userService.getUserId().subscribe({
+          next: (response) => {
+            this.userId = response.userId;
+            console.log(`${logPath}/@User response $7`, response);
+            resolve();
+          },
+          error: (err) => {
+            // this.error = err; // Handle errors
+            console.log(`${logPath}/@User error $7`, err);
+            reject(err);
+          }
+        })
+      );
     });
   }
 
@@ -130,5 +155,15 @@ export class UserProfileComponent implements OnInit {
         complete: () => console.log('HTTP Complete')
       }))
     );
+  }
+
+  public ngOnDestroy(): void {
+    const lifecycleName: string = `ngOnDestroy`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+    // console.log(`${logPath}/ @Clients`);
+
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    })
   }
 }

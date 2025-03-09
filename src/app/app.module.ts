@@ -23,6 +23,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
+import { GuideProfileComponent } from './pages/guide/guide-profile/guide-profile.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
     SettingsComponent,
     HeaderComponent,
     ForgotPasswordComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    GuideProfileComponent
   ],
   imports: [
     BrowserModule,
