@@ -38,10 +38,11 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
   public async ngOnInit() {
     const lifecycleName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
-    // console.log(`${logPath}/ @Login`);
 
     await this.getUserId();
+
     await this.getUserPhoto();
+
     this.convertImageToBase64();
 
     this.formSetup();
@@ -73,29 +74,27 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
     const lifecycleName: string = `getUserPhoto`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-    return new Promise<void>((resolve, reject) => {
-      this.subscriptions.push(
-        this.userService.getUserProfilePhoto(this.userId).subscribe({
-          next: (response) => {
-            console.log(`${logPath}/@User response`, response);
-            this.imageUrl = response.photoData;
-            this.safeUrl = this.sanitizer.bypassSecurityTrustUrl(response.photoData);
-            resolve();
-          },
-          error: (err) => {
-            // this.error = err; // Handle errors
-            console.log(`${logPath}/@User error`, err);
-            reject(err);
-          }
-        })
-      );
+    return new Promise<void>((resolve) => {
+        this.subscriptions.push(
+            this.userService.getUserProfilePhoto(this.userId).subscribe({
+                next: (response) => {
+                    console.log(`${logPath}/@User response`, response);
+                    this.imageBase64 = response.photoData;
+                    resolve();
+                },
+                error: (err) => {
+                    console.error(`${logPath}/@User error`, err);
+                    resolve();
+                }
+            })
+        );
     });
-  }
+}
 
   public formSetup(): void {
     const functionName: string = `formSetup`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
-    // console.log(`${logPath}/ @Login`);
+    console.log(`${logPath}/ @formSetup`);
 
     this.profileForm = this.fb.group({
       username: [{ value: undefined, disabled: true }],
@@ -169,9 +168,10 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
           this.subscriptions.push(
             this.userService.postUserProfilePhoto(this.userId, result).subscribe({
               next: (response) => {
-                console.log(`${logPath}/@User response`, response);
+                console.log(`${logPath}/@User response`, result);
+                console.log(`${logPath}/@User _newImage`, _newImage);
+                console.log(`${logPath}/@User result`, result);
                 this.imageUrl = result;
-                this.safeUrl = this.sanitizer.bypassSecurityTrustUrl(result);
               },
               error: (err) => {
                 console.log(`${logPath}/@User error`, err);
@@ -183,7 +183,9 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
     );
   }
 
-  convertImageToBase64() {
+  public convertImageToBase64(): void  {
+    const lifecycleName: string = `convertImageToBase64`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
     const img = new Image();
     img.src = this.imageUrl;
 
@@ -195,19 +197,20 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
         this.imageBase64 = canvas.toDataURL('image/png');
+        // console.log(`${logPath}/@User imageBase64`, this.imageBase64);
       }
     };
   }
 
-  triggerFileInput(): void {
+  public triggerFileInput(): void {
     const lifecycleName: string = `triggerFileInput`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-    console.log(`${logPath}/@User fileInput $1`, this.fileInput);
+    console.log(`${logPath}/@User fileInput`, this.fileInput);
     this.fileInput.nativeElement.click();
   }
 
-  onFileChange(event: any): void {
+  public onFileChange(event: any): void {
     const lifecycleName: string = `onFileChange`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
@@ -217,13 +220,39 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
 
       reader.onload = (e: any) => {
         let newImage = e.target.result;
-        console.log(`${logPath}/@User response $1`, newImage);
+        console.log(`${logPath}/@User response`, newImage);
         this.toggleAvatarSize('new', newImage);
       };
 
       reader.readAsDataURL(file);
     } else {
       alert('Please select a valid image file.');
+    }
+  }
+
+  public base64ToBlobURL(base64: string, mimeType: string): string {
+    const blob = this.base64ToBlob(base64, mimeType);
+    return URL.createObjectURL(blob);
+  }
+
+  public base64ToBlob(base64: string, mimeType: string): Blob {
+    try {
+      const cleanedBase64 = base64.replace(/^data:image\/(png|jpeg|jpg|gif);base64,/, '');
+
+      const paddedBase64 = cleanedBase64.padEnd(cleanedBase64.length + (4 - (cleanedBase64.length % 4)) % 4, '=');
+
+      const byteCharacters = atob(paddedBase64);
+
+      const byteArrays: number[] = [];
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteArrays.push(byteCharacters.charCodeAt(i));
+      }
+      const byteArray = new Uint8Array(byteArrays);
+
+      return new Blob([byteArray], { type: mimeType });
+    } catch (error) {
+      console.error('Error decoding Base64:', error);
+      throw new Error('Invalid Base64 encoding');
     }
   }
 }

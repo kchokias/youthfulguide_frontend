@@ -1,7 +1,7 @@
 <div class="guide-card" *ngIf="formReady">
   <div class="guide-header">
     <div class="guide-avatar">
-      <img [src]="safeUrl || '../../assets/images/user.png'" alt="Guide Profile">
+      <img [src]="imageUrl || '../../assets/images/user.png'" alt="Guide Profile">
     </div>
     <a class="resize-btn" (click)="toggleAvatarSize('patch')">Resize</a>
   </div>
