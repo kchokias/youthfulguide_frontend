@@ -6,6 +6,7 @@ import { UserService } from '../../user/user.service';
 import { ImageCropperDgComponent } from '../../shared/image-cropper/image-cropper.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MediaGalleryDialogComponent } from '../../shared/media-gallery-dialog/media-gallery-dialog.component';
 
 @Component({
   selector: 'app-guide-profile',
@@ -23,8 +24,10 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
   public formReady:boolean = false;
   public imageUrl = '../../assets/images/user.png';
   public imageBase64: string = '';
+  public mediaFiles: string[] = [];
   public safeUrl: any;
-  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('singleFileInput') singleFileInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('multipleFileInput') multipleFileInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +43,8 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
     await this.getUserId();
+
+    await this.getUserProfile(this.userId);
 
     await this.getUserPhoto();
 
@@ -70,26 +75,48 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
     });
   }
 
+  public async getUserProfile(_id: number): Promise<void> {
+    const lifecycleName: string = `getUserProfile`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    return new Promise<void>((resolve, reject) => {
+      this.subscriptions.push(
+        this.userService.getUserProfileById(_id).subscribe({
+          next: (response) => {
+            this.selectedUser = response.data;
+            console.log(`${logPath}/@User response`, response);
+            resolve();
+          },
+          error: (err) => {
+            // this.error = err; // Handle errors
+            console.log(`${logPath}/@User error`, err);
+            reject(err);
+          }
+        })
+      );
+    });
+  }
+
   public async getUserPhoto(): Promise<void> {
     const lifecycleName: string = `getUserPhoto`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-    return new Promise<void>((resolve) => {
+      return new Promise<void>((resolve) => {
         this.subscriptions.push(
-            this.userService.getUserProfilePhoto(this.userId).subscribe({
-                next: (response) => {
-                    console.log(`${logPath}/@User response`, response);
-                    this.imageBase64 = response.photoData;
-                    resolve();
-                },
-                error: (err) => {
-                    console.error(`${logPath}/@User error`, err);
-                    resolve();
-                }
-            })
+          this.userService.getUserProfilePhoto(this.userId).subscribe({
+            next: (response) => {
+              console.log(`${logPath}/@User response`, response);
+              this.imageBase64 = response.photoData;
+              resolve();
+            },
+            error: (err) => {
+              console.error(`${logPath}/@User error`, err);
+              resolve();
+            }
+          })
         );
-    });
-}
+      });
+  }
 
   public formSetup(): void {
     const functionName: string = `formSetup`;
@@ -202,12 +229,15 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
     };
   }
 
-  public triggerFileInput(): void {
+  public triggerFileInput(_case: string): void {
     const lifecycleName: string = `triggerFileInput`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-    console.log(`${logPath}/@User fileInput`, this.fileInput);
-    this.fileInput.nativeElement.click();
+    if(_case === 'single') {
+      this.singleFileInput.nativeElement.click();
+    } else {
+      this.multipleFileInput.nativeElement.click();
+    }
   }
 
   public onFileChange(event: any): void {
@@ -231,11 +261,16 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
   }
 
   public base64ToBlobURL(base64: string, mimeType: string): string {
+    const lifecycleName: string = `base64ToBlobURL`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
     const blob = this.base64ToBlob(base64, mimeType);
     return URL.createObjectURL(blob);
   }
 
   public base64ToBlob(base64: string, mimeType: string): Blob {
+    const lifecycleName: string = `base64ToBlob`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
     try {
       const cleanedBase64 = base64.replace(/^data:image\/(png|jpeg|jpg|gif);base64,/, '');
 
@@ -254,5 +289,36 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
       console.error('Error decoding Base64:', error);
       throw new Error('Invalid Base64 encoding');
     }
+  }
+
+  public onMultipleFilesChange(event: Event): void {
+    const lifecycleName: string = `onMultipleFilesChange`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    console.log(`${logPath}/ @Event`, event);
+
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      Array.from(input.files).forEach((file) => {
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = (e: any) => {
+            const base64String = e.target.result as string;
+            this.mediaFiles.push(base64String);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          alert('Please select valid image files.');
+        }
+      });
+    }
+  }
+
+  openGallery() {
+    this.dialog.open(MediaGalleryDialogComponent, {
+      width: '80%',
+      maxHeight: '90%',
+      data: { images: this.mediaFiles }
+    });
   }
 }

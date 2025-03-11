@@ -10,13 +10,17 @@ import { LocationFilters } from "./location-filter/location-filter.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImageCropperDgComponent } from "./image-cropper/image-cropper.component";
-
+import { StarRatingComponent } from "./star-rating/star-rating.component";
+import { GalleryModule } from 'ng-gallery';
+import { MediaGalleryDialogComponent } from "./media-gallery-dialog/media-gallery-dialog.component";
 
 @NgModule({
   declarations: [
     DatepickerComponent,
     LocationFilters,
-    ImageCropperDgComponent
+    ImageCropperDgComponent,
+    StarRatingComponent,
+    MediaGalleryDialogComponent
   ],
   imports: [
     CommonModule,
@@ -27,13 +31,16 @@ import { ImageCropperDgComponent } from "./image-cropper/image-cropper.component
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    ImageCropperModule
+    ImageCropperModule,
+    GalleryModule
   ],
   providers: [],
   exports: [
     DatepickerComponent,
     LocationFilters,
-    ImageCropperDgComponent
+    ImageCropperDgComponent,
+    StarRatingComponent,
+    MediaGalleryDialogComponent
   ]
 })
 export class SharedModule { }

@@ -9,7 +9,7 @@
 .guide-header {
   position: relative;
   text-align: center;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 
 .guide-avatar {
@@ -22,6 +22,14 @@
   overflow: hidden;
 }
 
+.guide-details {
+  font-family: 'Roboto';
+  margin-top: 15px;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
 .guide-avatar img {
   width: 150px;
   height: 150px;
@@ -30,21 +38,18 @@
   margin-top: 10px;
 }
 
-.guide-body {
+.guide-actions {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .resize-btn {
-  margin-top: 10px;
   font-size: 15px;
   color: black;
   cursor: pointer;
   text-decoration: underline;
-  position: absolute;
-  top: 150px;
-  left: 75px;
+  position: relative;
 }
 
 .import {
