@@ -1,18 +1,19 @@
-<h1 mat-dialog-title>Media Gallery</h1>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <h1 mat-dialog-title>Media Gallery</h1>
+  <div mat-dialog-actions>
+    <button mat-button color="primary" (click)="closeDialog()">Close</button>
+  </div>
+</div>
 
 <div mat-dialog-content>
   <gallery id="mediaGallery"></gallery>
 </div>
 
 <div class="gallery-thumbnails">
-  <div *ngFor="let image of data.images; let i = index" class="thumbnail-container">
-    <img [src]="image" class="thumbnail" />
+  <div *ngFor="let image of images; let i = index" class="thumbnail-container">
+    <img [src]="image.media_data" class="thumbnail" />
     <button mat-icon-button class="delete-btn" (click)="deleteImage(i)">
       <mat-icon>close</mat-icon>
     </button>
   </div>
-</div>
-
-<div mat-dialog-actions>
-  <button mat-button color="primary" (click)="closeDialog()">Close</button>
 </div>

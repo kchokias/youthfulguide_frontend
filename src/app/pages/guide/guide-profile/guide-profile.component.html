@@ -2,7 +2,7 @@
   <div class="guide-header">
     <a class="resize-btn" (click)="toggleAvatarSize('patch')">Resize</a>
     <div class="guide-avatar">
-      <img [src]="imageUrl || '../../assets/images/user.png'" alt="Guide Profile">
+      <img [src]="imageBase64 || '../../assets/images/user.png'" alt="Guide Profile">
     </div>
     <div class="guide-details">
       <p>{{ selectedUser.name }} {{ selectedUser.surname }}</p>
@@ -15,6 +15,6 @@
     <input #singleFileInput type="file" accept="image/*" (change)="onFileChange($event)" hidden>
     <button mat-stroked-button color="primary" class="import" (click)="triggerFileInput('multiple')">Import Media</button>
     <input #multipleFileInput type="file" accept="image/*" multiple (change)="onMultipleFilesChange($event)" hidden>
-    <button mat-stroked-button color="primary" class="import" (click)="openGallery()">Media Gallery</button>
+    <button [disabled]="!galleryReady" mat-stroked-button color="primary" class="import" (click)="openGallery()">Media Gallery</button>
   </div>
 </div>

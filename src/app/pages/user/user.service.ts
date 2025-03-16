@@ -6,7 +6,10 @@ const GET_PROFILE_USER_BY_ID_API = 'https://youthfulguides.app/api/User/GetUserB
 const GET_USER_ID_API = 'https://youthfulguides.app/api/User/GetUserIdFromToken';
 const PATCH_USER_BY_ID_API = 'https://youthfulguides.app/api/User/UpdateUser/';
 const UPLOAD_PROFILE_PHOTO = 'https://youthfulguides.app/api/User/UploadProfilePhoto';
+const UPLOAD_GUIDE_MEDIA = 'https://youthfulguides.app/api/Guide/UploadMedia';
 const GET_PROFILE_PHOTO = 'https://youthfulguides.app/api/User/GetProfilePhoto/';
+const GET_GUIDE_MEDIA = 'https://youthfulguides.app/api/Guide/GetAllMedia/';
+const DELETE_MEDIA_PHOTO = 'https://youthfulguides.app/api/Guide/DeleteMedia/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -46,6 +49,24 @@ export class UserService {
     return this.http.get(`${GET_PROFILE_USER_BY_ID_API}${id}`, { headers });
   }
 
+  getGuideMedia(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    return this.http.get(`${GET_GUIDE_MEDIA}${id}`, { headers });
+  }
+
+  deleteMediaPhoto(photoId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    return this.http.delete(`${DELETE_MEDIA_PHOTO}${photoId}`, { headers });
+  }
+
   postUserProfilePhoto(id: number, photoData: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -57,6 +78,23 @@ export class UserService {
     };
 
     return this.http.post(`${UPLOAD_PROFILE_PHOTO}`,
+      data,
+      { headers }
+    );
+  }
+
+  postGuideMedia(id: number, guideMedia: string[]): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    const data = {
+      guideId: id,
+      mediaData: guideMedia
+    };
+
+    return this.http.post(`${UPLOAD_GUIDE_MEDIA}`,
       data,
       { headers }
     );

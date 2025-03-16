@@ -22,6 +22,7 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
   private userId:number = 1;
   public selectedUser: any;
   public formReady:boolean = false;
+  public galleryReady:boolean = false;
   public imageUrl = '../../assets/images/user.png';
   public imageBase64: string = '';
   public mediaFiles: string[] = [];
@@ -32,8 +33,7 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    public dialog: MatDialog,
-    private sanitizer: DomSanitizer) {
+    public dialog: MatDialog) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -48,7 +48,7 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
 
     await this.getUserPhoto();
 
-    this.convertImageToBase64();
+    await this.getGuideMedia();
 
     this.formSetup();
   }
@@ -111,6 +111,29 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
             },
             error: (err) => {
               console.error(`${logPath}/@User error`, err);
+              resolve();
+            }
+          })
+        );
+      });
+  }
+
+  public async getGuideMedia(): Promise<void> {
+    const lifecycleName: string = `getGuideMedia`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+      return new Promise<void>((resolve) => {
+        this.subscriptions.push(
+          this.userService.getGuideMedia(this.userId).subscribe({
+            next: (response) => {
+              console.log(`${logPath}/@User response`, response);
+              this.mediaFiles = response.data;
+              this.galleryReady = true;
+              resolve();
+            },
+            error: (err) => {
+              console.error(`${logPath}/@User error`, err);
+              this.galleryReady = false;
               resolve();
             }
           })
@@ -195,10 +218,7 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
           this.subscriptions.push(
             this.userService.postUserProfilePhoto(this.userId, result).subscribe({
               next: (response) => {
-                console.log(`${logPath}/@User response`, result);
-                console.log(`${logPath}/@User _newImage`, _newImage);
-                console.log(`${logPath}/@User result`, result);
-                this.imageUrl = result;
+                this.imageBase64 = result;
               },
               error: (err) => {
                 console.log(`${logPath}/@User error`, err);
@@ -295,30 +315,54 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
     const lifecycleName: string = `onMultipleFilesChange`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-    console.log(`${logPath}/ @Event`, event);
-
+    this.galleryReady = false;
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      Array.from(input.files).forEach((file) => {
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            const base64String = e.target.result as string;
-            this.mediaFiles.push(base64String);
-          };
-          reader.readAsDataURL(file);
-        } else {
-          alert('Please select valid image files.');
-        }
-      });
-    }
-  }
 
-  openGallery() {
-    this.dialog.open(MediaGalleryDialogComponent, {
-      width: '80%',
-      maxHeight: '90%',
-      data: { images: this.mediaFiles }
-    });
-  }
+    if (input.files && input.files.length > 0) {
+        const files = Array.from(input.files);
+        const fileReaders: Promise<string>[] = [];
+
+        files.forEach((file) => {
+            if (file.type.startsWith('image/')) {
+                fileReaders.push(
+                    new Promise<string>((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = (e: any) => resolve(e.target.result as string);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(file);
+                    })
+                );
+            } else {
+                alert('Please select valid image files.');
+            }
+        });
+
+        Promise.all(fileReaders).then((base64Images) => {
+            this.mediaFiles.push(...base64Images);
+
+            this.subscriptions.push(
+                this.userService.postGuideMedia(this.userId, this.mediaFiles).subscribe({
+                    next: (response) => {
+                        this.galleryReady = true;
+                        console.log(`${logPath}/@User response`, response);
+                    },
+                    error: (err) => {
+                        console.log(`${logPath}/@User error`, err);
+                    }
+                })
+            );
+        }).catch(error => console.error(`${logPath}/@FileRead error`, error));
+    }
+}
+
+public openGallery(): void {
+  const lifecycleName: string = `openGallery`;
+  const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+  this.dialog.open(MediaGalleryDialogComponent, {
+    width: '80%',
+    maxHeight: '90%',
+    data: { images: this.mediaFiles }
+  });
+}
 }
