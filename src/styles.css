@@ -9,6 +9,7 @@ body {
   position: relative;
   font-family: "Aclonica", serif;
   background: #f4f7fb;
+  overflow-x: hidden;
 }
 
 .card {

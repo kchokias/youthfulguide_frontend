@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   title = 'Jwt_Login_Angular';
   private componentName: string = `AppComponent`;
   public screenWidth: number = 0
-  public isSideNavCollapsed = false;
+  public isSideNavCollapsed = true;
   public hideSidebarAndHeader = false;
 
   public constructor(private router: Router) {
@@ -27,6 +27,9 @@ export class AppComponent implements OnInit {
     const lifecycleName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
     // console.log(`${logPath}/ @App`);
+
+    this.screenWidth = window.innerWidth;
+    this.isSideNavCollapsed = this.screenWidth > 768;
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

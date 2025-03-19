@@ -6,9 +6,9 @@
     </div>
     <div class="guide-details">
       <p>{{ selectedUser.name }} {{ selectedUser.surname }}</p>
+      <p class="description">{{'@' +selectedUser.username}}</p>
       <app-star-rating [rating]="4.5"></app-star-rating>
     </div>
-
   </div>
   <div class="guide-actions">
     <button mat-stroked-button color="primary" class="import" (click)="triggerFileInput('single')">Import New Avatar Photo</button>

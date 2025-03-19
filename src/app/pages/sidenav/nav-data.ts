@@ -1,18 +1,23 @@
 export const navbarData = [
   {
     routeLink: 'bookings',
-    icon:'fa fa-plus',
-    label: 'New Booking'
+    icon:'fa-solid fa-book',
+    label: 'Bookings'
   },
   {
-    routeLink: 'history',
-    icon:'fa-solid fa-timeline',
-    label: 'History'
+    routeLink: 'availability',
+    icon:'fa-solid fa-calendar',
+    label: 'Availability'
   },
   {
-    routeLink: 'profile',
+    routeLink: 'profile-preview',
+    icon:'fa-solid fa-users-rectangle',
+    label: 'Profile Preview'
+  },
+  {
+    routeLink: 'profile-settings',
     icon:'fa-solid fa-id-card',
-    label: 'Profile'
+    label: 'Profile Settings'
   },
   {
     routeLink: 'faq',

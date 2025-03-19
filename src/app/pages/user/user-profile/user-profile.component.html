@@ -1,13 +1,14 @@
 <div class="container" *ngIf="formReady">
   <!-- LEFT COLUMN -->
   <div class="left-column">
-    <div class="card avatar">
+    <!-- <div class="card avatar">
       <div class="author">
         <img class="avatar" src="assets/images/user.png" alt="Profile">
         <h5 class="title">{{selectedUser.name}} {{selectedUser.surname}}</h5>
         <p class="description">{{selectedUser.username}}</p>
       </div>
-    </div>
+    </div> -->
+    <app-guide-profile></app-guide-profile>
   </div>
 
   <!-- RIGHT COLUMN -->
@@ -20,14 +21,18 @@
           <input type="text" formControlName="username">
         </div>
 
-        <div class="form-group">
-          <label>First Name</label>
-          <input type="text"  formControlName="name">
-        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
 
-        <div class="form-group">
-          <label>Last Name</label>
-          <input type="text" formControlName="surname">
+          <div class="form-group" fxFlex="50">
+            <label>First Name</label>
+            <input type="text"  formControlName="name">
+          </div>
+
+          <div class="form-group" fxFlex="50">
+            <label>Last Name</label>
+            <input type="text" formControlName="surname">
+          </div>
+
         </div>
 
         <div class="form-group">

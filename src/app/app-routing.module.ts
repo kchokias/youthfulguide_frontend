@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   {path: 'media', component: MediaComponent, canActivate: [authGuard] },
-  {path: 'profile', component: GuideProfileComponent, canActivate: [authGuard] },
+  {path: 'profile-preview', component: GuideProfileComponent, canActivate: [authGuard] },
   {path: 'profile-settings', component: UserProfileComponent, canActivate: [authGuard] },
   {path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
   {path: 'bookings', component: BookingsComponent, canActivate: [authGuard] }

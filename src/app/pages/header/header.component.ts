@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   private componentName: string = `RegisterComponent`;
 
-  @Input() collapsed = false;
+  @Input() collapsed = true;
   @Input() screenWidth = 0;
 
   public canShowSearchAsOverlay = false;

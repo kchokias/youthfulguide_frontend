@@ -42,7 +42,7 @@ export class SidenavComponent implements OnInit {
 
   @Output() onToggleSidenav: EventEmitter<SideNavToggle> = new EventEmitter();
   private componentName: string = `SidenavComponent`;
-  public collapsed = false;
+  public collapsed = true;
   public navData = navbarData;
   public screenWidth: number = 0
 
@@ -55,7 +55,10 @@ export class SidenavComponent implements OnInit {
     const lifecycleName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
     // console.log(`${logPath}/ @Sidenav`);
+
     this.screenWidth = window.innerWidth;
+    this.collapsed = this.screenWidth > 768;
+    this.onToggleSidenav.emit({collapsed:this.collapsed, screenWidth: this.screenWidth});
   }
 
   public toggleCollapse(): void {

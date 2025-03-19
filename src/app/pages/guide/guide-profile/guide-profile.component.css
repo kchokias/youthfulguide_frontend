@@ -3,7 +3,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 50%;
+  width: 100%;
 }
 
 .guide-header {
@@ -56,6 +56,12 @@
   color: #666!important;
   font-size: 14px;
   font-weight: 600;
+}
+
+.description {
+  text-align: center;
+  font-size: 24px;
+  color: #666;
 }
 
 :host ::ng-deep .mat-mdc-outlined-button[disabled][disabled] {

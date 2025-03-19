@@ -326,10 +326,10 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
             if (file.type.startsWith('image/')) {
                 fileReaders.push(
                     new Promise<string>((resolve, reject) => {
-                        const reader = new FileReader();
-                        reader.onload = (e: any) => resolve(e.target.result as string);
-                        reader.onerror = reject;
-                        reader.readAsDataURL(file);
+                      const reader = new FileReader();
+                      reader.onload = (e: any) => resolve(e.target.result as string);
+                      reader.onerror = reject;
+                      reader.readAsDataURL(file);
                     })
                 );
             } else {
@@ -355,9 +355,11 @@ export class GuideProfileComponent implements OnInit, OnDestroy {
     }
 }
 
-public openGallery(): void {
+public async openGallery(): Promise<void> {
   const lifecycleName: string = `openGallery`;
   const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+  await this.getGuideMedia();
 
   this.dialog.open(MediaGalleryDialogComponent, {
     width: '80%',
