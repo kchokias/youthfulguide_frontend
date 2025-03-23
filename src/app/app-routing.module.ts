@@ -10,6 +10,7 @@ import { BookingsComponent } from './pages/bookings/bookings.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 import { authGuard } from './helpers/auth.guard';
 import { GuideProfileComponent } from './pages/guide/guide-profile/guide-profile.component';
+import { AvailabilityComponent } from './pages/availability/availability.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'profile-preview', component: GuideProfileComponent, canActivate: [authGuard] },
   {path: 'profile-settings', component: UserProfileComponent, canActivate: [authGuard] },
   {path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
-  {path: 'bookings', component: BookingsComponent, canActivate: [authGuard] }
+  {path: 'bookings', component: BookingsComponent, canActivate: [authGuard] },
+  {path: 'availability', component: AvailabilityComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({

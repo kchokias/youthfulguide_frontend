@@ -24,6 +24,8 @@ import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
 import { GuideProfileComponent } from './pages/guide/guide-profile/guide-profile.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { AvailabilityComponent } from './pages/availability/availability.component';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { GuideProfileComponent } from './pages/guide/guide-profile/guide-profile
     HeaderComponent,
     ForgotPasswordComponent,
     UserProfileComponent,
-    GuideProfileComponent
+    GuideProfileComponent,
+    AvailabilityComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { GuideProfileComponent } from './pages/guide/guide-profile/guide-profile
     BookingsModule,
     SharedModule,
     OverlayModule,
-    CdkMenuModule
+    CdkMenuModule,
+    FullCalendarModule
   ],
   providers: [
     httpInterceptorProviders,

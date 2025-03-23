@@ -65,11 +65,11 @@
 }
 
 :host ::ng-deep .mat-mdc-outlined-button[disabled][disabled] {
-  --mdc-outlined-button-label-text-color: rgba(255, 0, 0, 0.5); /* Red tint for disabled text */
-  --mdc-outlined-button-disabled-label-text-color: rgba(255, 0, 0, 0.4); /* More visible but still faded */
-  --mdc-outlined-button-outline-color: rgba(255, 0, 0, 0.3); /* Red outline instead of default */
-  --mdc-outlined-button-disabled-outline-color: rgba(255, 0, 0, 0.2); /* Lighter red outline for disabled */
-  opacity: 0.6; /* Reduce visibility */
-  cursor: not-allowed; /* Change cursor */
-  transition: all 0.3s ease-in-out; /* Smooth transition */
+  --mdc-outlined-button-label-text-color: rgba(255, 0, 0, 0.5);
+  --mdc-outlined-button-disabled-label-text-color: rgba(255, 0, 0, 0.4);
+  --mdc-outlined-button-outline-color: rgba(255, 0, 0, 0.3);
+  --mdc-outlined-button-disabled-outline-color: rgba(255, 0, 0, 0.2);
+  opacity: 0.6;
+  cursor: not-allowed;
+  transition: all 0.3s ease-in-out;
 }

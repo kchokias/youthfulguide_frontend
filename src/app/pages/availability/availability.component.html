@@ -1,0 +1,10 @@
+<div>
+  <h2>Availability Calendar - Select Two Dates</h2>
+  <ng-container *ngIf="calendarReady">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+
+    <div *ngIf="selectedDates.length === 2">
+      <p><strong>Selected Range:</strong> {{ selectedDates[0] }} to {{ selectedDates[1] }}</p>
+    </div>
+  </ng-container>
+</div>

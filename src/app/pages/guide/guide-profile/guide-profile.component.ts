@@ -5,7 +5,6 @@ import { ObjectHelper } from 'src/app/helpers/object-helper.class';
 import { UserService } from '../../user/user.service';
 import { ImageCropperDgComponent } from '../../shared/image-cropper/image-cropper.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DomSanitizer } from '@angular/platform-browser';
 import { MediaGalleryDialogComponent } from '../../shared/media-gallery-dialog/media-gallery-dialog.component';
 
 @Component({

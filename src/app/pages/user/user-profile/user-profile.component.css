@@ -167,6 +167,7 @@ button {
   cursor: pointer;
   transition: 0.3s ease-in-out;
   font-family: "Aclonica", sans-serif;
+  margin-top: 25px;
 }
 
 button:hover {
