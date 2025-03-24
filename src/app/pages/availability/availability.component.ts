@@ -21,6 +21,8 @@ export class AvailabilityComponent {
   availableDates: string[] = [];
   bookedDates: string[] = [];
   calendarEvents: string[] = [];
+  selectOptions: string[] = ['Option 1', 'Option 2', 'Option 3'];
+  selectedValue: string = '';
 
   public calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],

@@ -1,5 +1,13 @@
-h2 {
-  text-align: center;
+.availability-container {
+  padding: 15px;
+  border-radius: 30px;
+  background-color: #3d3910;
+  font-family: "Carter One", system-ui!important;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 400;
 }
 
 .fullcalendar {
@@ -33,4 +41,48 @@ p {
 
 :host ::ng-deep .fc-daygrid-day-frame {
   min-height: 50px !important;
+}
+
+:host ::ng-deep .fc-daygrid-body {
+  width: 100% !important;
+}
+
+:host ::ng-deep .fc-scrollgrid-sync-table {
+  width: 100% !important;
+}
+
+:host ::ng-deep .fc-header-toolbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 10px;
+  gap: 10px;
+}
+
+:host ::ng-deep .fc-toolbar-chunk:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+:host ::ng-deep .fc-toolbar-chunk:first-child {
+  order: 3;
+  display: flex;
+  gap: 5px;
+}
+
+:host ::ng-deep .fc-toolbar-chunk:nth-child(1) {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+:host ::ng-deep .fc-toolbar-chunk:last-child {
+  order: 4;
+  display: flex;
+  gap: 5px;
+}
+
+:host ::ng-deep .fc-today-button {
+  display: none !important;
 }

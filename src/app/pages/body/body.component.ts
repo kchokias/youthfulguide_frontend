@@ -10,6 +10,7 @@ export class BodyComponent implements OnInit {
   private componentName: string = `BodyComponent`;
 
   @Input() collapsed = false;
+  public viewReady: boolean = false;
   @Input() screenWidth = 0;
 
   constructor(private router: Router) {}
@@ -28,7 +29,6 @@ export class BodyComponent implements OnInit {
     } else if (this.collapsed && this.screenWidth <= 768 && this.screenWidth > 0) {
       return 'body-md-screen';
     }
-
     return '';
   }
 }

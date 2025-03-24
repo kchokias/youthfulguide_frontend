@@ -1,10 +1,10 @@
 <div class="full-container">
   <ng-container *ngIf="!hideSidebarAndHeader">
     <app-sidenav (onToggleSidenav)="onToggleSideNav($event)"></app-sidenav>
-    <app-header
+    <!-- <app-header
       [collapsed]="isSideNavCollapsed"
       [screenWidth]="screenWidth">
-    </app-header>
+    </app-header> -->
   </ng-container>
 
   <app-body

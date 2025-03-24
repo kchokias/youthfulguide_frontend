@@ -1,10 +1,21 @@
-<div>
-  <h2>Availability Calendar - Select Two Dates</h2>
+<div class="availability-container">
+  <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 20px;">
+    <span class="title">Availability</span>
+    <span class="title">Select Date Range</span>
+  </div>
+
+  <!-- <div class="toolbar-dropdown">
+    <mat-form-field appearance="outline">
+      <mat-label>Select Option</mat-label>
+      <mat-select [(value)]="selectedValue">
+        <mat-option *ngFor="let option of selectOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div> -->
+
   <ng-container *ngIf="calendarReady">
     <full-calendar [options]="calendarOptions"></full-calendar>
-
-    <div *ngIf="selectedDates.length === 2">
-      <p><strong>Selected Range:</strong> {{ selectedDates[0] }} to {{ selectedDates[1] }}</p>
-    </div>
   </ng-container>
 </div>
