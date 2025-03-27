@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 
 const GET_AVAILABILTY_DATES = 'https://youthfulguides.app/api/Availability/Guide/';
+const UPDATE_AVAILABILITY = 'https://youthfulguides.app/api/Availability/Update/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -43,6 +44,25 @@ export class BookingService {
     });
 
     return this.http.get(`${GET_AVAILABILTY_DATES}${id}`, { headers });
+  }
+
+  setAvailability(_guidId: number, _start:string, _end:string, _status:string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    const data = {
+      "guide_id": _guidId,
+      "start_date": _start,
+      "end_date": _end,
+      "status": _status
+    };
+
+    return this.http.post(`${UPDATE_AVAILABILITY}`,
+      data,
+      { headers }
+    );
   }
 
 }

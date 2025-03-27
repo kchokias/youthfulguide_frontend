@@ -1,13 +1,14 @@
 .availability-container {
   padding: 15px;
   border-radius: 30px;
-  background-color: #3d3910;
+  background-color: rgba(18, 19, 21, 0.55);
   font-family: "Carter One", system-ui!important;
 }
 
 .title {
   font-size: 34px;
   font-weight: 400;
+  color: #F1E02B;
 }
 
 .fullcalendar {
@@ -55,7 +56,7 @@ p {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  padding: 10px;
+  padding: 10px 0;
   gap: 10px;
 }
 
@@ -75,6 +76,7 @@ p {
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-left: 35%;
 }
 
 :host ::ng-deep .fc-toolbar-chunk:last-child {
@@ -85,4 +87,107 @@ p {
 
 :host ::ng-deep .fc-today-button {
   display: none !important;
+}
+
+:host ::ng-deep .fc-dayGridMonth-button,
+:host ::ng-deep .fc-threeMonthView-button,
+:host ::ng-deep .fc-button-active {
+  width: 125px;
+  height: 48px;
+  border: 4px solid black;
+  color: black!important;
+  text-align: left;
+  background: white!important;
+  font-family: "Aclonica", serif;
+  padding-top: 9px;
+}
+
+:host ::ng-deep .fc-prev-button,
+:host ::ng-deep .fc-next-button {
+  border: 4px solid black;
+  color: black!important;
+  background: white!important;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .fc-prev-button:hover,
+:host ::ng-deep .fc-next-button:hover {
+  background: #F08BC3 !important;
+  border-color: black !important;
+}
+
+:host ::ng-deep .fc-button-active {
+  background: #F08BC3!important;
+}
+
+:host ::ng-deep .fc-threeMonthView-button {
+  border: 4px solid black;
+}
+
+:host ::ng-deep .fc .fc-scroller-liquid-absolute {
+  overflow: hidden hidden !important;
+}
+
+:host ::ng-deep .fc-toolbar-title {
+  color: #F1E02B!important;
+}
+
+:host ::ng-deep .fc-icon {
+  display: none !important;
+}
+
+:host ::ng-deep .mat-mdc-form-field-infix {
+  width: 150px;
+}
+
+:host ::ng-deep .fc-prev-button::before {
+  content: "\F22D"!important;
+  font-family: "bootstrap-icons" !important;
+  display: inline-block;
+  font-size: 1rem;
+  transform: translateY(2px);
+}
+
+:host ::ng-deep .fc-next-button::before {
+  content: "\F231"!important;
+  font-family: "bootstrap-icons" !important;
+  display: inline-block;
+  font-size: 1rem;
+  transform: translateY(2px);
+}
+
+select {
+  font-size: 1rem;
+  font-family: "Aclonica", serif;
+  font-weight: 400;
+  color: black;
+  width: 250px;
+  height: 38px;
+  padding: 0 10px;
+}
+
+#availability {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 250px;
+  border: 4px solid black;
+}
+
+.select-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-55%) rotate(180deg);;
+  font-size: 1rem;
+  color: black;
 }

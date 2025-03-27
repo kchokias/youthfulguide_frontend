@@ -1,7 +1,14 @@
 <div class="availability-container">
   <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 20px;">
     <span class="title">Availability</span>
-    <span class="title">Select Date Range</span>
+    <div class="select-wrapper">
+      <select name="availability" id="availability" [(ngModel)]="selectedAvailability" (change)="onAvailabilityChange()">
+        <option value="" disabled>Set Availability</option>
+        <option value="available">Available</option>
+        <option value="unavailable">Unavailable</option>
+      </select>
+      <i class="bi bi-eject-fill select-icon"></i>
+    </div>
   </div>
 
   <!-- <div class="toolbar-dropdown">

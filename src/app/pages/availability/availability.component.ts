@@ -21,15 +21,17 @@ export class AvailabilityComponent {
   availableDates: string[] = [];
   bookedDates: string[] = [];
   calendarEvents: string[] = [];
-  selectOptions: string[] = ['Option 1', 'Option 2', 'Option 3'];
   selectedValue: string = '';
+  selectedAvailability: string = '';
 
   public calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'threeMonthView',
     selectable: true,
     unselectAuto: false,
+    height: 'auto',
     select: this.handleDateSelection.bind(this),
+    selectAllow: this.allowOnlyDragSelection.bind(this),
     dayCellClassNames: this.applyCustomClass.bind(this),
     views: {
       threeMonthView: {
@@ -104,17 +106,29 @@ export class AvailabilityComponent {
       });
   }
 
-  handleDateSelection(selection: any) {
-    const selectedDate = selection.startStr;
+  public handleDateSelection(selection: any): void {
+    const functionName: string = `handleDateSelection`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
 
-    if (this.selectedDates.length === 2) {
-      this.selectedDates = [];
+    let startDate = selection.startStr;
+    let endDate = new Date(selection.end);
+
+    endDate.setDate(endDate.getDate() - 1);
+    let formattedEndDate = endDate.toISOString().split('T')[0];
+
+    if (new Date(startDate) > new Date(formattedEndDate)) {
+      [startDate, formattedEndDate] = [formattedEndDate, startDate];
     }
 
-    this.selectedDates.push(selectedDate);
+    this.selectedDates = [this.formatDate(startDate), this.formatDate(formattedEndDate)];
+
+    console.log('Selected Date Range: $1', this.selectedDates);
   }
 
-  applyCustomClass(arg: any) {
+  public applyCustomClass(arg: any): any[] {
+    const functionName: string = `applyCustomClass`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
     const date = this.formatDate(arg.date.toISOString().split('T')[0]);
 
     if (this.availableDates.includes(date)) {
@@ -125,11 +139,43 @@ export class AvailabilityComponent {
     return ['red-date'];
   }
 
-  formatDate(dateStr: string): string {
+  public formatDate(dateStr: string): string {
+    const functionName: string = `formatDate`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
     const date = new Date(dateStr);
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
+  }
+
+  public allowOnlyDragSelection(selection: any): boolean {
+    const functionName: string = `allowOnlyDragSelection`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    const start = selection.start;
+    const end = selection.end;
+
+    return end > start;
+  }
+
+  public async onAvailabilityChange() {
+    const functionName: string = `onAvailabilityChange`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    this.subscriptions.push(
+      this.bookingsService.setAvailability(this.userId, this.selectedDates[0], this.selectedDates[1], this.selectedAvailability).subscribe({
+        next: async (response) => {
+          console.log(`${logPath}/@User response`, response);
+          this.calendarReady = false;
+          await this.getAvailability();
+        },
+        error: (err) => {
+          console.log(`${logPath}/@User error`, err);
+        }
+      })
+    );
+
   }
 }
