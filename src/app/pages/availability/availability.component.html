@@ -11,17 +11,6 @@
     </div>
   </div>
 
-  <!-- <div class="toolbar-dropdown">
-    <mat-form-field appearance="outline">
-      <mat-label>Select Option</mat-label>
-      <mat-select [(value)]="selectedValue">
-        <mat-option *ngFor="let option of selectOptions" [value]="option">
-          {{ option }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div> -->
-
   <ng-container *ngIf="calendarReady">
     <full-calendar [options]="calendarOptions"></full-calendar>
   </ng-container>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarOptions } from '@fullcalendar/core';
@@ -49,7 +49,8 @@ export class AvailabilityComponent {
 
   constructor(
     private userService: UserService,
-    private bookingsService: BookingService) {}
+    private bookingsService: BookingService,
+    private cdRef: ChangeDetectorRef) {}
 
   public async ngOnInit() {
     const functionName: string = `ngOnInit`;
@@ -86,32 +87,36 @@ export class AvailabilityComponent {
     const lifecycleName: string = `getAvailability`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-      return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve) => {
         this.subscriptions.push(
-          this.bookingsService.getGuideAvailability(this.userId).subscribe({
-            next: (response) => {
-              console.log(`${logPath}/@User response $1`, response);
-              this.availableDates = response.availableDates;
-              this.bookedDates = response.bookedDates;
-              this.calendarReady = true;
-              resolve();
-            },
-            error: (err) => {
-              console.error(`${logPath}/@User error`, err);
-              this.calendarReady = false;
-              resolve();
-            }
-          })
+            this.bookingsService.getGuideAvailability(this.userId).subscribe({
+                next: (response) => {
+                    console.log(`${logPath}/@User response`, response);
+
+                    this.availableDates = response.availableDates.map((date: string) => this.convertToISO(date));
+                    this.bookedDates = response.bookedDates.map((date: string) => this.convertToISO(date));
+
+                    this.calendarReady = true;
+                    this.cdRef.detectChanges();
+                    resolve();
+                },
+                error: (err) => {
+                    console.error(`${logPath}/@User error`, err);
+                    this.calendarReady = false;
+                    resolve();
+                }
+            })
         );
-      });
+    });
   }
 
   public handleDateSelection(selection: any): void {
     const functionName: string = `handleDateSelection`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
+
     let startDate = selection.startStr;
-    let endDate = new Date(selection.end);
+    let endDate = new Date(selection.endStr);
 
     endDate.setDate(endDate.getDate() - 1);
     let formattedEndDate = endDate.toISOString().split('T')[0];
@@ -122,14 +127,14 @@ export class AvailabilityComponent {
 
     this.selectedDates = [this.formatDate(startDate), this.formatDate(formattedEndDate)];
 
-    console.log('Selected Date Range: $1', this.selectedDates);
-  }
+    console.log('Selected Date Range:', this.selectedDates);
+}
 
   public applyCustomClass(arg: any): any[] {
     const functionName: string = `applyCustomClass`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
-    const date = this.formatDate(arg.date.toISOString().split('T')[0]);
+    const date = this.deFormatDate(arg.date);
 
     if (this.availableDates.includes(date)) {
       return ['green-date'];
@@ -150,6 +155,17 @@ export class AvailabilityComponent {
     return `${day}.${month}.${year}`;
   }
 
+  public deFormatDate(dateStr: string): string {
+    const functionName: string = `formatDate`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    const date = new Date(dateStr);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
+  }
+
   public allowOnlyDragSelection(selection: any): boolean {
     const functionName: string = `allowOnlyDragSelection`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
@@ -168,6 +184,7 @@ export class AvailabilityComponent {
       this.bookingsService.setAvailability(this.userId, this.selectedDates[0], this.selectedDates[1], this.selectedAvailability).subscribe({
         next: async (response) => {
           console.log(`${logPath}/@User response`, response);
+          this.selectedAvailability = '';
           this.calendarReady = false;
           await this.getAvailability();
         },
@@ -176,6 +193,11 @@ export class AvailabilityComponent {
         }
       })
     );
+  }
 
+  private convertToISO(dateStr: string): string {
+    const [day, month, year] = dateStr.split('.').map(Number);
+
+    return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   }
 }
