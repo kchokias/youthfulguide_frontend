@@ -1,18 +1,77 @@
-<div fxFill fxLayout="column" fxLayoutAlign="space-around start" class="dashboard-component" fxLayoutGap="24px">
+<div class="container">
 
-  <div class="title">Guides List</div>
-
-  <div fxFill fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-
-    <app-datepicker></app-datepicker>
-
-    <app-location-filters></app-location-filters>
-
-    <mat-form-field class="search-field">
-      <mat-label>Search by Last name</mat-label>
-      <input matInput type="text" [(ngModel)]="searchName"(ngModelChange)=" searchByLastName($event)">
-      <button *ngIf="searchName" matSuffix mat-icon-button aria-label="Clear" (click)="searchName=''">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
+  <!-- App Description Text -->
+  <div class="app-description-box">
+    <p>App Description Text</p>
   </div>
+
+  <!-- Search Box -->
+  <div class="search-box">
+    <form [formGroup]="searchForm">
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px" fxFlex>
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
+          <p class="label">Where</p>
+
+          <div class="select-wrapper">
+            <select name="region" id="regionSelect" formControlName="region">
+              <option value="all">All Regions</option>
+              <option value="Central_Greece">Central Greece'</option>
+              <option value="Μacedonia">Macedonia</option>
+              <option value="Crete">Crete</option>
+              <option value="Τhrace">Thrace</option>
+            </select>
+            <i class="bi bi-eject-fill select-icon"></i>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="start start" fxFlex style="margin-left: 0.5vw!important;">
+            <label class="label" for="anywhere" style="margin-top: 0.5vh!important">Anywhere</label><br>
+            <input type="checkbox" class="custom-checkbox" formControlName="anywhere">
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
+          <p class="label">Dates</p>
+
+          <mat-form-field appearance="fill" class="date-picker">
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date">
+              <input matEndDate placeholder="End date">
+            </mat-date-range-input>
+             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+             <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+            <i class="bi bi-eject-fill select-icon"></i>
+
+          <div fxLayout="row" fxLayoutAlign="start start" fxFlex style="margin-left: 0.5vw!important;">
+            <label class="label" for="anytime" style="margin-top: 0.5vh!important">Anytime</label><br>
+            <input type="checkbox" class="custom-checkbox" formControlName="anytime">
+          </div>
+        </div>
+
+        <!-- End Date -->
+        <!-- <mat-form-field appearance="outline" class="form-field">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="end">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field> -->
+
+        <!-- Region Select -->
+        <!-- <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Region</mat-label>
+          <mat-select formControlName="region">
+            <mat-option *ngFor="let region of regions" [value]="region.value">
+              {{ region.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+        <button mat-raised-button color="primary" class="search-button" (click)="onSearch()">
+          <mat-icon>search</mat-icon>
+        </button>
+
+      </div>
+    </form>
+  </div>
+</div>

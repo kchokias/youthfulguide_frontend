@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 
 @Component({
@@ -8,16 +9,28 @@ import { MaterialModule } from 'src/app/material.module';
 })
 export class BookingsComponent implements OnInit {
   private componentName: string = `BookingsComponent`;
-  public searchName:string = '';
+  searchForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.searchForm = this.fb.group({
+      start: [new Date().toISOString().split('T')[0]],
+      end: [null],
+      region: ['all'],
+      anywhere: [false],
+      anytime: [false]
+    });
+  }
 
   public ngOnInit(): void {
     const functionName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
 
-  public searchByLastName(_event: any): void {
-    const functionName: string = `searchByLastName`;
+  public onSearch(): void {
+    const functionName: string = `onSearch`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
-    console.log(`${logPath}/ @search Term`, _event);
+    const { start, end, region } = this.searchForm.value;
+
+    console.log(`${logPath}/@'Searching Guides for`, { start, end, region });
   }
 }
