@@ -12,12 +12,20 @@ export class BookingsComponent implements OnInit {
   searchForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
+    const functionName: string = `constructor`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    const today: Date = new Date();
+    const endOfYear: Date = new Date(today.getFullYear(), 11, 31);
+
     this.searchForm = this.fb.group({
-      start: [new Date().toISOString().split('T')[0]],
-      end: [null],
+      dateRange: this.fb.group({
+        start: [today],
+        end: [endOfYear]
+      }),
       region: ['all'],
-      anywhere: [false],
-      anytime: [false]
+      anywhere: [true],
+      anytime: [true]
     });
   }
 

@@ -8,7 +8,7 @@
   <!-- Search Box -->
   <div class="search-box">
     <form [formGroup]="searchForm">
-      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px" fxFlex>
+      <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="30px" fxFlex>
 
         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
           <p class="label">Where</p>
@@ -30,18 +30,17 @@
           </div>
         </div>
 
-        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
+        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
           <p class="label">Dates</p>
 
           <mat-form-field appearance="fill" class="date-picker">
-            <mat-date-range-input [rangePicker]="picker">
-              <input matStartDate placeholder="Start date">
-              <input matEndDate placeholder="End date">
+            <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange">
+              <input matStartDate placeholder="Start date" formControlName="start">
+              <input matEndDate placeholder="End date" formControlName="end">
             </mat-date-range-input>
              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
              <mat-date-range-picker #picker></mat-date-range-picker>
           </mat-form-field>
-            <i class="bi bi-eject-fill select-icon"></i>
 
           <div fxLayout="row" fxLayoutAlign="start start" fxFlex style="margin-left: 0.5vw!important;">
             <label class="label" for="anytime" style="margin-top: 0.5vh!important">Anytime</label><br>
@@ -49,29 +48,33 @@
           </div>
         </div>
 
-        <!-- End Date -->
-        <!-- <mat-form-field appearance="outline" class="form-field">
-          <mat-label>End Date</mat-label>
-          <input matInput [matDatepicker]="endPicker" formControlName="end">
-          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-          <mat-datepicker #endPicker></mat-datepicker>
-        </mat-form-field> -->
-
-        <!-- Region Select -->
-        <!-- <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Region</mat-label>
-          <mat-select formControlName="region">
-            <mat-option *ngFor="let region of regions" [value]="region.value">
-              {{ region.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field> -->
-
-        <button mat-raised-button color="primary" class="search-button" (click)="onSearch()">
-          <mat-icon>search</mat-icon>
-        </button>
+        <div fxLayout="row" fxLayoutAlign="center center" fxFlex="30">
+          <button mat-raised-button class="search-button" (click)="onSearch()">
+            <p class="date-label">Search</p>
+          </button>
+        </div>
 
       </div>
     </form>
   </div>
+
+  <!-- Guides List -->
+  <div class="guides-list-box">
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="15" class="image-container">
+        <img src="../../../assets/images/diaviou.jpg" class="responsive-image">
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">
+        <p class="label">Guide Username 1</p>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
+        <p class="date-label">Actions</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="guides-list-box">
+    <p>App Description Text</p>
+  </div>
+
 </div>
