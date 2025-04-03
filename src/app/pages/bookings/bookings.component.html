@@ -66,15 +66,49 @@
       </div>
       <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">
         <p class="label">Guide Username 1</p>
+        <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px">
+          <app-star-rating [rating]="4.5" [fontSize]="'1em'"></app-star-rating>
+          <p class="no-bookings">(Number of Bookings)</p>
+        </div>
       </div>
-      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
-        <p class="date-label">Actions</p>
+      <div fxLayout="column" fxLayoutAlign="space-between center" fxFlex="35" fxFill>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <i class="bi bi-pin-map-fill no-bookings"></i>
+          <p class="no-bookings">Region, Country</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="    margin-left: auto;">
+          <button mat-raised-button class="profile-button" (click)="onSearch()">
+            <span class="date-label">View Profile</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="guides-list-box">
-    <p>App Description Text</p>
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="15" class="image-container">
+        <img src="../../../assets/images/diaviou.jpg" class="responsive-image">
+      </div>
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">
+        <p class="label">Guide Username 1</p>
+        <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px">
+          <app-star-rating [rating]="4.5" [fontSize]="'1em'"></app-star-rating>
+          <p class="no-bookings">(Number of Bookings)</p>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-between center" fxFlex="35" fxFill>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <i class="bi bi-pin-map-fill no-bookings"></i>
+          <p class="no-bookings">Region, Country</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="    margin-left: auto;">
+          <button mat-raised-button class="profile-button" (click)="onSearch()">
+            <span class="date-label">View Profile</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>

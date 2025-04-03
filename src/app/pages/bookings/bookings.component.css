@@ -70,11 +70,27 @@
   height: 61px;
 }
 
+.profile-button {
+  background-color: rgba(240, 139, 195, 1)!important;
+  color: black;
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 20px 40px;
+}
+
 .label {
   color: rgba(241, 224, 43, 1);
   font-family: "Carter One", system-ui!important;
   font-weight: 400;
   font-size: 20px;
+}
+
+.no-bookings {
+  color: rgba(241, 224, 43, 1);
+  font-family: "Carter One", system-ui!important;
+  transform: translateY(-2px);
 }
 
 .date-label {
@@ -203,14 +219,14 @@ select {
   display: flex;
 }
 
-/* .image-container {
+.image-container {
   width: 100%;
   height: 100%;
   display: flex;
-} */
+}
 
 .responsive-image {
-  width: 100%;
+  width: 150px;
   height: 100%;
   object-fit: fill;
 }
