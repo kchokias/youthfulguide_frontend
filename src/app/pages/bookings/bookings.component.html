@@ -10,44 +10,46 @@
     <form [formGroup]="searchForm">
       <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="30px" fxFlex>
 
+        <!-- Where -->
         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="30">
           <p class="label">Where</p>
-
           <div class="select-wrapper">
             <select name="region" id="regionSelect" formControlName="region">
               <option value="all">All Regions</option>
-              <option value="Central_Greece">Central Greece'</option>
-              <option value="Μacedonia">Macedonia</option>
+              <option value="Central_Greece">Central Greece</option>
+              <option value="Macedonia">Macedonia</option>
               <option value="Crete">Crete</option>
-              <option value="Τhrace">Thrace</option>
+              <option value="Thrace">Thrace</option>
             </select>
             <i class="bi bi-eject-fill select-icon"></i>
           </div>
 
           <div fxLayout="row" fxLayoutAlign="start start" fxFlex style="margin-left: 0.5vw!important;">
             <label class="label" for="anywhere" style="margin-top: 0.5vh!important">Anywhere</label><br>
-            <input type="checkbox" class="custom-checkbox" formControlName="anywhere">
+            <input type="checkbox" class="custom-checkbox" formControlName="anywhere" (change)="onAnywhereToggle($event)">
           </div>
         </div>
 
+        <!-- Dates -->
         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40">
           <p class="label">Dates</p>
 
           <mat-form-field appearance="fill" class="date-picker">
-            <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange">
+            <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange" >
               <input matStartDate placeholder="Start date" formControlName="start">
               <input matEndDate placeholder="End date" formControlName="end">
             </mat-date-range-input>
-             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-             <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
           </mat-form-field>
 
           <div fxLayout="row" fxLayoutAlign="start start" fxFlex style="margin-left: 0.5vw!important;">
             <label class="label" for="anytime" style="margin-top: 0.5vh!important">Anytime</label><br>
-            <input type="checkbox" class="custom-checkbox" formControlName="anytime">
+            <input type="checkbox" class="custom-checkbox" formControlName="anytime" (change)="onAnytimeToggle($event)">
           </div>
         </div>
 
+        <!-- Search Button -->
         <div fxLayout="row" fxLayoutAlign="center center" fxFlex="30">
           <button mat-raised-button class="search-button" (click)="onSearch()">
             <p class="date-label">Search</p>
@@ -59,56 +61,44 @@
   </div>
 
   <!-- Guides List -->
-  <div class="guides-list-box">
-    <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
-      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="15" class="image-container">
-        <img src="../../../assets/images/diaviou.jpg" class="responsive-image">
-      </div>
-      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">
-        <p class="label">Guide Username 1</p>
-        <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px">
-          <app-star-rating [rating]="4.5" [fontSize]="'1em'"></app-star-rating>
-          <p class="no-bookings">(Number of Bookings)</p>
+  <div *ngIf="guidesReady && guides.length > 0">
+    <div *ngFor="let guide of guides" class="guides-list-box">
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
+        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="15" class="image-container">
+          <img [src]="guide.profile_picture" class="responsive-image">
         </div>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="space-between center" fxFlex="35" fxFill>
-        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-          <i class="bi bi-pin-map-fill no-bookings"></i>
-          <p class="no-bookings">Region, Country</p>
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">
+          <p class="label">{{ guide.name }} {{ guide.surname }}</p>
+          <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px">
+            <ng-container *ngIf="guide.average_rating !== '-1.0000'; else noRating">
+              <app-star-rating [rating]="guide.average_rating" [fontSize]="'1em'"></app-star-rating>
+            </ng-container>
+            <ng-template #noRating>
+              <p class="no-bookings">No Rating</p>
+            </ng-template>
+            <p class="no-bookings">({{ guide.total_bookings }})</p>
+          </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="    margin-left: auto;">
-          <button mat-raised-button class="profile-button" (click)="onSearch()">
-            <span class="date-label">View Profile</span>
-          </button>
+
+        <div fxLayout="column" fxLayoutAlign="space-between center" fxFlex="35" fxFill>
+          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+            <i class="bi bi-pin-map-fill no-bookings"></i>
+            <p class="no-bookings">{{ guide.region }}, {{ guide.country }}</p>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;">
+            <button mat-raised-button class="profile-button" (click)="onSearch()">
+              <span class="date-label">View Profile</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="guides-list-box">
-    <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
-      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="15" class="image-container">
-        <img src="../../../assets/images/diaviou.jpg" class="responsive-image">
-      </div>
-      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">
-        <p class="label">Guide Username 1</p>
-        <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px">
-          <app-star-rating [rating]="4.5" [fontSize]="'1em'"></app-star-rating>
-          <p class="no-bookings">(Number of Bookings)</p>
-        </div>
-      </div>
-      <div fxLayout="column" fxLayoutAlign="space-between center" fxFlex="35" fxFill>
-        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-          <i class="bi bi-pin-map-fill no-bookings"></i>
-          <p class="no-bookings">Region, Country</p>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="    margin-left: auto;">
-          <button mat-raised-button class="profile-button" (click)="onSearch()">
-            <span class="date-label">View Profile</span>
-          </button>
-        </div>
-      </div>
-    </div>
+  <!-- No Guides Message -->
+  <div *ngIf="guidesReady && guides.length === 0" class="no-guides-message">
+    <p>No guides available for the selected criteria.</p>
   </div>
 
 </div>

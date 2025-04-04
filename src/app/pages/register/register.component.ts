@@ -13,9 +13,9 @@ export class RegisterComponent implements OnInit {
 
   public regions: any[] = [
     { viewValue: 'Central Greece', value: 'Central_Greece' },
-    { viewValue: 'Macedonia', value: 'Μacedonia' },
+    { viewValue: 'Macedonia', value: 'Macedonia' },
     { viewValue: 'Crete', value: 'Crete' },
-    { viewValue: 'Thrace', value: 'Τhrace' }
+    { viewValue: 'Thrace', value: 'Thrace' }
   ];
 
   public registerForm: FormGroup = new FormGroup({});

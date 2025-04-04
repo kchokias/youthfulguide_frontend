@@ -7,6 +7,7 @@
   transition: all .5 ease;
   background: #F1E02B;
   padding: 1rem 4rem 0 4rem;
+  overflow-y: auto;
 }
 
 .body-trimmed {

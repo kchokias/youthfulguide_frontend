@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 const GET_AVAILABILTY_DATES = 'https://youthfulguides.app/api/Availability/Guide/';
 const UPDATE_AVAILABILITY = 'https://youthfulguides.app/api/Availability/Update/';
+const GET_AVAILABLE_GUIDES = 'https://youthfulguides.app/api/AvailableGuides/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -63,6 +64,20 @@ export class BookingService {
       data,
       { headers }
     );
+  }
+
+  getAvailableGuides(_start: string, _end: string, _region: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    const params = new HttpParams()
+      .set('start', _start)
+      .set('end', _end)
+      .set('region', _region);
+
+    return this.http.get(GET_AVAILABLE_GUIDES, { headers, params });
   }
 
 }
