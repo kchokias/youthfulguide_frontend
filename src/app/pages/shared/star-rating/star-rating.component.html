@@ -1,4 +1,12 @@
 <div class="star-rating" [ngStyle]="{ 'font-size': fontSize }">
-  <i class="fa fa-star starder" *ngFor="let star of stars"></i>
-  <i class="fa fa-star-half starder" *ngIf="rating % 1 !== 0"></i>
+  <ng-container *ngFor="let star of starArray">
+    <i
+      class="fa"
+      [ngClass]="{
+        'fa-solid fa-star': getStarType(star) === 'full',
+        'fa-solid fa-star-half-stroke': getStarType(star) === 'half',
+        'fa-regular fa-star': getStarType(star) === 'empty'
+      }"
+    ></i>
+  </ng-container>
 </div>

@@ -1,20 +1,24 @@
-<div class="guide-card" *ngIf="formReady">
-  <div class="guide-header">
-    <a class="resize-btn" (click)="toggleAvatarSize('patch')">Resize</a>
-    <div class="guide-avatar">
+<div class="container" fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="30px" fxFlex>
+  <div class="details-box" fxLayout="row" fxLayoutAlign="start start" fxFlex="20" fxFill>
+    <div class="avatar-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="15" fxFill>
       <img [src]="imageBase64 || '../../assets/images/user.png'" alt="Guide Profile">
     </div>
-    <div class="guide-details">
-      <p>{{ selectedUser.name }} {{ selectedUser.surname }}</p>
-      <p class="description">{{'@' +selectedUser.username}}</p>
-      <app-star-rating [rating]="4.5"></app-star-rating>
+    <div class="profile-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="60" fxFill fxLayoutGap="10px">
+      <span class="username">&#64;poteStonElaiwna13</span>
+      <span class="fullname">Demirel Bosnak</span>
+      <div fxLayout="row" fxLayoutAlign="start start" fxFill>
+        <app-star-rating [rating]="1.5"></app-star-rating>
+        <span>(Number of bookings)</span>
+      </div>
     </div>
+    <div class="region-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="25" fxFill></div>
   </div>
-  <div class="guide-actions">
-    <button mat-stroked-button color="primary" class="import" (click)="triggerFileInput('single')">Import New Avatar Photo</button>
-    <input #singleFileInput type="file" accept="image/*" (change)="onFileChange($event)" hidden>
-    <button mat-stroked-button color="primary" class="import" (click)="triggerFileInput('multiple')">Import Media</button>
-    <input #multipleFileInput type="file" accept="image/*" multiple (change)="onMultipleFilesChange($event)" hidden>
-    <button [disabled]="!galleryReady" mat-stroked-button color="primary" class="import" (click)="openGallery()">Media Gallery</button>
+
+  <div class="availability-box" fxLayout="row" fxLayoutAlign="start start" fxFlex="65" fxFill>
+    <p>Bookings Availability</p>
+  </div>
+
+  <div class="description-box" fxLayout="row" fxLayoutAlign="start start" fxFlex="15" fxFill>
+    <p>Guide Description</p>
   </div>
 </div>

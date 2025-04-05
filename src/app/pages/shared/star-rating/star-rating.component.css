@@ -1,7 +1,13 @@
 .star-rating {
-  color: #f2cf0a;
+  display: flex;
 }
 
 .starder {
-  margin-right: 2px;
+  margin-right: 4px;
+  color: black;
+}
+
+.fa-solid.fa-star,
+.fa-solid.fa-star-half-stroke {
+  color: #f2cf0a;
 }

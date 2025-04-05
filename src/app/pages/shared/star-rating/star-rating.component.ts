@@ -6,11 +6,20 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./star-rating.component.css']
 })
 export class StarRatingComponent {
-
   @Input() rating: number = 0;
   @Input() fontSize: string = '2em';
 
-  get stars() {
-    return Array(Math.floor(this.rating)).fill(0);
+  get starArray(): number[] {
+    return [1, 2, 3, 4, 5];
+  }
+
+  getStarType(star: number): string {
+    if (this.rating >= star) {
+      return 'full';
+    } else if (this.rating > star - 1) {
+      return 'half';
+    } else {
+      return 'empty';
+    }
   }
 }
