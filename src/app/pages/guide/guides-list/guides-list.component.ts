@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MaterialModule } from 'src/app/material.module';
-import { BookingService } from './bookings.service';
+import { GuideService } from '../guide.service';
 
 @Component({
-  selector: 'app-bookings',
-  templateUrl: './bookings.component.html',
-  styleUrls: ['./bookings.component.css']
+  selector: 'app-guides-list',
+  templateUrl: './guides-list.component.html',
+  styleUrls: ['./guides-list.component.css']
 })
-export class BookingsComponent implements OnInit {
-  private componentName: string = `BookingsComponent`;
+export class GuidesListComponent implements OnInit {
+  private componentName: string = `GuidesListComponent`;
   searchForm: FormGroup;
   private subscriptions: Subscription[] = [];
   public guidesReady:boolean = false;
@@ -18,7 +18,7 @@ export class BookingsComponent implements OnInit {
   private today: Date = new Date();
   private endOfYear: Date = new Date( new Date().getFullYear(), 11, 31);
 
-  constructor(private fb: FormBuilder,private bookingsService: BookingService) {
+  constructor(private fb: FormBuilder,private guideService: GuideService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
@@ -59,7 +59,7 @@ export class BookingsComponent implements OnInit {
 
     return new Promise<void>((resolve) => {
       this.subscriptions.push(
-        this.bookingsService.getAvailableGuides(start, end, region).subscribe({
+        this.guideService.getAvailableGuides(start, end, region).subscribe({
           next: (response) => {
             console.log(`${logPath}/@User response`, response);
             this.guides = response.guides;

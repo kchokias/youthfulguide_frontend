@@ -8,12 +8,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MediaGalleryDialogComponent } from '../../shared/media-gallery-dialog/media-gallery-dialog.component';
 
 @Component({
-  selector: 'app-guide-profile',
-  templateUrl: './guide-profile.component.html',
-  styleUrls: ['./guide-profile.component.css']
+  selector: 'app-guide-profile-preview',
+  templateUrl: './guide-profile-preview.component.html',
+  styleUrls: ['./guide-profile-preview.component.css']
 })
 
-export class GuideProfileComponent implements OnInit, OnDestroy {
+export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
 
   private componentName: string = `GuideProfileComponent`;
   public profileForm: FormGroup = new FormGroup({});

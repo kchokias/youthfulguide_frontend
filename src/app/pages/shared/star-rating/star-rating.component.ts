@@ -9,17 +9,21 @@ export class StarRatingComponent {
   @Input() rating: number = 0;
   @Input() fontSize: string = '2em';
 
-  get starArray(): number[] {
-    return [1, 2, 3, 4, 5];
-  }
+  get starArray(): string[] {
+    const stars: string[] = [];
+    let remaining = this.rating;
 
-  getStarType(star: number): string {
-    if (this.rating >= star) {
-      return 'full';
-    } else if (this.rating > star - 1) {
-      return 'half';
-    } else {
-      return 'empty';
+    for (let i = 0; i < 5; i++) {
+      if (remaining >= 1) {
+        stars.push('full');
+      } else if (remaining >= 0.5) {
+        stars.push('half');
+      } else {
+        stars.push('empty');
+      }
+      remaining -= 1;
     }
+
+    return stars;
   }
 }

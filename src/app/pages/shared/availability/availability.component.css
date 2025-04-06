@@ -1,7 +1,6 @@
 .availability-container {
   padding: 15px;
   border-radius: 30px;
-  background-color: rgba(18, 19, 21, 0.55);
   font-family: "Carter One", system-ui!important;
 }
 
@@ -190,4 +189,43 @@ select {
   transform: translateY(-55%) rotate(180deg);;
   font-size: 1rem;
   color: black;
+}
+
+.profile-button {
+  color: black;
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-radius: 2px;
+  font-size: 15px;
+  width: 193px;
+  height: 41px;
+}
+
+.request-button {
+  color: black;
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-radius: 15px;
+  font-size: 15px;
+  width: 250px;
+  height: 46px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.date-label {
+  color: black;
+  font-family: "Aclonica", serif;
+  font-weight: 400;
+  color: black;
+  font-size: 16px;
+}
+
+.available {
+  background-color: rgba(0, 255, 0, 0.3) !important;
+}
+
+.not-available {
+  background-color: rgba(255, 0, 0, 0.6) !important;
+}
+
+.booked {
+  background-color: rgba(255, 255, 0, 0.6) !important;
 }

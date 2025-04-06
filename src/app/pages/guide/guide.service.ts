@@ -16,10 +16,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class BookingService {
+export class GuideService {
   private tokenKey = 'authToken';
 
-  private serviceName: string = `BookingService`;
+  private serviceName: string = `GuideService`;
 
   constructor(private router: Router,private http: HttpClient) {}
 

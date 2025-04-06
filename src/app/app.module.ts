@@ -16,16 +16,14 @@ import { HeaderComponent } from './pages/header/header.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './helpers/http.interceptor';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { BookingsModule } from './pages/bookings/bookings.module';
 import { SharedModule } from './pages/shared/shared.module';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
-import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
+import { UserProfileSettingsComponent } from './pages/user/user-profile-settings/user-profile-settings.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
-import { GuideProfileComponent } from './pages/guide/guide-profile/guide-profile.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { AvailabilityComponent } from './pages/availability/availability.component';
+import { GuideModule } from './pages/guide/guide.module';
 
 
 @NgModule({
@@ -40,9 +38,7 @@ import { AvailabilityComponent } from './pages/availability/availability.compone
     SettingsComponent,
     HeaderComponent,
     ForgotPasswordComponent,
-    UserProfileComponent,
-    GuideProfileComponent,
-    AvailabilityComponent
+    UserProfileSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,11 +49,10 @@ import { AvailabilityComponent } from './pages/availability/availability.compone
     CommonModule,
     FormsModule,
     HttpClientModule,
-    BookingsModule,
+    GuideModule,
     SharedModule,
     OverlayModule,
-    CdkMenuModule,
-    FullCalendarModule
+    CdkMenuModule
   ],
   providers: [
     httpInterceptorProviders,

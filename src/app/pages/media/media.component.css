@@ -1,0 +1,75 @@
+.guide-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+}
+
+.guide-header {
+  position: relative;
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.guide-avatar {
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  border: 3px solid #666;
+  background: #fbe24c;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.guide-details {
+  font-family: 'Roboto';
+  margin-top: 15px;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.guide-avatar img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: 10px;
+}
+
+.guide-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resize-btn {
+  font-size: 15px;
+  color: black;
+  cursor: pointer;
+  text-decoration: underline;
+  position: relative;
+}
+
+.import {
+  color: #666!important;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.description {
+  text-align: center;
+  font-size: 24px;
+  color: #666;
+}
+
+:host ::ng-deep .mat-mdc-outlined-button[disabled][disabled] {
+  --mdc-outlined-button-label-text-color: rgba(255, 0, 0, 0.5);
+  --mdc-outlined-button-disabled-label-text-color: rgba(255, 0, 0, 0.4);
+  --mdc-outlined-button-outline-color: rgba(255, 0, 0, 0.3);
+  --mdc-outlined-button-disabled-outline-color: rgba(255, 0, 0, 0.2);
+  opacity: 0.6;
+  cursor: not-allowed;
+  transition: all 0.3s ease-in-out;
+}

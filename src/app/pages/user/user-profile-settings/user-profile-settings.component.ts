@@ -5,12 +5,12 @@ import { UserService } from '../user.service';
 import { ObjectHelper } from 'src/app/helpers/object-helper.class';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: 'app-user-profile-settings',
+  templateUrl: './user-profile-settings.component.html',
+  styleUrls: ['./user-profile-settings.component.css']
 })
 
-export class UserProfileComponent implements OnInit, OnDestroy {
+export class UserProfileSettingsComponent implements OnInit, OnDestroy {
 
   private componentName: string = `UserProfileComponent`;
   public profileForm: FormGroup = new FormGroup({});

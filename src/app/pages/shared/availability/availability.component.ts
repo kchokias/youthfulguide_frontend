@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarOptions } from '@fullcalendar/core';
 import { Subscription } from 'rxjs';
-import { UserService } from '../user/user.service';
-import { BookingService } from '../bookings/bookings.service';
+import { UserService } from '../../user/user.service';
+import { GuideService } from '../../guide/guide.service';
 
 @Component({
   selector: 'app-availability',
@@ -13,6 +13,7 @@ import { BookingService } from '../bookings/bookings.service';
 })
 export class AvailabilityComponent {
   private componentName: string = `AvailabilityComponent`;
+  @Input() background: string = 'rgba(18, 19, 21, 0.85)';
   private subscriptions: Subscription[] = [];
   private userId:number = 1;
   public calendarReady:boolean = false;
@@ -49,7 +50,7 @@ export class AvailabilityComponent {
 
   constructor(
     private userService: UserService,
-    private bookingsService: BookingService,
+    private guideService: GuideService,
     private cdRef: ChangeDetectorRef) {}
 
   public async ngOnInit() {
@@ -88,24 +89,22 @@ export class AvailabilityComponent {
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
     return new Promise<void>((resolve) => {
-        this.subscriptions.push(
-            this.bookingsService.getGuideAvailability(this.userId).subscribe({
-                next: (response) => {
-                    console.log(`${logPath}/@User response`, response);
-
-                    this.availableDates = response.availableDates.map((date: string) => this.convertToISO(date));
-                    this.bookedDates = response.bookedDates.map((date: string) => this.convertToISO(date));
-
-                    this.calendarReady = true;
-                    this.cdRef.detectChanges();
-                    resolve();
-                },
-                error: (err) => {
-                    console.error(`${logPath}/@User error`, err);
-                    this.calendarReady = false;
-                    resolve();
-                }
-            })
+      this.subscriptions.push(
+        this.guideService.getGuideAvailability(this.userId).subscribe({
+          next: (response) => {
+            console.log(`${logPath}/@User response`, response);
+            this.availableDates = response.availableDates.map((date: string) => this.convertToISO(date));
+            this.bookedDates = response.bookedDates.map((date: string) => this.convertToISO(date));
+            this.calendarReady = true;
+            this.cdRef.detectChanges();
+            resolve();
+            },
+            error: (err) => {
+              console.error(`${logPath}/@User error`, err);
+              this.calendarReady = false;
+              resolve();
+            }
+          })
         );
     });
   }
@@ -114,21 +113,24 @@ export class AvailabilityComponent {
     const functionName: string = `handleDateSelection`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
-
-    let startDate = selection.startStr;
-    let endDate = new Date(selection.endStr);
-
+    const startDate = selection.startStr;
+    const endDate = new Date(selection.endStr);
     endDate.setDate(endDate.getDate() - 1);
-    let formattedEndDate = endDate.toISOString().split('T')[0];
+    const formattedEndDate = endDate.toISOString().split('T')[0];
 
-    if (new Date(startDate) > new Date(formattedEndDate)) {
-      [startDate, formattedEndDate] = [formattedEndDate, startDate];
+    if (this.background === 'transparent') {
+      this.selectedDates = [this.formatDate(startDate)];
+    } else {
+      const rangeStart = new Date(startDate);
+      const rangeEnd = new Date(formattedEndDate);
+      const finalStart = rangeStart > rangeEnd ? formattedEndDate : startDate;
+      const finalEnd = rangeStart > rangeEnd ? startDate : formattedEndDate;
+
+      this.selectedDates = [this.formatDate(finalStart), this.formatDate(finalEnd)];
     }
 
-    this.selectedDates = [this.formatDate(startDate), this.formatDate(formattedEndDate)];
-
-    console.log('Selected Date Range:', this.selectedDates);
-}
+    console.log('Selected Date(s):$0', this.selectedDates);
+  }
 
   public applyCustomClass(arg: any): any[] {
     const functionName: string = `applyCustomClass`;
@@ -138,7 +140,7 @@ export class AvailabilityComponent {
 
     if (this.availableDates.includes(date)) {
       return ['green-date'];
-    } else if (this.bookedDates.includes(date)) {
+    } else if (this.bookedDates.includes(date) && this.background !== 'transparent') {
       return ['yellow-date'];
     }
     return ['red-date'];
@@ -170,10 +172,12 @@ export class AvailabilityComponent {
     const functionName: string = `allowOnlyDragSelection`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
-    const start = selection.start;
-    const end = selection.end;
-
-    return end > start;
+    if (this.background === 'transparent') {
+      const start = selection.start;
+      const end = selection.end;
+      return end.getTime() - start.getTime() === 24 * 60 * 60 * 1000;
+    }
+    return selection.end > selection.start;
   }
 
   public async onAvailabilityChange() {
@@ -181,7 +185,7 @@ export class AvailabilityComponent {
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
     this.subscriptions.push(
-      this.bookingsService.setAvailability(this.userId, this.selectedDates[0], this.selectedDates[1], this.selectedAvailability).subscribe({
+      this.guideService.setAvailability(this.userId, this.selectedDates[0], this.selectedDates[1], this.selectedAvailability).subscribe({
         next: async (response) => {
           console.log(`${logPath}/@User response`, response);
           this.selectedAvailability = '';

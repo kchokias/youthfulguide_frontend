@@ -13,6 +13,8 @@ import { ImageCropperDgComponent } from "./image-cropper/image-cropper.component
 import { StarRatingComponent } from "./star-rating/star-rating.component";
 import { GalleryModule } from 'ng-gallery';
 import { MediaGalleryDialogComponent } from "./media-gallery-dialog/media-gallery-dialog.component";
+import { AvailabilityComponent } from "./availability/availability.component";
+import { FullCalendarModule } from "@fullcalendar/angular";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { MediaGalleryDialogComponent } from "./media-gallery-dialog/media-galler
     LocationFilters,
     ImageCropperDgComponent,
     StarRatingComponent,
-    MediaGalleryDialogComponent
+    MediaGalleryDialogComponent,
+    AvailabilityComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,8 @@ import { MediaGalleryDialogComponent } from "./media-gallery-dialog/media-galler
     MatNativeDateModule,
     MatDialogModule,
     ImageCropperModule,
-    GalleryModule
+    GalleryModule,
+    FullCalendarModule
   ],
   providers: [],
   exports: [
@@ -40,7 +44,8 @@ import { MediaGalleryDialogComponent } from "./media-gallery-dialog/media-galler
     LocationFilters,
     ImageCropperDgComponent,
     StarRatingComponent,
-    MediaGalleryDialogComponent
+    MediaGalleryDialogComponent,
+    AvailabilityComponent
   ]
 })
 export class SharedModule { }

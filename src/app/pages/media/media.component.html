@@ -1,1 +1,20 @@
-<p>media works!</p>
+<div class="guide-card" *ngIf="formReady">
+  <div class="guide-header">
+    <a class="resize-btn" (click)="toggleAvatarSize('patch')">Resize</a>
+    <div class="guide-avatar">
+      <img [src]="imageBase64 || '../../assets/images/user.png'" alt="Guide Profile">
+    </div>
+    <div class="guide-details">
+      <p>{{ selectedUser.name }} {{ selectedUser.surname }}</p>
+      <p class="description">{{'@' +selectedUser.username}}</p>
+      <app-star-rating [rating]="4.5"></app-star-rating>
+    </div>
+  </div>
+  <div class="guide-actions">
+    <button mat-stroked-button color="primary" class="import" (click)="triggerFileInput('single')">Import New Avatar Photo</button>
+    <input #singleFileInput type="file" accept="image/*" (change)="onFileChange($event)" hidden>
+    <button mat-stroked-button color="primary" class="import" (click)="triggerFileInput('multiple')">Import Media</button>
+    <input #multipleFileInput type="file" accept="image/*" multiple (change)="onMultipleFilesChange($event)" hidden>
+    <button [disabled]="!galleryReady" mat-stroked-button color="primary" class="import" (click)="openGallery()">Media Gallery</button>
+  </div>
+</div>
