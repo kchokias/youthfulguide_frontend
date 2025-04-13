@@ -6,11 +6,11 @@ import { MaterialModule } from '../../material.module';
 import { GuidesListComponent } from './guides-list/guides-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { GuideProfilePreviewComponent } from './guide-profile-preview/guide-profile-preview.component';
-import { AvailabilityComponent } from '../shared/availability/availability.component';
+import { GuideBookingsComponent } from './guide-bookings/guide-bookings.component';
 
 
 @NgModule({
-    declarations: [GuidesListComponent, GuideProfilePreviewComponent],
+    declarations: [GuidesListComponent, GuideProfilePreviewComponent, GuideBookingsComponent],
     imports: [
       CommonModule,
       RouterModule,

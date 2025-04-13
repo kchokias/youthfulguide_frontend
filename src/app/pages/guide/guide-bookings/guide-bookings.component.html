@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="search-box">
+    <form [formGroup]="searchForm">
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="31">
+        <p class="label">Dates</p>
+
+        <mat-form-field appearance="fill" class="date-picker">
+          <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange" >
+            <input matStartDate placeholder="Start date" formControlName="start">
+            <input matEndDate placeholder="End date" formControlName="end">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center end" fxFlex="15" style="margin-bottom:0.75%">
+        <label class="label" for="upcoming">Upcoming</label><br>
+        <input type="checkbox" class="custom-checkbox" formControlName="upcoming">
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center end" fxFlex="14" style="margin-bottom:0.75%">
+        <label class="label" for="pending">Pending</label><br>
+        <input type="checkbox" class="custom-checkbox" formControlName="pending">
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center end" fxFlex="15" style="margin-bottom:0.75%">
+        <label class="label" for="completed">Completed</label><br>
+        <input type="checkbox" class="custom-checkbox" formControlName="completed">
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="end center" fxFlex="25">
+        <button mat-raised-button class="search-button" (click)="onSearch()">
+          <p class="date-label">Search</p>
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="guides-list-box">
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="15" class="image-container">
+        <!-- <img [src]="guide.profile_picture" class="responsive-image"> -->
+        <img  src="../../assets/images/user.png" class="responsive-image">
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">
+        <!-- <p class="label">{{ guide.name }} {{ guide.surname }}</p> -->
+        <p class="label">Traveler Username 1</p>
+        <p class="label">Name Surname</p>
+        <p class="label">Email</p>
+
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="space-between end" fxFlex="35" fxFill>
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;">
+          <button mat-raised-button class="profile-button" (click)="onSearch()">
+            <span class="date-label">Cancel</span>
+          </button>
+        </div>
+        <p class="label" style="margin-bottom: -50px;">Date</p>
+        <p class="label">Upcoming</p>
+      </div>
+    </div>
+  </div>
+</div>

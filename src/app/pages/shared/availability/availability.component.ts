@@ -14,6 +14,7 @@ import { GuideService } from '../../guide/guide.service';
 export class AvailabilityComponent {
   private componentName: string = `AvailabilityComponent`;
   @Input() background: string = 'rgba(18, 19, 21, 0.85)';
+  @Input() guideId:number = 1;
   private subscriptions: Subscription[] = [];
   private userId:number = 1;
   public calendarReady:boolean = false;
@@ -71,7 +72,7 @@ export class AvailabilityComponent {
         this.userService.getUserId().subscribe({
           next: (response) => {
             this.userId = response.userId;
-            console.log(`${logPath}/@User response`, response);
+            console.log(`${logPath}/@User response $0`, response);
             resolve();
           },
           error: (err) => {
@@ -172,12 +173,19 @@ export class AvailabilityComponent {
     const functionName: string = `allowOnlyDragSelection`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
+    const start = selection.start;
+    const end = selection.end;
+
+    // Convert selected date to ISO for comparison
+    const selectedDateISO = this.deFormatDate(start);
+
     if (this.background === 'transparent') {
-      const start = selection.start;
-      const end = selection.end;
-      return end.getTime() - start.getTime() === 24 * 60 * 60 * 1000;
+      const isSingleDay = end.getTime() - start.getTime() === 24 * 60 * 60 * 1000;
+      const isAvailable = this.availableDates.includes(selectedDateISO);
+      return isSingleDay && isAvailable;
     }
-    return selection.end > selection.start;
+
+    return end > start;
   }
 
   public async onAvailabilityChange() {
@@ -186,6 +194,25 @@ export class AvailabilityComponent {
 
     this.subscriptions.push(
       this.guideService.setAvailability(this.userId, this.selectedDates[0], this.selectedDates[1], this.selectedAvailability).subscribe({
+        next: async (response) => {
+          console.log(`${logPath}/@User response`, response);
+          this.selectedAvailability = '';
+          this.calendarReady = false;
+          await this.getAvailability();
+        },
+        error: (err) => {
+          console.log(`${logPath}/@User error`, err);
+        }
+      })
+    );
+  }
+
+  public async requestBooking() {
+    const functionName: string = `requestBooking`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    this.subscriptions.push(
+      this.guideService.requestBooking(this.userId, this.selectedDates[0], this.guideId).subscribe({
         next: async (response) => {
           console.log(`${logPath}/@User response`, response);
           this.selectedAvailability = '';

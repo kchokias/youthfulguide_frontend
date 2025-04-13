@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px">
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px" *ngIf="formReady">
   <div class="container" fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="30px" fxFlex>
     <div class="details-box" fxLayout="row" fxLayoutAlign="start start" fxFlex="20" fxFill fxLayoutGap="30px">
       <div class="avatar-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="15" fxFill>
@@ -91,7 +91,7 @@
     </div>
   </div>
   <div class="container" fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="30px" fxFlex style="margin-top: 22px;">
-    <app-availability [background]="'transparent'"></app-availability>
+    <app-availability [background]="'transparent'" [id]="selectedUser.id"></app-availability>
   </div>
 
   <div class="container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px" style="margin-top: 22px;" >
@@ -102,13 +102,13 @@
           class="review-container"
           *ngFor="let review of reviews"
           fxLayout="row"
-          fxLayoutAlign="space-around center"
-        >
+          fxLayoutAlign="space-around center">
           <div
             class="review-box"
             fxLayout="column"
             fxLayoutAlign="space-between start"
             fxFlex="80"
+            fxLayoutGap="30px"
           >
             <p class="username">{{ review.username }}</p>
             <p class="comment">{{ review.comment }}</p>

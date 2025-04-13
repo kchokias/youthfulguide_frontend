@@ -5,12 +5,6 @@ import { UserService } from '../../user/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GuideService } from '../guide.service';
 
-interface MediaObject {
-  id: number;
-  created_at: string;
-  media_data: string;
-}
-
 @Component({
   selector: 'app-guide-profile-preview',
   templateUrl: './guide-profile-preview.component.html',
@@ -42,7 +36,6 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
   @ViewChild('multipleFileInput') multipleFileInput!: ElementRef<HTMLInputElement>;
 
   constructor(
-    private fb: FormBuilder,
     private userService: UserService,
     public dialog: MatDialog,
     private guideService: GuideService) {
@@ -113,7 +106,7 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
 
     return new Promise<void>((resolve, reject) => {
       this.subscriptions.push(
-        this.guideService.getGuideReviews(_id).subscribe({
+        this.guideService.getGuideReviews            (_id).subscribe({
           next: (response) => {
             this.reviews = response.reviews;
             console.log(`${logPath}/@Reviews response`, response);

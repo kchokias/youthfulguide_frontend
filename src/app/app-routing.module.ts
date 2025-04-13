@@ -11,6 +11,7 @@ import { UserProfileSettingsComponent } from './pages/user/user-profile-settings
 import { authGuard } from './helpers/auth.guard';
 import { GuideProfilePreviewComponent } from './pages/guide/guide-profile-preview/guide-profile-preview.component';
 import { AvailabilityComponent } from './pages/shared/availability/availability.component';
+import { GuideBookingsComponent } from './pages/guide/guide-bookings/guide-bookings.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'profile-preview', component: GuideProfilePreviewComponent, canActivate: [authGuard] },
   {path: 'profile-settings', component: UserProfileSettingsComponent, canActivate: [authGuard] },
   {path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
-  {path: 'bookings', component: GuidesListComponent, canActivate: [authGuard] },
+  {path: 'find-a-guide', component: GuidesListComponent, canActivate: [authGuard] },
+  {path: 'bookings', component: GuideBookingsComponent, canActivate: [authGuard] },
   {path: 'availability', component: AvailabilityComponent, canActivate: [authGuard] }
 ];
 

@@ -1,5 +1,10 @@
 export const navbarData = [
   {
+    routeLink: 'find-a-guide',
+    icon:'fa-solid fa-magnifying-glass',
+    label: 'Find a Guide'
+  },
+  {
     routeLink: 'bookings',
     icon:'fa-solid fa-book',
     label: 'Bookings'

@@ -26,7 +26,7 @@
   </div>
 
   <div style="padding-top: 60px;" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px" fxFill *ngIf="background === 'transparent'">
-    <button mat-raised-button class="request-button">
+    <button mat-raised-button class="request-button" (click)="requestBooking()">
       <span class="date-label">Request a booking</span>
     </button>
   </div>
