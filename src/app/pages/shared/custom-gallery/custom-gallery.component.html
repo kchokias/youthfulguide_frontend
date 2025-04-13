@@ -1,0 +1,23 @@
+<div class="media-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="70" fxLayoutGap="20px" fxFill>
+  <div class="large-box" fxLayout="row" fxLayoutAlign="start start" fxFlex="70" fxLayoutGap="20px" fxFill>
+    <div class="large-image" fxLayout="row" fxLayoutAlign="start start" fxFlex="70" *ngIf="firstPhoto">
+      <img [src]="firstPhoto" alt="Gallery Photo" class="responsive-image">
+    </div>
+
+    <div class="medium-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxFill fxLayoutGap="20px" *ngIf="mediumPhotos.length > 0">
+      <div class="medium-image" fxLayout="column" fxLayoutAlign="start start" fxFlex="50" *ngFor="let photo of mediumPhotos">
+        <img [src]="photo" alt="Gallery Photo" class="responsive-image" style="width: -webkit-fill-available!important;">
+      </div>
+    </div>
+  </div>
+
+  <div class="small-box" fxLayout="row" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="25px" fxFill *ngIf="smallPhotos.length > 0">
+    <div class="small-image" fxLayout="column" fxLayoutAlign="start start" fxFlex="20" *ngFor="let photo of smallPhotos; let i = index">
+      <img [src]="photo" class="responsive-sm-image" *ngIf="i < smallPhotos.length - 1 || remainingCount <= 0">
+      <div class="see-all-container" *ngIf="i === smallPhotos.length - 1 && remainingCount > 0">
+        <img [src]="photo" class="responsive-sm-image">
+        <span class="all-pages">See All {{remainingCount}}+</span>
+      </div>
+    </div>
+  </div>
+</div>

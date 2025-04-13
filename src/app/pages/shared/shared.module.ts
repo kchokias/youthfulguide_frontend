@@ -15,6 +15,7 @@ import { GalleryModule } from 'ng-gallery';
 import { MediaGalleryDialogComponent } from "./media-gallery-dialog/media-gallery-dialog.component";
 import { AvailabilityComponent } from "./availability/availability.component";
 import { FullCalendarModule } from "@fullcalendar/angular";
+import { CustomGalleryComponent } from "./custom-gallery/custom-gallery.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FullCalendarModule } from "@fullcalendar/angular";
     ImageCropperDgComponent,
     StarRatingComponent,
     MediaGalleryDialogComponent,
-    AvailabilityComponent
+    AvailabilityComponent,
+    CustomGalleryComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { FullCalendarModule } from "@fullcalendar/angular";
     ImageCropperDgComponent,
     StarRatingComponent,
     MediaGalleryDialogComponent,
-    AvailabilityComponent
+    AvailabilityComponent,
+    CustomGalleryComponent
   ]
 })
 export class SharedModule { }

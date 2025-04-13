@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-
 const GET_AVAILABILTY_DATES = 'https://youthfulguides.app/api/Availability/Guide/';
 const UPDATE_AVAILABILITY = 'https://youthfulguides.app/api/Availability/Update/';
 const GET_AVAILABLE_GUIDES = 'https://youthfulguides.app/api/AvailableGuides/';
+const GET_GUIDE_PROFILE_BY_ID = 'https://youthfulguides.app/api/GuideProfile/';
+const GET_GUIDE_REVIEWS = 'https://youthfulguides.app/api/GuideReviews/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -78,6 +79,24 @@ export class GuideService {
       .set('region', _region);
 
     return this.http.get(GET_AVAILABLE_GUIDES, { headers, params });
+  }
+
+  getGuideProfileById(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    return this.http.get(`${GET_GUIDE_PROFILE_BY_ID}${id}`, { headers });
+  }
+
+  getGuideReviews(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    return this.http.get(`${GET_GUIDE_REVIEWS}${id}`, { headers });
   }
 
 }
