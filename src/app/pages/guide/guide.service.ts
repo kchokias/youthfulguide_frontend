@@ -9,6 +9,10 @@ const REQUEST_BOOKING = 'https://youthfulguides.app/api/Bookings/Request/';
 const GET_AVAILABLE_GUIDES = 'https://youthfulguides.app/api/AvailableGuides/';
 const GET_GUIDE_PROFILE_BY_ID = 'https://youthfulguides.app/api/GuideProfile/';
 const GET_GUIDE_REVIEWS = 'https://youthfulguides.app/api/GuideReviews/';
+const GET_GUIDE_BOOKINGS = 'https://youthfulguides.app/api/GuideBookings/';
+const ACCEPT = 'https://youthfulguides.app/api/Bookings/Accept';
+const DECLINE = 'https://youthfulguides.app/api/Bookings/Decline';
+const CANCEL = 'https://youthfulguides.app/api/Bookings/Cancel';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -86,6 +90,51 @@ export class GuideService {
     );
   }
 
+  acceptBooking(_booking_id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    const data = {
+      "booking_id": _booking_id};
+
+    return this.http.post(`${ACCEPT}`,
+      data,
+      { headers }
+    );
+  }
+
+  declineBooking(_booking_id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    const data = {
+      "booking_id": _booking_id};
+
+    return this.http.post(`${DECLINE}`,
+      data,
+      { headers }
+    );
+  }
+
+  cancelBooking(_booking_id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    const data = {
+      "booking_id": _booking_id};
+
+    return this.http.post(`${CANCEL}`,
+      data,
+      { headers }
+    );
+  }
+
   getAvailableGuides(_start: string, _end: string, _region: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -98,6 +147,23 @@ export class GuideService {
       .set('region', _region);
 
     return this.http.get(GET_AVAILABLE_GUIDES, { headers, params });
+  }
+
+  geGuidesBookings(_start: string, _end: string, _confirmed: string, _pending: string, _completed: string, _guideId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    const params = new HttpParams()
+    .set('guide_id', _guideId)
+    .set('start', _start)
+    .set('end', _end)
+    .set('confirmed', _confirmed)
+    .set('pending', _pending)
+    .set('completed', _completed);
+
+    return this.http.get(GET_GUIDE_BOOKINGS, { headers, params });
   }
 
   getGuideProfileById(id: number): Observable<any> {

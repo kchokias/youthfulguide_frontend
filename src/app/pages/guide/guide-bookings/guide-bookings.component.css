@@ -23,7 +23,7 @@
 }
 
 .guides-list-box {
-  height: 20vh;
+  height: 25vh;
   margin-bottom: 20px;
   padding: 1% 2%;
   width: 100%;
@@ -81,11 +81,29 @@
   padding: 20px 40px;
 }
 
+.accept-button {
+  padding: 25px 17px;
+  background-color: rgba(139, 240, 146, 1)!important;
+}
+
+.decline-button {
+  padding: 25px 17px;
+  background-color: rgba(240, 112, 114, 1)!important;
+}
+
 .label {
   color: rgba(241, 224, 43, 1);
   font-family: "Carter One", system-ui!important;
   font-weight: 400;
   font-size: 20px;
+}
+
+.review-label {
+  color: rgba(241, 224, 43, 1);
+  font-family: "Carter One", system-ui!important;
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: auto;
 }
 
 .no-bookings {
@@ -221,7 +239,7 @@ select {
 }
 
 .responsive-image {
-  width: 150px;
+  width: 200px;
   height: 100%;
   object-fit: fill;
 }

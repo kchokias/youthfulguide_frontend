@@ -34,7 +34,7 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
         start: [this.today],
         end: [this.endOfYear]
       }),
-      upcoming: [true],
+      confirmed: [true],
       pending: [true],
       completed: [true]
     });
@@ -45,6 +45,8 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
     await this.getUserId();
+
+    await this.getGuideBookings();
   }
 
   public async getUserId(): Promise<void> {
@@ -69,6 +71,57 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
     });
   }
 
+  public async getGuideBookings(): Promise<void> {
+    const lifecycleName: string = `getGuideBookings`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    let start = this.formatDateToString(this.searchForm.get('dateRange.start')?.value);
+    let end = this.formatDateToString(this.searchForm.get('dateRange.end')?.value);
+    let confirmed = this.searchForm.get('confirmed')?.value;
+    let pending = this.searchForm.get('pending')?.value;
+    let completed = this.searchForm.get('completed')?.value;
+
+    return new Promise<void>((resolve) => {
+      this.subscriptions.push(
+        this.guideService.geGuidesBookings(start, end, confirmed, pending, completed, this.userId.toString()).subscribe({
+          next: (response) => {
+            console.log(`${logPath}/@User response`, response);
+            this.bookings = response;
+            this.bookingsReady = true;
+            resolve();
+          },
+            error: (err) => {
+              console.error(`${logPath}/@User error`, err);
+              this.bookingsReady = false;
+              resolve();
+                }
+            })
+        );
+    });
+  }
+
+  public async onSearch() {
+    const functionName: string = `onSearch`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    this.bookings = [];
+    this.bookingsReady = false;
+    await this.getGuideBookings();
+  }
+
+  private formatDateToString(date: Date): string {
+    const functionName: string = `formatDateToString`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    if (!date) return '';
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}.${month}.${year}`;
+  }
+
   public ngOnDestroy(): void {
     const lifecycleName: string = `ngOnDestroy`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
@@ -79,12 +132,57 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
     })
   }
 
-  public async onSearch() {
-    const functionName: string = `onSearch`;
+  public onCancelBooking(id: number) : void{
+    const functionName: string = `onCancelBooking`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
-    this.bookings = [];
-    this.bookingsReady = false;
-    // await this.getBookings();
+    this.subscriptions.push(
+      this.guideService.cancelBooking(id).subscribe({
+        next: async (response) => {
+          console.log(`${logPath}/@User response`, response);
+          await this.getGuideBookings();
+          this.bookingsReady = false;
+        },
+        error: (err) => {
+          console.log(`${logPath}/@User error`, err);
+        }
+      })
+    );
+  }
+
+  public onAcceptBooking (id: number) : void{
+    const functionName: string = `onAcceptBooking`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    this.subscriptions.push(
+      this.guideService.acceptBooking(id).subscribe({
+        next: async (response) => {
+          console.log(`${logPath}/@User response`, response);
+          await this.getGuideBookings();
+          this.bookingsReady = false;
+        },
+        error: (err) => {
+          console.log(`${logPath}/@User error`, err);
+        }
+      })
+    );
+  }
+
+  public onDeclineBooking(id: number) : void{
+    const functionName: string = `onDeclineBooking`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    this.subscriptions.push(
+      this.guideService.declineBooking(id).subscribe({
+        next: async (response) => {
+          console.log(`${logPath}/@User response`, response);
+          await this.getGuideBookings();
+          this.bookingsReady = false;
+        },
+        error: (err) => {
+          console.log(`${logPath}/@User error`, err);
+        }
+      })
+    );
   }
 }
