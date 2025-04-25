@@ -24,6 +24,7 @@ import { UserProfileSettingsComponent } from './pages/user/user-profile-settings
 import { AuthInterceptor } from './helpers/auth.interceptor';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { GuideModule } from './pages/guide/guide.module';
+import { TravelerModule } from './pages/traveler/traveler.module';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { GuideModule } from './pages/guide/guide.module';
     GuideModule,
     SharedModule,
     OverlayModule,
+    TravelerModule,
     CdkMenuModule
   ],
   providers: [

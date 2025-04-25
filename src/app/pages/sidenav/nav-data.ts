@@ -10,6 +10,11 @@ export const navbarData = [
     label: 'Bookings'
   },
   {
+    routeLink: 'my-bookings',
+    icon:'fa-solid fa-book',
+    label: 'My Bookings'
+  },
+  {
     routeLink: 'availability',
     icon:'fa-solid fa-calendar',
     label: 'Availability'
@@ -28,5 +33,10 @@ export const navbarData = [
     routeLink: 'faq',
     icon:'fa solid fa-question',
     label: 'FAQ'
+  },
+  {
+    routeLink: 'help',
+    icon:'fa solid fa-question',
+    label: 'Help'
   },
 ]

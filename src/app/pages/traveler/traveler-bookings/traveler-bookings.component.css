@@ -1,0 +1,260 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  border-radius: 20px;
+  border: 5px solid rgba(18, 19, 21, 0.85);
+  background: rgba(18, 19, 21, 0.85);
+  margin-bottom: 15px;
+}
+
+.app-description-box, .guides-list-box {
+  background: rgba(18, 19, 21, 1);
+  border: 3px solid rgba(251, 226, 76, 1);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-description-box {
+  height: 15vh;
+  margin-bottom: 40px;
+}
+
+.guides-list-box {
+  height: 30vh;
+  margin-bottom: 20px;
+  padding: 1% 2%;
+  width: 100%;
+}
+
+.app-description-box p {
+  text-align: center;
+  margin: 0;
+  font-family: "Carter One", system-ui!important;
+  font-weight: 400;
+  font-size: 24px;
+  color: rgba(251, 226, 76, 1);
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.search-box {
+  border: 3px solid rgba(251, 226, 76, 1);
+  border-radius: 20px;
+  max-width: 60vw;
+  width: 60vw;
+  margin: 0 auto;
+  padding: 1%;
+  background: rgba(18, 19, 21, 1);
+  margin-bottom: 40px;
+}
+
+.form-field {
+  width: -webkit-fill-available;
+  max-width: 100%;
+}
+
+.search-button {
+  background-color: rgba(240, 139, 195, 1)!important;
+  color: black;
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  height: 61px;
+}
+
+.profile-button {
+  background-color: rgba(240, 139, 195, 1)!important;
+  color: black;
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 25px 36px;
+}
+
+.accept-button {
+  padding: 25px 17px;
+  background-color: rgba(139, 240, 146, 1)!important;
+}
+
+.decline-button {
+  padding: 25px 17px;
+  background-color: rgba(240, 112, 114, 1)!important;
+}
+
+.label {
+  color: rgba(241, 224, 43, 1);
+  font-family: "Carter One", system-ui!important;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.review-label {
+  color: rgba(241, 224, 43, 1);
+  font-family: "Carter One", system-ui!important;
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: auto;
+}
+
+.no-bookings {
+  color: rgba(241, 224, 43, 1);
+  font-family: "Carter One", system-ui!important;
+  transform: translateY(-2px);
+}
+
+.date-label {
+  color: black;
+  font-family: "Aclonica", serif;
+  font-weight: 400;
+  color: black;
+  font-size: 13px;
+}
+
+select {
+  font-size: 1rem;
+  font-family: "Aclonica", serif;
+  font-weight: 400;
+  color: black;
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+}
+
+#regionSelect {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+  border: 4px solid black;
+}
+
+.select-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-55%) rotate(180deg);
+  font-size: 1rem;
+  color: black;
+}
+
+#anywhere {
+  margin-top: 1vh;
+  height: 25px;
+  width: 50px;
+}
+
+.custom-checkbox {
+  transform: translateY(-2px);
+  margin-left: 10px;
+  height: 25px;
+  width: 25px;
+  border: 2px solid rgba(241, 224, 43, 1);
+  background-color: rgba(0, 0, 0, 0.2);
+  appearance: none;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.custom-checkbox:checked {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.custom-checkbox:checked::before {
+  content: "\F26E"!important;
+  font-family: "bootstrap-icons" !important;
+  font-size: 1.4rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: yellow;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  height: 46px;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper{
+  border: 4px solid black;
+}
+
+:host ::ng-deep .mat-mdc-form-field-infix {
+  padding-top: 7px!important;
+  padding-bottom: 0px!important;
+  min-height: 38px;
+  width: 240px!important;
+}
+
+:host ::ng-deep .mdc-text-field--filled {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+:host ::ng-deep .mdc-text-field {
+  padding: 0 11px;
+}
+
+:host ::ng-deep .date-picker .mat-mdc-icon-button {
+  color: black;
+  transform: translateY(-5px);
+}
+
+:host ::ng-deep .date-picker .mat-date-range-input-inner {
+  color: black;
+  font-size: 16px;
+  font-family: "Aclonica", serif;
+}
+
+:host ::ng-deep .date-picker .mat-date-range-input-wrapper {
+  max-width: 115px;
+  width: 115px;
+  min-width: 115px;
+}
+
+.guides-container, .image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.responsive-image {
+  width: 200px;
+  height: 100%;
+  object-fit: fill;
+}
+
+@media (max-width: 900px) {
+  [fxLayout="row"] {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-field {
+    width: 100%;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+}
