@@ -1,20 +1,40 @@
-<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''" fxLayout="column" fxLayoutAlign="start center">
   <div class="logo-container">
-    <button class="logo" (click)="toggleCollapse()">A</button>
-    <div class="logo-text" @fadeInOut *ngIf="collapsed">Angular</div>
-    <button @rotate class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
-      <i class="fas fa-times close-icon"></i>
-    </button>
+    <div class="logo-text" *ngIf="!collapsed" (click)="toggleCollapse()">
+      <img
+        [src]="'../../assets/images/logo.jpg'"
+        class="responsive-image"
+        alt="App Logo"/>
+    </div>
+    <div class="logo-text" *ngIf="collapsed" (click)="closeSidenav()">
+      <img
+        [src]="'../../assets/images/logo.jpg'"
+        class="responsive-image"
+        alt="App Logo"/>
+    </div>
   </div>
 
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a class="sidenav-nav-link" [routerLink]="data.routeLink"
+      <a class="sidenav-nav-link"
+        *ngIf="data.routeLink !== 'logout'; else logoutTemplate"
+        [routerLink]="data.routeLink"
          routerLinkActive="active"
-         [routerLinkActiveOptions]="{exact: true}">
-        <i class="sidenav-link-icon" [class]="data.icon"></i>
+         [routerLinkActiveOptions]="{exact: true}"
+         fxLayout="row" fxLayoutAlign="space-between center">
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{ data.label }}</span>
+        <i class="sidenav-link-icon" [class]="data.icon"></i>
       </a>
+
+      <ng-template #logoutTemplate>
+        <a class="sidenav-nav-link" (click)="logout()" fxLayout="row" fxLayoutAlign="space-between center">
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{ data.label }}</span>
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+        </a>
+        <button @rotate class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+          <i class="fas fa-times close-icon"></i>
+        </button>
+      </ng-template>
     </li>
   </ul>
 </div>

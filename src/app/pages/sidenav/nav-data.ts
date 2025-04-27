@@ -30,6 +30,11 @@ export const navbarData = [
     label: 'Profile Settings'
   },
   {
+    routeLink: 'logout',
+    icon:'bi bi-box-arrow-left',
+    label: 'Sign Out'
+  },
+  {
     routeLink: 'faq',
     icon:'fa solid fa-question',
     label: 'FAQ'

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { navbarData } from './nav-data';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { Router } from '@angular/router';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -15,13 +16,13 @@ interface SideNavToggle {
     trigger('fadeInOut', [
       transition(':enter', [
         style({opacity: 0}),
-        animate('350ms',
+        animate('50ms',
           style({opacity: 1})
         )
       ]),
       transition(':leave', [
         style({opacity: 0}),
-        animate('350ms',
+        animate('50ms',
           style({opacity: 0})
         )
       ]),
@@ -46,7 +47,7 @@ export class SidenavComponent implements OnInit {
   public navData = navbarData;
   public screenWidth: number = 0
 
-  public constructor() {
+  public constructor(private router: Router) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -88,6 +89,15 @@ export class SidenavComponent implements OnInit {
       this.onToggleSidenav.emit({collapsed:this.collapsed, screenWidth: this.screenWidth});
     }
 
+  }
+
+  logout() {
+    localStorage.removeItem('token');  // or sessionStorage.removeItem('token');
+
+    localStorage.clear();
+
+    // Redirect to login page
+    this.router.navigate(['/login']);
   }
 
 }
