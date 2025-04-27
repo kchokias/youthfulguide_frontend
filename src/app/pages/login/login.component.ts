@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   private componentName: string = `LoginComponent`;
   private subscriptions: Subscription[] = [];
   public formReady: boolean = false;
+  public logoBase64: string = '';
+  hide = true;
 
   public constructor(private loginService: LoginService, private authService: AuthService) {}
 

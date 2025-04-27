@@ -11,6 +11,10 @@ import { LoginService } from '../login/login.service';
 
 export class RegisterComponent implements OnInit {
 
+  hide = true;
+  confirmHide = true;
+  passwordsMatch: boolean = false;
+
   public regions: any[] = [
     { viewValue: 'Central Greece', value: 'Central_Greece' },
     { viewValue: 'Macedonia', value: 'Macedonia' },
@@ -64,10 +68,15 @@ export class RegisterComponent implements OnInit {
       'username': [undefined, [Validators.required]],
       'email':  [undefined, [Validators.required, Validators.email]],
       'password':[undefined, [Validators.required]],
-      // 'password2': [undefined, [Validators.required]],
+      'password2': [undefined, [Validators.required]],
       'role':[undefined, [Validators.required]],
       'country':['greece', [Validators.required]],
       'region':[undefined, [Validators.required]],
     });
   }
+
+
+checkPasswordsMatch() {
+  this.passwordsMatch = this.registerForm.get('password')!.value === this.registerForm.get('password2')!.value;
+}
 }

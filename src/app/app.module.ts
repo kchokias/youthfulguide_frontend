@@ -22,16 +22,14 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
 import { UserProfileSettingsComponent } from './pages/user/user-profile-settings/user-profile-settings.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
-import { FullCalendarModule } from '@fullcalendar/angular';
 import { GuideModule } from './pages/guide/guide.module';
 import { TravelerModule } from './pages/traveler/traveler.module';
-
+import { LoginModule } from './pages/login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent,
     SidenavComponent,
     BodyComponent,
     DashboardComponent,
@@ -54,7 +52,8 @@ import { TravelerModule } from './pages/traveler/traveler.module';
     SharedModule,
     OverlayModule,
     TravelerModule,
-    CdkMenuModule
+    CdkMenuModule,
+    LoginModule
   ],
   providers: [
     httpInterceptorProviders,

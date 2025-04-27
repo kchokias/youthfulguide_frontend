@@ -16,6 +16,7 @@ import { MediaGalleryDialogComponent } from "./media-gallery-dialog/media-galler
 import { AvailabilityComponent } from "./availability/availability.component";
 import { FullCalendarModule } from "@fullcalendar/angular";
 import { CustomGalleryComponent } from "./custom-gallery/custom-gallery.component";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CustomGalleryComponent } from "./custom-gallery/custom-gallery.componen
     MatDialogModule,
     ImageCropperModule,
     GalleryModule,
+    MatIconModule,
     FullCalendarModule
   ],
   providers: [],
