@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -14,7 +15,7 @@ export class ForgotPasswordComponent implements OnInit {
   public bringPassword: boolean = false;
   public passwordChecks: boolean = false;
 
-  public constructor(private formBuilder: FormBuilder) {
+  public constructor(private formBuilder: FormBuilder, private router: Router) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -37,35 +38,15 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  public passwordFormSetup(): void {
-    const functionName: string = `emailFormSetup`;
-    const logPath: string = `/${this.componentName}/${functionName}()`;
-    // console.log(`${logPath}/ @Login`);
-
-    this.newPasswordForm = this.formBuilder.group({
-      'password1':  [undefined, Validators.required],
-      'password2':  [undefined, Validators.required]
-    });
-  }
-
   public onEmailSubmit(): void {
     const functionName: string = `onSubmit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
     console.log(`${logPath}/ @Login form.value`, this.forgotForm.value);
 
-    this.passwordFormSetup();
     this.bringPassword = true;
   }
 
-  public onPasswordSubmit(): void {
-    const functionName: string = `onSubmit`;
-    const logPath: string = `/${this.componentName}/${functionName}()`;
-    console.log(`${logPath}/ @Password form.value`, this.newPasswordForm.value);
-
-    if(this.newPasswordForm.get('password1')!.value === this.newPasswordForm.get('password2')!.value) {
-      this.passwordChecks = true;
-    } else {
-      this.passwordChecks = false;
-    }
+  public goBack(): void {
+    this.router.navigate(['/login']);
   }
 }

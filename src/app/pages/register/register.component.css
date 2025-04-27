@@ -143,3 +143,9 @@ select {
   font-style: normal;
   color: black;
 }
+
+@media (min-height: 800px) {
+  #sign-up {
+    margin-top: 5vh;
+  }
+}
