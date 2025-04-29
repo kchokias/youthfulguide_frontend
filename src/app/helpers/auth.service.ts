@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private tokenKey = 'authToken';
+  private role: string = 'guide';
 
   constructor(private router: Router) {}
 
@@ -26,4 +27,12 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
+
+  setUserRole(_role: string): void {
+     this.role = _role;
+  }
+
+  getUserRole(): string {
+    return this.role;
+ }
 }

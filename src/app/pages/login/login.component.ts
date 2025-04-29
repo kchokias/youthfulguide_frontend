@@ -48,9 +48,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       (this.loginService.login(this.loginForm.value)
       .subscribe({
         next: (response) => {
-          console.log(`${logPath}/ @loginForm response $0`, response);
+          console.log(`${logPath}/ @loginForm response`, response);
           const token = response.token;
-          this.authService.login(token);
+          this.authService.setUserRole(response.user.role);
+
+          setTimeout(() => {
+            this.authService.login(token);
+          }, 1000);
         },
         error: (error) => {
           let loginError = 'Invalid login credentials';

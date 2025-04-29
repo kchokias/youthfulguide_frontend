@@ -2,6 +2,8 @@ import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/
 import { navbarData } from './nav-data';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/helpers/auth.service';
+import { NavItem } from './nav-item.model';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -44,10 +46,11 @@ export class SidenavComponent implements OnInit {
   @Output() onToggleSidenav: EventEmitter<SideNavToggle> = new EventEmitter();
   private componentName: string = `SidenavComponent`;
   public collapsed = true;
-  public navData = navbarData;
+  public navData: NavItem[] = navbarData;
+  public filteredNavData: NavItem[] = [];
   public screenWidth: number = 0
 
-  public constructor(private router: Router) {
+  public constructor(private router: Router, private authService: AuthService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -55,7 +58,10 @@ export class SidenavComponent implements OnInit {
   public ngOnInit(): void {
     const lifecycleName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
-    // console.log(`${logPath}/ @Sidenav`);
+    console.log(`${logPath}/ @Sidenav`);
+
+    const role = this.authService.getUserRole();
+    this.filteredNavData = navbarData.filter(item => item.visibleFor.includes(role));
 
     this.screenWidth = window.innerWidth;
     this.collapsed = this.screenWidth > 768;
@@ -92,11 +98,10 @@ export class SidenavComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token');  // or sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
 
     localStorage.clear();
 
-    // Redirect to login page
     this.router.navigate(['/login']);
   }
 

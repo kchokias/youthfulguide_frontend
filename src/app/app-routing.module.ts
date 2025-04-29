@@ -13,6 +13,8 @@ import { GuideProfilePreviewComponent } from './pages/guide/guide-profile-previe
 import { AvailabilityComponent } from './pages/shared/availability/availability.component';
 import { GuideBookingsComponent } from './pages/guide/guide-bookings/guide-bookings.component';
 import { TravelerBookingsComponent } from './pages/traveler/traveler-bookings/traveler-bookings.component';
+import { roleGuard } from './helpers/role.guard';
+
 
 const routes: Routes = [
   // {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -27,7 +29,7 @@ const routes: Routes = [
   {path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
   {path: 'find-a-guide', component: GuidesListComponent, canActivate: [authGuard] },
   {path: 'bookings', component: GuideBookingsComponent, canActivate: [authGuard] },
-  {path: 'my-bookings', component: TravelerBookingsComponent, canActivate: [authGuard] },
+  {path: 'my-bookings', component: TravelerBookingsComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'visitor'} },
   {path: 'availability', component: AvailabilityComponent, canActivate: [authGuard] }
 ];
 

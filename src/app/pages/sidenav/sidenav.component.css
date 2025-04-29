@@ -35,6 +35,8 @@
 
 .btn-close {
   margin-left: auto;
+  margin-bottom: 7.5%;
+  margin-right: 7.5%;
   cursor: pointer;
   width: 2rem;
   height: 2rem;
@@ -44,8 +46,13 @@
 }
 
 .close-icon {
-  color: #fff;
+  color: rgba(251, 226, 76, 1);
   font-size: 24px;
+}
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sidenav-collapsed {
@@ -100,12 +107,8 @@
   color: #000;
 }
 
-.sidenav-nav-link.active:nth-child(odd) {
+.sidenav-nav-link.active {
   background-color: rgba(240, 139, 195, 1);
-}
-
-.sidenav-nav-link.active:nth-child(even) {
-  background-color: white;
 }
 
 .active .sidenav-link-icon,

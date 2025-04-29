@@ -72,7 +72,7 @@ export class AvailabilityComponent {
         this.userService.getUserId().subscribe({
           next: (response) => {
             this.userId = response.userId;
-            console.log(`${logPath}/@User response $0`, response);
+            console.log(`${logPath}/@User response`, response);
             resolve();
           },
           error: (err) => {
@@ -130,7 +130,7 @@ export class AvailabilityComponent {
       this.selectedDates = [this.formatDate(finalStart), this.formatDate(finalEnd)];
     }
 
-    console.log('Selected Date(s):$0', this.selectedDates);
+    console.log('Selected Date(s)', this.selectedDates);
   }
 
   public applyCustomClass(arg: any): any[] {

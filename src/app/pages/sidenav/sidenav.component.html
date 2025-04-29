@@ -15,7 +15,7 @@
   </div>
 
   <ul class="sidenav-nav">
-    <li class="sidenav-nav-item" *ngFor="let data of navData">
+    <li class="sidenav-nav-item" *ngFor="let data of filteredNavData">
       <a class="sidenav-nav-link"
         *ngIf="data.routeLink !== 'logout'; else logoutTemplate"
         [routerLink]="data.routeLink"
@@ -31,10 +31,14 @@
           <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{ data.label }}</span>
           <i class="sidenav-link-icon" [class]="data.icon"></i>
         </a>
-        <button @rotate class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
-          <i class="fas fa-times close-icon"></i>
-        </button>
       </ng-template>
     </li>
   </ul>
+
+  <button @rotate class="btn-close centered" *ngIf="!collapsed" (click)="toggleCollapse()">
+    <i class="bi bi-arrows-fullscreen close-icon"></i>
+  </button>
+  <button @rotate class="btn-close" *ngIf="collapsed" (click)="closeSidenav()" >
+    <i class="bi bi-arrows-fullscreen close-icon"></i>
+  </button>
 </div>
