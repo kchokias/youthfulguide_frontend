@@ -14,6 +14,7 @@ import { AvailabilityComponent } from './pages/shared/availability/availability.
 import { GuideBookingsComponent } from './pages/guide/guide-bookings/guide-bookings.component';
 import { TravelerBookingsComponent } from './pages/traveler/traveler-bookings/traveler-bookings.component';
 import { roleGuard } from './helpers/role.guard';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'forgot', component: ForgotPasswordComponent},
+  {path: 'reset-password/:token', component: ResetPasswordComponent },
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   {path: 'media', component: MediaComponent, canActivate: [authGuard] },

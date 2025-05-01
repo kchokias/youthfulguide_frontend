@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent implements OnInit {
-
+export class ForgotPasswordComponent implements OnInit, OnDestroy {
   private componentName: string = `ForgotPasswordComponent`;
+  public message: string = ``;
   public forgotForm: FormGroup = new FormGroup({});
-  public newPasswordForm: FormGroup = new FormGroup({});
-  public bringPassword: boolean = false;
-  public passwordChecks: boolean = false;
+  private subscriptions: Subscription[] = [];
 
-  public constructor(private formBuilder: FormBuilder, private router: Router) {
+  public constructor(private formBuilder: FormBuilder, private router: Router, private loginService: LoginService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -26,6 +26,16 @@ export class ForgotPasswordComponent implements OnInit {
     // console.log(`${logPath}/ @Login`);
 
     this.emailFormSetup();
+  }
+
+  public ngOnDestroy(): void {
+    const lifecycleName: string = `ngOnDestroy`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+    // console.log(`${logPath}/ @Login`);
+
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    })
   }
 
   public emailFormSetup(): void {
@@ -43,7 +53,18 @@ export class ForgotPasswordComponent implements OnInit {
     const logPath: string = `/${this.componentName}/${functionName}()`;
     console.log(`${logPath}/ @Login form.value`, this.forgotForm.value);
 
-    this.bringPassword = true;
+    this.subscriptions.push
+      (this.loginService.forgotPassword(this.forgotForm.value)
+      .subscribe({
+        next: (response) => {
+          console.log(`${logPath}/ @loginForm response`, response);
+          this.message = response.message;
+        },
+        error: (error) => {
+          let loginError = 'This email does not exist in our system';
+        }
+      })
+    );
   }
 
   public goBack(): void {

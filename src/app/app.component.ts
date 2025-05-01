@@ -33,7 +33,9 @@ export class AppComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.hideSidebarAndHeader = ['/login', '/register', '/forgot'].includes(this.router.url);
+        const hiddenRoutes = ['/login', '/register', '/forgot'];
+        const url = this.router.url;
+        this.hideSidebarAndHeader = hiddenRoutes.includes(url) || url.startsWith('/reset-password/');
       }
     });
   }

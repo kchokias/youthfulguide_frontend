@@ -20,7 +20,7 @@ export class BodyComponent implements OnInit {
   public getBodyClass(): string {
     const authRoutes = ['/login', '/register', '/forgot'];
 
-    if (authRoutes.includes(this.router.url)) {
+    if (authRoutes.includes(this.router.url) || this.router.url.startsWith('/reset-password/')) {
       return 'body-auth';
     }
 

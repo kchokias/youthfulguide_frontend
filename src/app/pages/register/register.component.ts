@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
   }
 
 
-checkPasswordsMatch() {
-  this.passwordsMatch = this.registerForm.get('password')!.value === this.registerForm.get('password2')!.value;
-}
+  public checkPasswordsMatch() {
+    this.passwordsMatch = this.registerForm.get('password')!.value === this.registerForm.get('password2')!.value;
+  }
 }

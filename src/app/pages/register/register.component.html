@@ -61,6 +61,16 @@
           <button
             mat-icon-button
             matSuffix
+            disabled
+            type="button"
+            style="transform: translate(0px, -3px);">
+            <mat-icon [ngStyle]="{'color': passwordsMatch ? 'green' : 'red'}">
+              {{ passwordsMatch ? 'check_circle' : 'cancel' }}
+            </mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            matSuffix
             (click)="confirmHide = !confirmHide"
             [attr.aria-label]="'Toggle password visibility'"
             [attr.aria-pressed]="confirmHide"
@@ -68,16 +78,7 @@
             style="transform: translate(0px, -3px);">
             <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-          <button
-          mat-icon-button
-          matSuffix
-          disabled
-          type="button"
-          style="transform: translate(0px, -3px);">
-          <mat-icon [ngStyle]="{'color': passwordsMatch ? 'green' : 'red'}">
-            {{ passwordsMatch ? 'check_circle' : 'cancel' }}
-          </mat-icon>
-        </button>
+
         </mat-form-field>
 
         <div fxLayout="column" fxLayoutAlign="start start" style="width: 80%;">

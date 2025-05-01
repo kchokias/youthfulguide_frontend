@@ -8,9 +8,9 @@
 
   <!-- RIGHT COLUMN -->
   <div class="right-column" *ngIf="formReady">
-    <div class="card" fxLayout="column" fxLayoutAlign="space-evenly center">
+    <div class="card" fxLayout="column" fxLayoutAlign="space-evenly start">
       <p class="name">Edit Profile Settings</p>
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="space-evenly center">
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="space-evenly center" style="margin-top: 15px;">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" style="width: 100%;">
 
           <div class="form-group" fxFlex="50">

@@ -25,6 +25,7 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
 import { GuideModule } from './pages/guide/guide.module';
 import { TravelerModule } from './pages/traveler/traveler.module';
 import { LoginModule } from './pages/login/login.module';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LoginModule } from './pages/login/login.module';
     SettingsComponent,
     HeaderComponent,
     ForgotPasswordComponent,
-    UserProfileSettingsComponent
+    UserProfileSettingsComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
