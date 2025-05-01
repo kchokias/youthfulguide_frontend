@@ -7,31 +7,38 @@ body {
 }
 
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  width: 100%;
+  height: calc(100vh - 2rem);
+  border-radius: 20px;
+  background: transparent;
+  margin-bottom: 1rem;
 }
 
 .left-column {
   flex: 1;
   width: 40%;
   max-width: 40%;
+  height: 100%;
 }
 
 .right-column {
   flex: 1;
   width: 60%;
   max-width: 60%;
+  height: 100%;
+  font-family: "Carter One", serif;
 }
 
 .card {
-  background: #fff;
+  background: rgba(18, 19, 21, 0.85);
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin-bottom: 20px;
   margin: 0rem 0 1.25rem 0;
   padding: 20px;
+  height: 100%;
+  width: 100%;
 }
 
 .avatar {
@@ -49,10 +56,11 @@ body {
   background: white;
 }
 
-.card .author h5 {
-  margin: 10px 0 5px;
-  font-size: 18px;
-  font-weight: bold;
+.name {
+  font-size: 30px;
+  font-weight: 400;
+  color: rgba(241, 224, 43, 1);
+  text-align: start;
 }
 
 .card .description {
@@ -64,15 +72,16 @@ body {
 form {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .form-group {
   margin-bottom: 15px;
 }
 
-.form-group label {
-  font-weight: bold;
-  font-size: 14px;
+.form-group label, .labela {
+  font-size: 20px;
+  color: rgba(241, 224, 43, 1);
   display: block;
   margin-bottom: 5px;
 }
@@ -80,11 +89,17 @@ form {
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  padding: 10px 10px 6px;
+  border-radius: 20px;
+  border: 3px solid rgba(18, 19, 21, 1);
   font-size: 14px;
   font-family: "Aclonica", sans-serif;
+}
+
+.form-group input:disabled {
+  background-color: rgba(172, 149, 6, 1)!important;
+  cursor: not-allowed;
+  color: black!important;
 }
 
 .form-group textarea {
@@ -140,8 +155,8 @@ form {
 
 .toggle-password {
   position: absolute;
-  right: 10px;
-  top: 13px;
+  right: 15px;
+  top: 8px;
   font-size: 14px;
   cursor: pointer;
 }
@@ -158,21 +173,58 @@ form {
 }
 
 button {
-  background-color: #263238;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
+  color: rgba(18, 19, 21, 1)!important;
+  font-family: "Carter One", serif;
   font-size: 14px;
+  font-weight: 400;
+  background-color: rgba(240, 139, 195, 1);
+  width: 60%;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
-  font-family: "Aclonica", sans-serif;
-  margin-top: 25px;
+  margin: 2rem auto;
+  height: 45px;
+  border: 3px solid rgba(0, 0, 0, 1);
+  border-radius: 10px;
 }
 
 button:hover {
   background-color: #e9de1d;
   color: #263238;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+  border: 3px solid black;
+}
+
+select {
+  font-size: 1rem;
+  font-family: "Aclonica", serif;
+  font-weight: 400;
+  color: black;
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+}
+
+#regionSelect {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.select-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-55%) rotate(180deg);
+  font-size: 1rem;
+  color: black;
 }
 
 @media screen and (max-width: 768px) {

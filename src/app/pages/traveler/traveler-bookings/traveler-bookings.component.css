@@ -57,7 +57,7 @@
 }
 
 .form-field {
-  width: -webkit-fill-available;
+  width: 100%;
   max-width: 100%;
 }
 

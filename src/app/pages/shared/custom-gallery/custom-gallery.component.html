@@ -6,7 +6,7 @@
 
     <div class="medium-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxFill fxLayoutGap="20px" *ngIf="mediumPhotos.length > 0">
       <div class="medium-image" fxLayout="column" fxLayoutAlign="start start" fxFlex="50" *ngFor="let photo of mediumPhotos">
-        <img [src]="photo" alt="Gallery Photo" class="responsive-image" style="width: -webkit-fill-available!important;">
+        <img [src]="photo" alt="Gallery Photo" class="responsive-image" style="width: 100%!important;">
       </div>
     </div>
   </div>

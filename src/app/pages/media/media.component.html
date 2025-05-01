@@ -1,20 +1,19 @@
-<div class="guide-card" *ngIf="formReady">
+<div class="guide-card" *ngIf="formReady" fxLayout="column" fxLayoutAlign="space-around center">
   <div class="guide-header">
-    <a class="resize-btn" (click)="toggleAvatarSize('patch')">Resize</a>
     <div class="guide-avatar">
-      <img [src]="imageBase64 || '../../assets/images/user.png'" alt="Guide Profile">
+      <img [src]="imageBase64 || '../../assets/images/user.png'" alt="Guide Profile" (click)="toggleAvatarSize('patch')">
     </div>
-    <div class="guide-details">
-      <p>{{ selectedUser.name }} {{ selectedUser.surname }}</p>
+    <div class="guide-details" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15px">
+      <p class="name">{{ selectedUser.name }} {{ selectedUser.surname }}</p>
       <p class="description">{{'@' +selectedUser.username}}</p>
-      <app-star-rating [rating]="4.5"></app-star-rating>
+      <app-star-rating [rating]="4.5" [fontSize]="'3em'"></app-star-rating>
     </div>
   </div>
-  <div class="guide-actions">
-    <button mat-stroked-button color="primary" class="import" (click)="triggerFileInput('single')">Import New Avatar Photo</button>
+  <div class="guide-actions" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <button mat-stroked-button color="primary" class="import" (click)="triggerFileInput('single')">Upload Profile Photo</button>
     <input #singleFileInput type="file" accept="image/*" (change)="onFileChange($event)" hidden>
-    <button mat-stroked-button color="primary" class="import" (click)="triggerFileInput('multiple')">Import Media</button>
-    <input #multipleFileInput type="file" accept="image/*" multiple (change)="onMultipleFilesChange($event)" hidden>
-    <button [disabled]="!galleryReady" mat-stroked-button color="primary" class="import" (click)="openGallery()">Media Gallery</button>
+    <button *ngIf="selectedUser.role === 'guide'" mat-stroked-button color="primary" class="import pink" (click)="triggerFileInput('multiple')">Upload Media</button>
+    <input *ngIf="selectedUser.role === 'guide'" #multipleFileInput type="file" accept="image/*" multiple (change)="onMultipleFilesChange($event)" hidden>
+    <button *ngIf="selectedUser.role === 'guide'" [disabled]="!galleryReady" mat-stroked-button color="primary" class="import" (click)="openGallery()">Media Gallery</button>
   </div>
 </div>

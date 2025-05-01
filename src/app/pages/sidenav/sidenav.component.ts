@@ -48,7 +48,8 @@ export class SidenavComponent implements OnInit {
   public collapsed = true;
   public navData: NavItem[] = navbarData;
   public filteredNavData: NavItem[] = [];
-  public screenWidth: number = 0
+  public screenWidth: number = 0;
+  public screenHeight: number = 0;
 
   public constructor(private router: Router, private authService: AuthService) {
     const functionName: string = `constructor`;
@@ -64,6 +65,7 @@ export class SidenavComponent implements OnInit {
     this.filteredNavData = navbarData.filter(item => item.visibleFor.includes(role));
 
     this.screenWidth = window.innerWidth;
+    this.screenHeight = window.innerHeight;
     this.collapsed = this.screenWidth > 768;
     this.onToggleSidenav.emit({collapsed:this.collapsed, screenWidth: this.screenWidth});
   }
@@ -90,18 +92,16 @@ export class SidenavComponent implements OnInit {
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
     this.screenWidth = window.innerWidth;
+    this.screenHeight = window.innerHeight;
     if(this.screenWidth <= 768) {
       this.collapsed = false;
       this.onToggleSidenav.emit({collapsed:this.collapsed, screenWidth: this.screenWidth});
     }
-
   }
 
   logout() {
     localStorage.removeItem('token');
-
     localStorage.clear();
-
     this.router.navigate(['/login']);
   }
 

@@ -38,6 +38,20 @@
   <button @rotate class="btn-close centered" *ngIf="!collapsed" (click)="toggleCollapse()">
     <i class="bi bi-arrows-fullscreen close-icon"></i>
   </button>
+  <div class="euro-container" *ngIf="collapsed && screenHeight > 800" fxLayout="row" fxLayoutAlign="start center">
+    <div class="eu-container" fxFlex="60" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px" fxFlexFill>
+      <img
+        [src]="'../../assets/images/eu.png'"
+        class="eu-image"
+        alt="EU Logo"/>
+    </div>
+    <div class="dia-container" fxFlex="40" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px" fxFlexFill>
+      <img
+        [src]="'../../assets/images/diaviou.jpg'"
+        class="dia-image"
+        alt="Dia Viou Logo"/>
+    </div>
+  </div>
   <button @rotate class="btn-close" *ngIf="collapsed" (click)="closeSidenav()" >
     <i class="bi bi-arrows-fullscreen close-icon"></i>
   </button>

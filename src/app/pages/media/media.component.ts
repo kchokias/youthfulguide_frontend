@@ -22,6 +22,7 @@ private componentName: string = `GuideProfileComponent`;
   public galleryReady:boolean = false;
   public imageUrl = '../../assets/images/user.png';
   public imageBase64: string = '';
+  public role: string = '';
   public mediaFiles: string[] = [];
   public safeUrl: any;
   @ViewChild('singleFileInput') singleFileInput!: ElementRef<HTMLInputElement>;
@@ -81,7 +82,7 @@ private componentName: string = `GuideProfileComponent`;
         this.userService.getUserProfileById(_id).subscribe({
           next: (response) => {
             this.selectedUser = response.data;
-            console.log(`${logPath}/@User response`, response);
+            console.log(`${logPath}/@User response $1`, response);
             resolve();
           },
           error: (err) => {

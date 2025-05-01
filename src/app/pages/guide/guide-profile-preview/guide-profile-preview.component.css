@@ -43,8 +43,8 @@
 .details-box img {
   object-fit: cover;
   border-radius: 50%;
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
+  width: 100%;
+  height: 100%;
 }
 
 .no-bookings {
@@ -80,7 +80,7 @@
 
 .responsive-image {
   height: 100%;
-  width: -webkit-fill-available!important;
+  width: 100%!important;
   display: block;
   max-height: 450px;
   cursor: pointer;
@@ -88,7 +88,7 @@
 
 .responsive-sm-image {
   height: 100%;
-  width: -webkit-fill-available!important;
+  width: 100%!important;
   display: block;
   max-height: 100%;
   cursor: pointer;

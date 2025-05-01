@@ -58,7 +58,7 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
       password: [undefined],
       region: [undefined],
       role: [{ value:undefined, disabled: true}],
-      country: [{ value: undefined, disabled: true }]
+      country: [undefined]
       // aboutMe: ['Oh so, your weak rhyme You doubt I\'ll bother, reading into it']
     });
 
