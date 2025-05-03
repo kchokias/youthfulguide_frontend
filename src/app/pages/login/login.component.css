@@ -110,7 +110,18 @@ form {
   max-width: 200px;
   max-height: 75px;
 }
+
 .dia-image {
   max-width: 75px;
   max-height: 75px;
+}
+
+:host ::ng-deep .full-width .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.error-msg {
+  margin: 7.5px 0;
+  font-family: "Aclonica", serif;
+  color: rgba(255, 0, 0, 1);
 }

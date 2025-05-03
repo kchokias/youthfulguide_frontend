@@ -15,6 +15,10 @@
           <input matInput type="email" name="email" autocomplete="email" formControlName="email" required>
         </mat-form-field>
 
+        <p class="error-msg" [style.visibility]="emailErrorFlag ? 'visible' : 'hidden'">
+          {{errorMessage}}
+        </p>
+
         <mat-form-field appearance="fill" class="full-width" hideRequiredMarker="true">
           <mat-label>Password</mat-label>
           <input
@@ -35,7 +39,11 @@
           </button>
         </mat-form-field>
 
-        <button mat-raised-button type="submit" class="profile-button lgn">Login</button>
+        <p class="error-msg" [style.visibility]="emailErrorFlag ? 'visible' : 'hidden'">
+          {{errorMessage}}
+        </p>
+
+        <button mat-raised-button type="submit" class="profile-button lgn" style="margin-top: 2.5px">Login</button>
 
         <button mat-raised-button type="button" class="profile-button rgs" routerLink="/register" style="margin-top: 15px">Sign up</button>
 

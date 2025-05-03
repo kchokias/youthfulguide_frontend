@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { LoginService } from './login.service';
@@ -16,10 +16,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   private componentName: string = `LoginComponent`;
   private subscriptions: Subscription[] = [];
   public formReady: boolean = false;
+  public emailErrorFlag: boolean = false;
   public logoBase64: string = '';
+  public errorMessage: string = 'rfsdfsdfsd';
   hide = true;
 
-  public constructor(private loginService: LoginService, private authService: AuthService) {}
+  public constructor(private loginService: LoginService, private authService: AuthService,private cd: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
     const lifecycleName: string = `ngOnInit`;
@@ -44,6 +46,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     const logPath: string = `/${this.componentName}/${functionName}()`;
     console.log(`${logPath}/ @Login form.value`, this.loginForm.value);
 
+    this.emailErrorFlag = false;
+
     this.subscriptions.push
       (this.loginService.login(this.loginForm.value)
       .subscribe({
@@ -57,7 +61,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           }, 1000);
         },
         error: (error) => {
-          let loginError = 'Invalid login credentials';
+          console.log(`${logPath}/ @Error`, error);
+          if (error.status === 401) {
+            this.emailErrorFlag = true;
+          }
         }
       })
     );
