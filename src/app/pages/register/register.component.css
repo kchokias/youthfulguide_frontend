@@ -122,8 +122,8 @@ select {
   border: 2px solid rgba(0, 0, 0, 1);
   font-size: 16px;
   cursor: pointer;
-  padding: 20px 40px;
-  width: 40%;
+  padding: 1rem 2rem;
+  width: 50%;
   font-family: "Carter One", serif;
   font-size: 16px;
 }
@@ -142,6 +142,13 @@ select {
   text-decoration: none;
   font-style: normal;
   color: black;
+}
+
+.error-msg {
+  margin: 1.5px 0;
+  font-family: "Aclonica", serif;
+  color: rgba(255, 0, 0, 1);
+  font-size: 13px;
 }
 
 @media (min-height: 800px) {

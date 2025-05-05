@@ -8,26 +8,42 @@
   <div class="login-box" fxFlex="30" fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
     <div class="login-container" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="7.5px" fxFlexFill>
       <h2>Register</h2>
-      <form action="#" [formGroup]="registerForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7.5px">
+      <form action="#" [formGroup]="registerForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7.5px">
         <mat-form-field appearance="fill" class="full-width" hideRequiredMarker="true">
           <mat-label>Name</mat-label>
           <input matInput type="text" formControlName="name" required>
         </mat-form-field>
+
+        <p class="error-msg" [style.visibility]="nameErrorFlag ? 'visible' : 'hidden'">
+          {{errorMessage}}
+        </p>
 
         <mat-form-field appearance="fill" class="full-width" hideRequiredMarker="true">
           <mat-label>Surname</mat-label>
           <input matInput type="text" formControlName="surname" required>
         </mat-form-field>
 
+        <p class="error-msg" [style.visibility]="surnameErrorFlag ? 'visible' : 'hidden'">
+          {{errorMessage}}
+        </p>
+
         <mat-form-field appearance="fill" class="full-width" hideRequiredMarker="true">
           <mat-label>Username</mat-label>
           <input matInput type="text" formControlName="username" required>
         </mat-form-field>
 
+        <p class="error-msg" [style.visibility]="usernameErrorFlag ? 'visible' : 'hidden'">
+          {{errorMessage}}
+        </p>
+
         <mat-form-field appearance="fill" class="full-width" hideRequiredMarker="true">
           <mat-label>Email</mat-label>
           <input matInput type="email" name="email" autocomplete="email" formControlName="email" required>
         </mat-form-field>
+
+        <p class="error-msg" [style.visibility]="emailErrorFlag ? 'visible' : 'hidden'">
+          {{errorMessage}}
+        </p>
 
         <mat-form-field appearance="fill" class="full-width" hideRequiredMarker="true">
           <mat-label>Password</mat-label>
@@ -81,6 +97,10 @@
 
         </mat-form-field>
 
+        <p class="error-msg" [style.visibility]="passErrorFlag ? 'visible' : 'hidden'">
+          {{errorMessage}}
+        </p>
+
         <div fxLayout="column" fxLayoutAlign="start start" style="width: 80%;">
           <label for="regionSelect" style="font-weight: 600;">Select Country</label>
           <div class="select-wrapper">
@@ -115,7 +135,7 @@
           </div>
         </div>
 
-        <button id="sign-up" mat-raised-button type="submit" class="profile-button lgn" [disabled]="registerForm.disabled || registerForm.invalid">Sign up</button>
+        <button id="sign-up" mat-raised-button type="button" (click)="onSubmit()" class="profile-button lgn">Sign up</button>
 
         <button mat-raised-button type="button" class="profile-button rgs" (click)="goBack()">Back</button>
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from '../login/login.service';
+import { SnackbarService } from '../shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -18,12 +19,15 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   public confirmHide = true;
   public passwordsMatch: boolean = false;
   private subscriptions: Subscription[] = [];
+  public passErrorFlag: boolean = false;
+  public errorMessage: string = 'rfsdfsdfsd';
 
   public constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private loginService: LoginService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private snackbarService: SnackbarService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -36,7 +40,6 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.activatedRoute.paramMap.subscribe(params => {
       this.token = params.get('token')!;
     });
-
 
     this.newPasswordFormSetup();
   }
@@ -67,14 +70,33 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     const logPath: string = `/${this.componentName}/${functionName}()`;
     console.log(`${logPath}/ @Login form.value`, this.newPasswordForm.value);
 
+    this.newPasswordForm.markAllAsTouched();
+
+    if (this.newPasswordForm.get('password')!.value !== this.newPasswordForm.get('password2')!.value) {
+      this.passErrorFlag = true;
+      this.errorMessage = 'Passwords do not match!';
+      return;
+    }
+
+    if (this.newPasswordForm.invalid) {
+      console.warn(`${logPath}/ Form is invalid, aborting submission.`);
+      return;
+    }
+
     this.subscriptions.push
       (this.loginService.resetPassword(this.token, this.newPasswordForm!.value.password)
       .subscribe({
         next: (response) => {
+          this.snackbarService.open('Changed successfully!', 'success');
           console.log(`${logPath}/ @loginForm response`, response);
-          // this.message = response.message;
+          this.goBack();
         },
         error: (error) => {
+          this.snackbarService.open(error.error.message, 'error');
+          if (error.error.errorCode === 1) {
+            this.passErrorFlag = false;
+            this.errorMessage = error.error.message;
+          }
           let loginError = 'This email does not exist in our system';
         }
       })

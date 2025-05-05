@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { UserService } from "../../user/user.service";
 import { MatDialog } from "@angular/material/dialog";
 import { TravelerService } from "../traveler.service";
+import { SnackbarService } from "../../shared/snackbar/snackbar.service";
 
 @Component({
   selector: 'app-traveler-bookings',
@@ -25,7 +26,8 @@ export class TravelerBookingsComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private travelerService: TravelerService,
-    private userService: UserService) {
+    private userService: UserService,
+    private snackbarService: SnackbarService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 

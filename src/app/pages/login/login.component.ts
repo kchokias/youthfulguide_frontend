@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { LoginService } from './login.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/helpers/auth.service';
+import { SnackbarService } from '../shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -17,11 +17,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   public formReady: boolean = false;
   public emailErrorFlag: boolean = false;
+  public passErrorFlag: boolean = false;
   public logoBase64: string = '';
   public errorMessage: string = 'rfsdfsdfsd';
   hide = true;
 
-  public constructor(private loginService: LoginService, private authService: AuthService,private cd: ChangeDetectorRef) {}
+  public constructor(
+    private loginService: LoginService,
+    private authService: AuthService,
+    private snackbarService: SnackbarService
+  ) {}
 
   public ngOnInit(): void {
     const lifecycleName: string = `ngOnInit`;
@@ -55,15 +60,22 @@ export class LoginComponent implements OnInit, OnDestroy {
           console.log(`${logPath}/ @loginForm response`, response);
           const token = response.token;
           this.authService.setUserRole(response.user.role);
-
           setTimeout(() => {
             this.authService.login(token);
+            this.snackbarService.open('Login successfully!', 'success');
           }, 1000);
         },
         error: (error) => {
           console.log(`${logPath}/ @Error`, error);
-          if (error.status === 401) {
+          this.snackbarService.open(error.error.message, 'error');
+          if (error.error.code === 3) {
+            this.emailErrorFlag = false;
+            this.passErrorFlag = true;
+            this.errorMessage = error.error.message;
+          } else if (error.error.code === 2) {
             this.emailErrorFlag = true;
+            this.passErrorFlag = false;
+            this.errorMessage = error.error.message;
           }
         }
       })

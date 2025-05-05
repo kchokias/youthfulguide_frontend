@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../login/login.service';
+import { SnackbarService } from '../shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-register',
@@ -24,8 +25,18 @@ export class RegisterComponent implements OnInit {
 
   public registerForm: FormGroup = new FormGroup({});
   private componentName: string = `RegisterComponent`;
+  public emailErrorFlag: boolean = false;
+  public surnameErrorFlag: boolean = false;
+  public usernameErrorFlag: boolean = false;
+  public nameErrorFlag: boolean = false;
+  public passErrorFlag: boolean = false;
+  public errorMessage: string = 'rfsdfsdfsd';
 
-  public constructor(private formBuilder: FormBuilder, private router: Router,private loginService: LoginService) {
+  public constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private loginService: LoginService,
+    private snackbarService: SnackbarService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -41,14 +52,72 @@ export class RegisterComponent implements OnInit {
   public onSubmit(): void {
     const functionName: string = `onSubmit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
-    console.log(`${logPath}/ @registerForm form.value`, this.registerForm.value);
+    console.log(`${logPath}/ @onSubmit`);
+
+    this.registerForm.markAllAsTouched();
+
+    if (this.registerForm.get('password')!.value !== this.registerForm.get('password2')!.value) {
+      this.emailErrorFlag = false;
+      this.nameErrorFlag = false;
+      this.surnameErrorFlag = false;
+      this.usernameErrorFlag = false;
+      this.passErrorFlag = true;
+      this.errorMessage = 'Passwords do not match!';
+    return;
+    }
+
+    if (this.registerForm.invalid) {
+      console.warn(`${logPath}/ Form is invalid, aborting submission.`);
+      return;
+    }
 
     this.loginService.register(this.registerForm.value).subscribe({
       next: (response: any) => {
         console.log('HTTP Response:', response);
+        this.snackbarService.open('Set up successfully!', 'success');
         this.goBack();
       },
-      error: (error: any) => console.log('HTTP Error:', error),
+      error: (error: any) => {
+        this.snackbarService.open(error.error.message, 'error');
+        console.log('HTTP Error:', error);
+        if (error.error.errorCode === 1) {
+          this.emailErrorFlag = false;
+          this.nameErrorFlag = true;
+          this.surnameErrorFlag = false;
+          this.usernameErrorFlag = false;
+          this.passErrorFlag = false;
+          this.errorMessage = error.error.message;
+        }
+        else if (error.error.errorCode === 2) {
+          this.emailErrorFlag = false;
+          this.nameErrorFlag = false;
+          this.surnameErrorFlag = true;
+          this.usernameErrorFlag = false;
+          this.passErrorFlag = false;
+          this.errorMessage = error.error.message;
+        } else if (error.error.errorCode === 3 || error.error.errorCode === 7) {
+          this.emailErrorFlag = false;
+          this.nameErrorFlag = false;
+          this.surnameErrorFlag = false;
+          this.usernameErrorFlag = true;
+          this.passErrorFlag = false;
+          this.errorMessage = error.error.message;
+        } else if (error.error.errorCode === 4) {
+          this.emailErrorFlag = true;
+          this.nameErrorFlag = false;
+          this.surnameErrorFlag = false;
+          this.usernameErrorFlag = false;
+          this.passErrorFlag = false;
+          this.errorMessage = error.error.message;
+        } else if (error.error.errorCode === 5 || error.error.errorCode === 6) {
+          this.emailErrorFlag = false;
+          this.nameErrorFlag = false;
+          this.surnameErrorFlag = false;
+          this.usernameErrorFlag = false;
+          this.passErrorFlag = true;
+          this.errorMessage = error.error.message;
+        }
+      },
       complete: () => console.log('HTTP Complete')
     });
   }
@@ -69,9 +138,9 @@ export class RegisterComponent implements OnInit {
       'email':  [undefined, [Validators.required, Validators.email]],
       'password':[undefined, [Validators.required]],
       'password2': [undefined, [Validators.required]],
-      'role':[undefined, [Validators.required]],
-      'country':['greece', [Validators.required]],
-      'region':[undefined, [Validators.required]],
+      'role':['guide', [Validators.required]],
+      'country':['Greece', [Validators.required]],
+      'region':['Crete', [Validators.required]],
     });
   }
 

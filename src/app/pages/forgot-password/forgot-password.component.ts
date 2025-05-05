@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from '../login/login.service';
+import { SnackbarService } from '../shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -14,8 +15,14 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   public message: string = ``;
   public forgotForm: FormGroup = new FormGroup({});
   private subscriptions: Subscription[] = [];
+  public emailErrorFlag: boolean = false;
+  public errorMessage: string = 'rfsdfsdfsd';
 
-  public constructor(private formBuilder: FormBuilder, private router: Router, private loginService: LoginService) {
+  public constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private loginService: LoginService,
+    private snackbarService: SnackbarService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -53,12 +60,22 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     const logPath: string = `/${this.componentName}/${functionName}()`;
     console.log(`${logPath}/ @Login form.value`, this.forgotForm.value);
 
+    this.forgotForm.markAllAsTouched();
+
+    if (this.forgotForm.invalid) {
+      console.warn(`${logPath}/ Form is invalid, aborting submission.`);
+      return;
+    }
+
+
     this.subscriptions.push
       (this.loginService.forgotPassword(this.forgotForm.value)
       .subscribe({
         next: (response) => {
           console.log(`${logPath}/ @loginForm response`, response);
-          this.message = response.message;
+          this.snackbarService.open(response.message, 'success');
+          this.errorMessage = response.message;
+          this.goBack();
         },
         error: (error) => {
           let loginError = 'This email does not exist in our system';

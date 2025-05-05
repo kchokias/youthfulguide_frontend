@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { UserService } from "../../user/user.service";
 import { MatDialog } from "@angular/material/dialog";
 import { GuideService } from "../guide.service";
+import { SnackbarService } from "../../shared/snackbar/snackbar.service";
 
 @Component({
   selector: 'app-guide-bookings',
@@ -25,7 +26,8 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private guideService: GuideService,
-    private userService: UserService) {
+    private userService: UserService,
+    private snackbarService: SnackbarService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
