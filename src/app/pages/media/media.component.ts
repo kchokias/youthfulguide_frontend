@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ObjectHelper } from 'src/app/helpers/object-helper.class';
@@ -25,6 +25,7 @@ private componentName: string = `GuideProfileComponent`;
   public role: string = '';
   public mediaFiles: string[] = [];
   public safeUrl: any;
+  @Output() ready = new EventEmitter<void>();
   @ViewChild('singleFileInput') singleFileInput!: ElementRef<HTMLInputElement>;
   @ViewChild('multipleFileInput') multipleFileInput!: ElementRef<HTMLInputElement>;
 
@@ -127,6 +128,7 @@ private componentName: string = `GuideProfileComponent`;
               console.log(`${logPath}/@User response`, response);
               this.mediaFiles = response.data;
               this.galleryReady = true;
+              this.ready.emit();
               resolve();
             },
             error: (err) => {

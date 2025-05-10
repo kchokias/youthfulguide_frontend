@@ -5,6 +5,7 @@ import { UserService } from "../../user/user.service";
 import { MatDialog } from "@angular/material/dialog";
 import { GuideService } from "../guide.service";
 import { SnackbarService } from "../../shared/snackbar/snackbar.service";
+import { ConfirmationDialogService } from "../../shared/confirmation-dialog/confirmation-dialog.service";
 
 @Component({
   selector: 'app-guide-bookings',
@@ -27,7 +28,8 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private guideService: GuideService,
     private userService: UserService,
-    private snackbarService: SnackbarService) {
+    private snackbarService: SnackbarService,
+    private confirmationDialog: ConfirmationDialogService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
@@ -134,9 +136,13 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
     })
   }
 
-  public onCancelBooking(id: number) : void{
+  public async onCancelBooking(id: number): Promise<void> {
+
     const functionName: string = `onCancelBooking`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    const confirmed = await this.confirmationDialog.open('Are you sure you want to cancel this booking?');
+    if (!confirmed) return;
 
     this.subscriptions.push(
       this.guideService.cancelBooking(id).subscribe({
@@ -152,9 +158,12 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
     );
   }
 
-  public onAcceptBooking (id: number) : void{
+  public async onAcceptBooking(id: number): Promise<void> {
     const functionName: string = `onAcceptBooking`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    const confirmed = await this.confirmationDialog.open('Are you sure you want to accept this booking?');
+    if (!confirmed) return;
 
     this.subscriptions.push(
       this.guideService.acceptBooking(id).subscribe({
@@ -170,9 +179,12 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
     );
   }
 
-  public onDeclineBooking(id: number) : void{
+  public async onDeclineBooking(id: number): Promise<void> {
     const functionName: string = `onDeclineBooking`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    const confirmed = await this.confirmationDialog.open('Are you sure you want to decline this booking?');
+    if (!confirmed) return;
 
     this.subscriptions.push(
       this.guideService.declineBooking(id).subscribe({

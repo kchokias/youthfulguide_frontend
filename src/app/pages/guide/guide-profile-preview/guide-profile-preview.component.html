@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px" *ngIf="formReady">
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px"  *ngIf="formReady">
   <div class="container" fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="30px" fxFlex>
     <div class="details-box" fxLayout="row" fxLayoutAlign="start start" fxFlex="20" fxFill fxLayoutGap="30px">
       <div class="avatar-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="15" fxFill>
@@ -128,4 +128,13 @@
       </div>
   </div>
 
+</div>
+
+<div fxLayout="row" class="non-container" fxLayoutAlign="start start" fxLayoutGap="30px" *ngIf="!formReady">
+  <div fxLayout="row" fxLayoutAlign="center center" fxFlex style="height: 100vh;">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <span class="loading-text">Loading...</span>
+      <div class="spinner"></div>
+    </div>
+  </div>
 </div>

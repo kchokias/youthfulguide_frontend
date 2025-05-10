@@ -5,6 +5,7 @@ import { CalendarOptions } from '@fullcalendar/core';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../user/user.service';
 import { GuideService } from '../../guide/guide.service';
+import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-availability',
@@ -52,7 +53,8 @@ export class AvailabilityComponent {
   constructor(
     private userService: UserService,
     private guideService: GuideService,
-    private cdRef: ChangeDetectorRef) {}
+    private cdRef: ChangeDetectorRef,
+    private confirmationDialog: ConfirmationDialogService) {}
 
   public async ngOnInit() {
     const functionName: string = `ngOnInit`;
@@ -192,6 +194,18 @@ export class AvailabilityComponent {
     const functionName: string = `onAvailabilityChange`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
+    if (!this.selectedDates[0] || !this.selectedDates[1]) return;
+
+    let confirmed: any;
+
+    if (this.selectedDates[0] !== this.selectedDates[1]) {
+      confirmed = await this.confirmationDialog.open(`Are you sure you want to set ${this.selectedDates[0]} - ${this.selectedDates[1]} as ${this.selectedAvailability}?`);
+    } else {
+      confirmed = await this.confirmationDialog.open(`Are you sure you want to set ${this.selectedDates[0]} as ${this.selectedAvailability}?`);
+    }
+
+    if (!confirmed) return;
+
     this.subscriptions.push(
       this.guideService.setAvailability(this.userId, this.selectedDates[0], this.selectedDates[1], this.selectedAvailability).subscribe({
         next: async (response) => {
@@ -210,6 +224,11 @@ export class AvailabilityComponent {
   public async requestBooking() {
     const functionName: string = `requestBooking`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    if (!this.selectedDates[0]) return;
+
+    const confirmed = await this.confirmationDialog.open(`Are you sure you want to request a booking at ${this.selectedDates[0]}?`);
+    if (!confirmed) return;
 
     this.subscriptions.push(
       this.guideService.requestBooking(this.userId, this.selectedDates[0], this.guideId).subscribe({

@@ -1,4 +1,5 @@
-<div class="availability-container" [ngStyle]="{ 'background': background }">
+<div class="availability-container" [ngStyle]="{ 'background': background }" *ngIf="calendarReady">
+
   <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 20px;">
     <span class="title" *ngIf="background !== 'transparent'">Availability</span>
     <span class="title" *ngIf="background === 'transparent'">Make a request for booking</span>
@@ -32,4 +33,13 @@
   </div>
 
 
+</div>
+
+<div fxLayout="row" class="non-container" fxLayoutAlign="start start" fxLayoutGap="30px" *ngIf="!calendarReady">
+  <div fxLayout="row" fxLayoutAlign="center center" fxFlex style="height: 100vh;">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <span class="loading-text">Loading...</span>
+      <div class="spinner"></div>
+    </div>
+  </div>
 </div>

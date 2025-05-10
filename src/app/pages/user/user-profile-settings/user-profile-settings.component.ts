@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UserService } from '../user.service';
 import { ObjectHelper } from 'src/app/helpers/object-helper.class';
+import { ConfirmationDialogService } from '../../shared/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-user-profile-settings',
@@ -22,6 +23,8 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
   private userId:number = 1;
   public selectedUser: any;
 
+  public mediaReady = false;
+
   public regions: any[] = [
     { viewValue: 'Central Greece', value: 'Central_Greece' },
     { viewValue: 'Macedonia', value: 'Μacedonia' },
@@ -29,7 +32,7 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
     { viewValue: 'Thrace', value: 'Τhrace' }
   ];
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private confirmationDialog: ConfirmationDialogService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -58,8 +61,8 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
       password: [undefined],
       region: [undefined],
       role: [{ value:undefined, disabled: true}],
-      country: [undefined]
-      // aboutMe: ['Oh so, your weak rhyme You doubt I\'ll bother, reading into it']
+      country: [undefined],
+      description: ['Oh so, your weak rhyme You doubt I\'ll bother, reading into it']
     });
 
     this.initializeForm(this.selectedUser);
@@ -80,7 +83,8 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
         'surname',
         'region',
         'role',
-        'country'
+        'country',
+        'description'
       ])
     );
 
@@ -137,10 +141,13 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public onSubmit(): void {
+  public async onSubmit(): Promise<void> {
     const functionName: string = `onSubmit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
     console.log(`${logPath}/ @registerForm form.value`, this.profileForm.value);
+
+    const confirmed = await this.confirmationDialog.open('Are you sure you want to update this profile?');
+    if (!confirmed) return;
 
     const { username, email, role, ...filteredProfileData } = this.profileForm.value;
 
@@ -149,12 +156,16 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
     }
 
     this.subscriptions.push(
-      (this.userService.patchUserById(1,filteredProfileData).subscribe({
+      (this.userService.patchUserById(this.userId,filteredProfileData).subscribe({
         next: (response: any) => console.log('HTTP Response:', response),
         error: (error: any) => console.log('HTTP Error:', error),
         complete: () => console.log('HTTP Complete')
       }))
     );
+  }
+
+  onMediaReady(): void {
+    this.mediaReady = true;
   }
 
   public ngOnDestroy(): void {
