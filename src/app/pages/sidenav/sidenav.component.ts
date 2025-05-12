@@ -64,6 +64,8 @@ export class SidenavComponent implements OnInit {
     const role = this.authService.getUserRole();
     this.filteredNavData = navbarData.filter(item => item.visibleFor.includes(role));
 
+    console.log(`${logPath}/ @role` , role);
+
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
     this.collapsed = this.screenWidth > 768;

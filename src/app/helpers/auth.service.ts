@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private tokenKey = 'authToken';
-  private role: string = 'guide';
+  public role: string = '';
+  private roleKey = 'userRole';
 
   constructor(private router: Router) {}
 
@@ -28,11 +29,16 @@ export class AuthService {
     return this.getToken() !== null;
   }
 
-  setUserRole(_role: string): void {
-     this.role = _role;
+  setUserRole(role: string): void {
+    this.role = role;
+    localStorage.setItem(this.roleKey, role);
   }
 
   getUserRole(): string {
+    if (!this.role) {
+      const saved = localStorage.getItem(this.roleKey);
+      this.role = saved || 'visitor';
+    }
     return this.role;
- }
+  }
 }

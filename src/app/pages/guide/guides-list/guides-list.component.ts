@@ -115,4 +115,22 @@ export class GuidesListComponent implements OnInit {
       this.searchForm.get('dateRange')?.enable();
     }
   }
+
+  public viewProfile(id: number): void {
+    const functionName: string = `viewProfile`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+    console.log(`${logPath}/ @viewProfile`, id);
+
+    const url = `${window.location.origin}/#/profile-preview`;
+    const newWindow = window.open(url, '_blank');
+
+    const sendMessage = () => {
+      if (newWindow) {
+        newWindow.postMessage({ id }, window.location.origin);
+        console.log(`${logPath}/ @message sent`, id);
+      }
+    };
+
+    setTimeout(sendMessage, 500);
+  }
 }

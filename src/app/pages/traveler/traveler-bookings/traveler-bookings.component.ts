@@ -5,6 +5,7 @@ import { UserService } from "../../user/user.service";
 import { MatDialog } from "@angular/material/dialog";
 import { TravelerService } from "../traveler.service";
 import { SnackbarService } from "../../shared/snackbar/snackbar.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-traveler-bookings',
@@ -27,7 +28,8 @@ export class TravelerBookingsComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private travelerService: TravelerService,
     private userService: UserService,
-    private snackbarService: SnackbarService) {
+    private snackbarService: SnackbarService,
+    private router: Router) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
@@ -152,4 +154,21 @@ export class TravelerBookingsComponent implements OnInit, OnDestroy {
     );
   }
 
+  public viewProfile(id: number): void {
+    const functionName: string = `viewProfile`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+    console.log(`${logPath}/ @viewProfile`, id);
+
+    const url = `${window.location.origin}/#/profile-preview`;
+    const newWindow = window.open(url, '_blank');
+
+    const sendMessage = () => {
+      if (newWindow) {
+        newWindow.postMessage({ id }, window.location.origin);
+        console.log(`${logPath}/ @message sent`, id);
+      }
+    };
+
+    setTimeout(sendMessage, 500);
+  }
 }

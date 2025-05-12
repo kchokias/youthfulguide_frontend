@@ -87,7 +87,7 @@
             <p class="no-bookings">{{ guide.region }}, {{ guide.country }}</p>
           </div>
           <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;">
-            <button mat-raised-button class="profile-button" (click)="onSearch()">
+            <button mat-raised-button class="profile-button" (click)="viewProfile(guide.id)">
               <span class="date-label">View Profile</span>
             </button>
           </div>

@@ -16,7 +16,7 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
   private componentName: string = `GuideProfileComponent`;
   public guideForm: FormGroup = new FormGroup({});
   private subscriptions: Subscription[] = [];
-  private userId:number = 1;
+  private userId:number = -1;
   public selectedUser: any;
   public formReady:boolean = false;
   public galleryReady:boolean = false;
@@ -47,7 +47,15 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
     const lifecycleName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-    await this.getUserId();
+    const receivedId = await this.waitForUserIdMessage();
+
+    if (receivedId) {
+      this.userId = receivedId;
+      console.log(`${logPath} ✅ Received ID from postMessage:`, this.userId);
+    } else {
+      await this.getUserId();
+      console.log(`${logPath} ❗️Fallback getUserId:`, this.userId);
+    }
 
     await this.getGuideProfile(this.userId);
 
@@ -166,5 +174,22 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
         // console.log(`${logPath}/@User imageBase64`, this.imageBase64);
       }
     };
+  }
+
+  private waitForUserIdMessage(): Promise<number | null> {
+    return new Promise((resolve) => {
+      const timeout = setTimeout(() => resolve(null), 1000);
+
+      window.addEventListener('message', function handler(event) {
+        if (event.origin !== window.location.origin) return;
+
+        const data = event.data;
+        if (data && data.id) {
+          window.removeEventListener('message', handler);
+          clearTimeout(timeout);
+          resolve(data.id);
+        }
+      });
+    });
   }
 }
