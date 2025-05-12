@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 
 const GET_TRAVELER_BOOKINGS = 'https://youthfulguides.app/api/TravelerBookings/';
+const GET_TRAVELER_PROFILE_BY_ID = 'https://youthfulguides.app/api/TravelerProfile/';
 const CANCEL = 'https://youthfulguides.app/api/Traveler/CancelBooking/';
 
 const httpOptions = {
@@ -69,4 +70,12 @@ export class TravelerService {
         { headers }
       );
     }
+
+  getTravelerProfileById(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+    return this.http.get(`${GET_TRAVELER_PROFILE_BY_ID}${id}`, { headers });
+  }
 }

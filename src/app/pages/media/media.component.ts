@@ -47,7 +47,12 @@ private componentName: string = `GuideProfileComponent`;
 
     await this.getUserPhoto();
 
-    await this.getGuideMedia();
+    if(this.selectedUser.role === 'guide') {
+      await this.getGuideMedia();
+    } else {
+      this.galleryReady = true;
+      this.ready.emit();
+    }
 
     this.formSetup();
   }
@@ -83,7 +88,7 @@ private componentName: string = `GuideProfileComponent`;
         this.userService.getUserProfileById(_id).subscribe({
           next: (response) => {
             this.selectedUser = response.data;
-            console.log(`${logPath}/@User response $1`, response);
+            console.log(`${logPath}/@User response `, response);
             resolve();
           },
           error: (err) => {

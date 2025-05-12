@@ -15,6 +15,7 @@ import { GuideBookingsComponent } from './pages/guide/guide-bookings/guide-booki
 import { TravelerBookingsComponent } from './pages/traveler/traveler-bookings/traveler-bookings.component';
 import { roleGuard } from './helpers/role.guard';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { TravelerPreviewComponent } from './pages/traveler/traveler-preview/traveler-preview.component';
 
 
 const routes: Routes = [
@@ -26,13 +27,15 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   {path: 'media', component: MediaComponent, canActivate: [authGuard] },
-  {path: 'profile-preview', component: GuideProfilePreviewComponent, canActivate: [authGuard] },
+  {path: 'profile-preview', component: GuideProfilePreviewComponent, canActivate: [authGuard], data: { expectedRole: 'guide'} },
+  {path: 'visitor-preview', component: TravelerPreviewComponent, canActivate: [authGuard] },
   {path: 'profile-settings', component: UserProfileSettingsComponent, canActivate: [authGuard] },
   {path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
   {path: 'find-a-guide', component: GuidesListComponent, canActivate: [authGuard] },
   {path: 'bookings', component: GuideBookingsComponent, canActivate: [authGuard] },
   {path: 'my-bookings', component: TravelerBookingsComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'visitor'} },
-  {path: 'availability', component: AvailabilityComponent, canActivate: [authGuard] }
+  {path: 'availability', component: AvailabilityComponent, canActivate: [authGuard] },
+  {path: 'profile-preview/:id', component: GuideProfilePreviewComponent, canActivate: [authGuard]}
 ];
 
 @NgModule({

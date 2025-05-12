@@ -26,6 +26,7 @@ import { GuideModule } from './pages/guide/guide.module';
 import { TravelerModule } from './pages/traveler/traveler.module';
 import { LoginModule } from './pages/login/login.module';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { TravelerPreviewComponent } from './pages/traveler/traveler-preview/traveler-preview.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     HeaderComponent,
     ForgotPasswordComponent,
     UserProfileSettingsComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    TravelerPreviewComponent
   ],
   imports: [
     BrowserModule,

@@ -62,7 +62,7 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
       region: [undefined],
       role: [{ value:undefined, disabled: true}],
       country: [undefined],
-      description: ['Oh so, your weak rhyme You doubt I\'ll bother, reading into it']
+      description: [undefined]
     });
 
     this.initializeForm(this.selectedUser);
@@ -128,12 +128,12 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
         this.userService.getUserId().subscribe({
           next: (response) => {
             this.userId = response.userId;
-            console.log(`${logPath}/@User response $7`, response);
+            console.log(`${logPath}/@User response`, response);
             resolve();
           },
           error: (err) => {
             // this.error = err; // Handle errors
-            console.log(`${logPath}/@User error $7`, err);
+            console.log(`${logPath}/@User error`, err);
             reject(err);
           }
         })
@@ -144,7 +144,7 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
   public async onSubmit(): Promise<void> {
     const functionName: string = `onSubmit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
-    console.log(`${logPath}/ @registerForm form.value`, this.profileForm.value);
+    console.log(`${logPath}/ @profileForm form.value`, this.profileForm.value);
 
     const confirmed = await this.confirmationDialog.open('Are you sure you want to update this profile?');
     if (!confirmed) return;

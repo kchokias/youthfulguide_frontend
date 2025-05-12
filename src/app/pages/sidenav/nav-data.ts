@@ -35,7 +35,13 @@ export const navbarData: NavItem[] = [
     routeLink: 'profile-settings',
     icon: 'fa-solid fa-id-card',
     label: 'Profile Settings',
-    visibleFor: ['guide', 'visitor']
+    visibleFor: ['guide']
+  },
+  {
+    routeLink: 'visitor-preview',
+    icon: 'fa-solid fa-id-card',
+    label: 'Profile Settings',
+    visibleFor: ['visitor']
   },
   {
     routeLink: 'faq',

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../../user/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GuideService } from '../guide.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-guide-profile-preview',
@@ -38,7 +39,8 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     public dialog: MatDialog,
-    private guideService: GuideService) {
+    private guideService: GuideService,
+    private route: ActivatedRoute) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -47,14 +49,14 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
     const lifecycleName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-    const receivedId = await this.waitForUserIdMessage();
+    const receivedId = Number(this.route.snapshot.paramMap.get('id'));
 
     if (receivedId) {
       this.userId = receivedId;
-      console.log(`${logPath} ✅ Received ID from postMessage:`, this.userId);
+      console.log(`${logPath} ✅ Received ID from postMessage`, this.userId);
     } else {
       await this.getUserId();
-      console.log(`${logPath} ❗️Fallback getUserId:`, this.userId);
+      console.log(`${logPath} Fallback getUserId`, this.userId);
     }
 
     await this.getGuideProfile(this.userId);
@@ -95,7 +97,7 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
         this.guideService.getGuideProfileById(_id).subscribe({
           next: (response) => {
             this.selectedUser = response;
-            console.log(`${logPath}/@User response`, response);
+            console.log(`${logPath}/@User response #0`, response);
             resolve();
           },
           error: (err) => {
@@ -114,7 +116,7 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
 
     return new Promise<void>((resolve, reject) => {
       this.subscriptions.push(
-        this.guideService.getGuideReviews            (_id).subscribe({
+        this.guideService.getGuideReviews(_id).subscribe({
           next: (response) => {
             this.reviews = response.reviews;
             console.log(`${logPath}/@Reviews response`, response);

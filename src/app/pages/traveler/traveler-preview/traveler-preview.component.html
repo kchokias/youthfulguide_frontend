@@ -1,0 +1,110 @@
+<div fxLayout="row" class="container" fxLayoutAlign="start start" fxLayoutGap="30px">
+
+  <ng-container *ngIf="!formReady; else content">
+    <div fxLayout="row" fxLayoutAlign="center center" fxFlex style="height: 100vh;">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <span class="loading-text">Loading...</span>
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #content>
+    <!-- LEFT COLUMN -->
+  <div class="left-column" [style.visibility]="mediaReady ? 'visible' : 'hidden'">
+    <app-media (ready)="onMediaReady()"></app-media>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="right-column" [style.visibility]="mediaReady ? 'visible' : 'hidden'">
+    <div class="card" fxLayout="column" fxLayoutAlign="space-evenly start">
+      <p class="name">Edit Profile Settings</p>
+      <form [formGroup]="travelerForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="space-evenly center" style="margin-top: 15px;">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" style="width: 100%;">
+
+          <div class="form-group" fxFlex="50">
+            <label>Name</label>
+            <input type="text"  formControlName="name">
+          </div>
+
+          <div class="form-group" fxFlex="50">
+            <label>Surname</label>
+            <input type="text" formControlName="surname">
+          </div>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" style="width: 100%;">
+          <div class="form-group" style="margin-top: 15px;" fxFlex="50">
+            <label>Username</label>
+            <input type="text" formControlName="username">
+          </div>
+
+          <div class="form-group" fxFlex="50">
+            <label>Role</label>
+            <input type="text" formControlName="role">
+          </div>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" style="width: 100%;">
+          <div class="form-group" fxFlex="50">
+            <label>Email</label>
+            <input type="email" autocomplete="email" formControlName="email">
+          </div>
+          <div class="form-group password-group" fxFlex="50">
+            <label>Change Password</label>
+            <div class="input-container">
+              <input
+                [type]="isPasswordVisible ? 'text' : 'password'"
+                autocomplete="current-password"
+                formControlName="password">
+              <span class="toggle-password" (click)="togglePasswordVisibility()">
+                <i class="fas" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'" style="color: black;"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" style="width: 100%;">
+          <div fxLayout="column" fxLayoutAlign="start start" style="width: 50%;">
+            <label for="regionSelect" class="labela">Select Country</label>
+            <div class="select-wrapper">
+              <select name="region" id="countrySelect" formControlName="country">
+                <option value="Greece">Greece</option>
+              </select>
+              <i class="bi bi-eject-fill select-icon"></i>
+            </div>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="start start" style="width: 50%;">
+            <label for="regionSelect" class="labela">Select Region</label>
+            <div class="select-wrapper">
+              <select name="region" id="regionSelect" formControlName="region">
+                <option value="Central_Greece">Central Greece</option>
+                <option value="Macedonia">Macedonia</option>
+                <option value="Crete">Crete</option>
+                <option value="Thrace">Thrace</option>
+              </select>
+              <i class="bi bi-eject-fill select-icon"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="selectedUser.role === 'guide'" style="width: 100%;">
+          <div class="form-group" style="margin-top: 15px;" fxFlex="100">
+            <label>Description</label>
+            <textarea formControlName="description" rows="4"></textarea>
+          </div>
+        </div>
+
+
+        <button type="submit" [disabled]="travelerForm.disabled || travelerForm.invalid">Update Profile</button>
+      </form>
+    </div>
+  </div>
+  </ng-template>
+
+</div>
+
