@@ -10,9 +10,9 @@ const GET_AVAILABLE_GUIDES = 'https://youthfulguides.app/api/AvailableGuides/';
 const GET_GUIDE_PROFILE_BY_ID = 'https://youthfulguides.app/api/GuideProfile/';
 const GET_GUIDE_REVIEWS = 'https://youthfulguides.app/api/GuideReviews/';
 const GET_GUIDE_BOOKINGS = 'https://youthfulguides.app/api/GuideBookings/';
-const ACCEPT = 'https://youthfulguides.app/api/Bookings/Accept';
-const DECLINE = 'https://youthfulguides.app/api/Bookings/Decline';
-const CANCEL = 'https://youthfulguides.app/api/Bookings/Cancel';
+const ACCEPT = 'https://youthfulguides.app/api/Accept';
+const DECLINE = 'https://youthfulguides.app/api/Decline';
+const CANCEL = 'https://youthfulguides.app/api/Cancel';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -266,6 +266,7 @@ export class AvailabilityComponent {
         },
         error: (err) => {
           console.log(`${logPath}/@User error`, err);
+          this.snackbarService.open(err.error.message, 'error');
         }
       })
     );
