@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
     this.loginService.register(this.registerForm.value).subscribe({
       next: (response: any) => {
         console.log('HTTP Response:', response);
-        this.snackbarService.open('Set up successfully!', 'success');
+        this.snackbarService.open('Account is ready!', 'success');
         this.goBack();
       },
       error: (error: any) => {

@@ -12,7 +12,7 @@
 <div class="gallery-thumbnails">
   <div *ngFor="let image of images; let i = index" class="thumbnail-container">
     <img [src]="image.media_data" class="thumbnail" />
-    <button mat-icon-button class="delete-btn" (click)="deleteImage(i)">
+    <button mat-icon-button class="delete-btn" (click)="deleteImage(i)" *ngIf="role === 'guide'">
       <mat-icon>close</mat-icon>
     </button>
   </div>

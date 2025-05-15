@@ -4,6 +4,7 @@ import { animate, keyframes, style, transition, trigger } from '@angular/animati
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/helpers/auth.service';
 import { NavItem } from './nav-item.model';
+import { ConfirmationDialogService } from '../shared/confirmation-dialog/confirmation-dialog.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -51,7 +52,10 @@ export class SidenavComponent implements OnInit {
   public screenWidth: number = 0;
   public screenHeight: number = 0;
 
-  public constructor(private router: Router, private authService: AuthService) {
+  public constructor(
+    private router: Router,
+    private authService: AuthService,
+    private confirmationDialog: ConfirmationDialogService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -101,10 +105,13 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.clear();
-    this.router.navigate(['/login']);
+  async logout() {
+    let confirmed = await this.confirmationDialog.open(`Are you sure you want to logout?`);
+    if (confirmed) {
+      localStorage.removeItem('token');
+      localStorage.clear();
+      this.router.navigate(['/login']);
+    }
   }
 
 }

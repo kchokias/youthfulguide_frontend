@@ -102,14 +102,22 @@
   cursor: pointer;
 }
 
-.all-pages {
-  position: absolute;
-  margin: 5rem;
-  color: white;
-  text-decoration: underline;
-  background-color: black;
-  padding: 2.5px;
+.profile-button {
+  background-color: rgba(240, 139, 195, 1)!important;
+  color: black;
+  border: 2px solid rgba(0, 0, 0, 1);
+  border-radius: 15px;
+  font-size: 16px;
   cursor: pointer;
+  padding: 1.5rem;
+}
+
+.date-label {
+  color: black;
+  font-family: "Aclonica", serif;
+  font-weight: 400;
+  color: black;
+  font-size: 16px;
 }
 
 .description-box {
@@ -142,6 +150,10 @@
   min-height: 100px;
   width: 100%;
   margin-bottom: 15px;
+}
+
+.review-container-wrapper {
+  width: 100%;
 }
 
 .review-box {

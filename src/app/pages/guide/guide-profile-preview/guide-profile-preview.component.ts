@@ -5,6 +5,7 @@ import { UserService } from '../../user/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GuideService } from '../guide.service';
 import { ActivatedRoute } from '@angular/router';
+import { MediaGalleryDialogComponent } from '../../shared/media-gallery-dialog/media-gallery-dialog.component';
 
 @Component({
   selector: 'app-guide-profile-preview',
@@ -33,6 +34,7 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
   public mediaFiles: { media_data: string }[] = [];
   public reviews: any[] = [];
   public safeUrl: any;
+  today = new Date();
   @ViewChild('singleFileInput') singleFileInput!: ElementRef<HTMLInputElement>;
   @ViewChild('multipleFileInput') multipleFileInput!: ElementRef<HTMLInputElement>;
 
@@ -193,5 +195,42 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
+
+  public async openGallery(): Promise<void> {
+    const lifecycleName: string = `openGallery`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    await this.getGuideMedia();
+
+    this.dialog.open(MediaGalleryDialogComponent, {
+      width: '80%',
+      maxHeight: '90%',
+      data: { images: this.mediaFiles }
+    });
+  }
+
+  public async getGuideMedia(): Promise<void> {
+    const lifecycleName: string = `getGuideMedia`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+      return new Promise<void>((resolve) => {
+        this.subscriptions.push(
+          this.userService.getGuideMedia(this.userId).subscribe({
+            next: (response) => {
+              console.log(`${logPath}/@User response`, response);
+              this.mediaFiles = response.data;
+              this.galleryReady = true;
+              // this.ready.emit();
+              resolve();
+            },
+            error: (err) => {
+              console.error(`${logPath}/@User error`, err);
+              this.galleryReady = false;
+              resolve();
+            }
+          })
+        );
+      });
   }
 }

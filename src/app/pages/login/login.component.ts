@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           const token = response.token;
           this.authService.setUserRole(response.user.role);
           setTimeout(() => {
-            this.authService.login(token);
+            this.authService.login(token, response.user.role);
             this.snackbarService.open('Login successfully!', 'success');
           }, 1000);
         },

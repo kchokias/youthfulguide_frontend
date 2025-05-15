@@ -121,4 +121,10 @@
 
     </div>
   </div>
+
+  <div class="guides-list-box" *ngIf="bookings.length === 0">
+    <div fxLayout="column" fxLayoutAlign="center center" fxFill>
+      <p class="label">No bookings match your filters.</p>
+    </div>
+  </div>
 </div>

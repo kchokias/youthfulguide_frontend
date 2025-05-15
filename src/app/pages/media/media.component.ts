@@ -360,16 +360,16 @@ private componentName: string = `GuideProfileComponent`;
     }
 }
 
-public async openGallery(): Promise<void> {
-  const lifecycleName: string = `openGallery`;
-  const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+  public async openGallery(): Promise<void> {
+    const lifecycleName: string = `openGallery`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-  await this.getGuideMedia();
+    await this.getGuideMedia();
 
-  this.dialog.open(MediaGalleryDialogComponent, {
-    width: '80%',
-    maxHeight: '90%',
-    data: { images: this.mediaFiles }
-  });
-}
+    this.dialog.open(MediaGalleryDialogComponent, {
+      width: '80%',
+      maxHeight: '90%',
+      data: { images: this.mediaFiles }
+    });
+  }
 }

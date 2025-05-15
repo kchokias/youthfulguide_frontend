@@ -27,6 +27,8 @@ export class AvailabilityComponent {
   selectedValue: string = '';
   selectedAvailability: string = '';
 
+  public selectedUser: any;
+
   public calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'threeMonthView',
@@ -61,6 +63,8 @@ export class AvailabilityComponent {
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
     await this.getUserId();
+
+    await this.getUserProfile(this.userId);
 
     await this.getAvailability();
   }
@@ -249,5 +253,27 @@ export class AvailabilityComponent {
     const [day, month, year] = dateStr.split('.').map(Number);
 
     return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  }
+
+  public async getUserProfile(_id: number): Promise<void> {
+    const lifecycleName: string = `getUserProfile`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    return new Promise<void>((resolve, reject) => {
+      this.subscriptions.push(
+        this.userService.getUserProfileById(_id).subscribe({
+          next: (response) => {
+            this.selectedUser = response.data;
+            console.log(`${logPath}/@User response`, response);
+            resolve();
+          },
+          error: (err) => {
+            // this.error = err; // Handle errors
+            console.log(`${logPath}/@User error`, err);
+            reject(err);
+          }
+        })
+      );
+    });
   }
 }

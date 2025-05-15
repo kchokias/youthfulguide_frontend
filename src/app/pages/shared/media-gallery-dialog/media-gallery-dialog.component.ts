@@ -15,6 +15,7 @@ export class MediaGalleryDialogComponent implements OnInit {
   images: MediaItem[];
   private subscriptions: Subscription[] = [];
   private componentName: string = `MediaGalleryDialogComponent`;
+  public role: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<MediaGalleryDialogComponent>,
@@ -25,9 +26,12 @@ export class MediaGalleryDialogComponent implements OnInit {
     this.images = data.images;
   }
 
-  ngOnInit(): void {
+  public async ngOnInit() {
     const lifecycleName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    await this.getUserRole();
+
     this.galleryRef = this.gallery.ref('mediaGallery');
 
     this.galleryRef.reset();
@@ -37,6 +41,28 @@ export class MediaGalleryDialogComponent implements OnInit {
     });
 
     console.log(`${logPath}/@this.images error`, this.images);
+  }
+
+  public async getUserRole(): Promise<void> {
+    const lifecycleName: string = `getUserRole`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    return new Promise<void>((resolve, reject) => {
+      this.subscriptions.push(
+        this.userService.getUserRoleFromToken().subscribe({
+          next: (response) => {
+            this.role = response.role;
+            console.log(`${logPath}/@User response #1`, response);
+            resolve();
+          },
+          error: (err) => {
+            // this.error = err; // Handle errors
+            console.log(`${logPath}/@User error`, err);
+            reject(err);
+          }
+        })
+      );
+    });
   }
 
   closeDialog(): void {

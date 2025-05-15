@@ -69,6 +69,7 @@
         </div>
 
         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">
+          <p class="label">{{ guide.username }}</p>
           <p class="label">{{ guide.name }} {{ guide.surname }}</p>
           <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px">
             <ng-container *ngIf="guide.average_rating !== '-1.0000'; else noRating">
@@ -97,8 +98,10 @@
   </div>
 
   <!-- No Guides Message -->
-  <div *ngIf="guidesReady && guides.length === 0" class="no-guides-message">
-    <p>No guides available for the selected criteria.</p>
+  <div *ngIf="guides.length === 0" class="guides-list-box">
+    <div fxLayout="column" fxLayoutAlign="center center" fxFill>
+      <p class="label">No guides match your filter</p>
+    </div>
   </div>
 
 </div>

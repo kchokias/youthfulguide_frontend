@@ -8,7 +8,7 @@ export class SnackbarService {
   open(
     message: string,
     type: 'success' | 'error' | 'info' | 'warning' = 'info',
-    duration = 10000
+    duration = 5000
   ) {
     const componentRef = createComponent(SnackbarComponent, {
       environmentInjector: this.appRef.injector,

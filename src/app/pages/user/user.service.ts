@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 const GET_PROFILE_USER_BY_ID_API = 'https://youthfulguides.app/api/User/GetUserByUserId/';
+const GET_USER_ROLE = 'https://youthfulguides.app/api/User/GetUserRoleFromToken/';
 const GET_USER_ID_API = 'https://youthfulguides.app/api/User/GetUserIdFromToken';
 const PATCH_USER_BY_ID_API = 'https://youthfulguides.app/api/User/UpdateUser/';
 const UPLOAD_PROFILE_PHOTO = 'https://youthfulguides.app/api/User/UploadProfilePhoto';
@@ -47,6 +48,15 @@ export class UserService {
     });
 
     return this.http.get(`${GET_PROFILE_USER_BY_ID_API}${id}`, { headers });
+  }
+
+  getUserRoleFromToken(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getAuthHeader(),
+    });
+
+    return this.http.get(`${GET_USER_ROLE}`, { headers });
   }
 
   getGuideMedia(id: number): Observable<any> {
