@@ -10,6 +10,7 @@ import { CommonModule, NgClass } from '@angular/common';
 })
 export class ConfirmationDialogComponent {
   @Input() description: string = '';
+  @Input() type: 'info' | 'warning' | 'success' = 'info';
 
   private _resolve!: (value: boolean) => void;
 

@@ -10,12 +10,23 @@
 }
 
 .dialog {
-  background: rgba(139, 240, 146, 1);
   border: 3px solid rgba(0, 0, 0, 1);
   padding: 1.5rem 4rem;
   width: auto;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   text-align: center;
+}
+
+.info {
+  background-color: rgba(139, 240, 146, 1);
+}
+
+.warning {
+  background-color: rgba(240, 139, 195, 1);
+}
+
+.success {
+  background-color: #d4edda;
 }
 
 .actions {
@@ -32,7 +43,7 @@ button {
 }
 
 .confirm {
-  background-color: rgba(240, 139, 195, 1);
+  background-color: rgba(234, 107, 172, 1);
   font-size: 12px;
   font-family: 'Aclonica', system-ui !important;
   font-weight: 400;

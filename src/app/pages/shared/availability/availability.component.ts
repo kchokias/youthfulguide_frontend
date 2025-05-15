@@ -7,6 +7,7 @@ import { UserService } from '../../user/user.service';
 import { GuideService } from '../../guide/guide.service';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 import { ActivatedRoute } from '@angular/router';
+import { SnackbarService } from '../snackbar/snackbar.service';
 
 @Component({
   selector: 'app-availability',
@@ -58,7 +59,8 @@ export class AvailabilityComponent {
     private guideService: GuideService,
     private cdRef: ChangeDetectorRef,
     private confirmationDialog: ConfirmationDialogService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private snackbarService: SnackbarService) {}
 
   public async ngOnInit() {
     const functionName: string = `ngOnInit`;
@@ -68,10 +70,11 @@ export class AvailabilityComponent {
 
     if (receivedId) {
       this.guideId = receivedId;
-      console.log(`${logPath} ✅ Received ID from postMessage #1`, this.guideId);
+      await this.getUserId();
+      console.log(`${logPath} ✅ Received ID from postMessage`, this.guideId);
     } else {
       await this.getUserId();
-      console.log(`${logPath} Fallback getUserId #1`, this.userId);
+      console.log(`${logPath} Fallback getUserId`, this.userId);
     }
 
     await this.getUserProfile(this.userId);
@@ -249,13 +252,14 @@ export class AvailabilityComponent {
 
     if (!this.selectedDates[0]) return;
 
-    const confirmed = await this.confirmationDialog.open(`Are you sure you want to request a booking at ${this.selectedDates[0]}?`);
+    const confirmed = await this.confirmationDialog.open(`Do you want to request a booking on ${this.selectedDates[0]}?`, 'warning');
     if (!confirmed) return;
 
     this.subscriptions.push(
       this.guideService.requestBooking(this.userId, this.selectedDates[0], this.guideId).subscribe({
         next: async (response) => {
           console.log(`${logPath}/@User response`, response);
+          this.snackbarService.open('Request submitted successfully', 'success');
           this.selectedAvailability = '';
           this.calendarReady = false;
           await this.getAvailability();

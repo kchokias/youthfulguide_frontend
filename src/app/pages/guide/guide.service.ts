@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 const GET_AVAILABILTY_DATES = 'https://youthfulguides.app/api/Availability/Guide/';
 const UPDATE_AVAILABILITY = 'https://youthfulguides.app/api/Availability/Update/';
-const REQUEST_BOOKING = 'https://youthfulguides.app/api/Bookings/Request/';
+const REQUEST_BOOKING = 'https://youthfulguides.app/api/Request/';
 const GET_AVAILABLE_GUIDES = 'https://youthfulguides.app/api/AvailableGuides/';
 const GET_GUIDE_PROFILE_BY_ID = 'https://youthfulguides.app/api/GuideProfile/';
 const GET_GUIDE_REVIEWS = 'https://youthfulguides.app/api/GuideReviews/';
@@ -72,7 +72,7 @@ export class GuideService {
     );
   }
 
-  requestBooking(_guidId: number, _date:string, _userId: number): Observable<any> {
+  requestBooking(_userId: number, _date:string, _guidId: number): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.getAuthHeader(),

@@ -1,8 +1,10 @@
 <div class="overlay">
-  <div class="dialog">
+  <div class="dialog" [ngClass]="type">
     <p>{{ description }}</p>
     <div class="actions">
-      <button class="confirm" (click)="confirm()">Yes</button>
+      <button class="confirm" (click)="confirm()">
+        {{ type === 'warning' ? 'Request' : 'Yes' }}
+      </button>
       <button class="cancel" (click)="cancel()">Go Back</button>
     </div>
   </div>
