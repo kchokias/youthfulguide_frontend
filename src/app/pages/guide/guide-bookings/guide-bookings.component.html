@@ -16,17 +16,17 @@
       </div>
 
       <div fxLayout="row" fxLayoutAlign="center end" fxFlex="15" style="margin-bottom:0.75%;margin-right: 15px">
-        <label class="label" for="confirmed">Confirmed</label><br>
+        <label class="name-label" for="confirmed">Confirmed</label><br>
         <input type="checkbox" class="custom-checkbox" formControlName="confirmed">
       </div>
 
       <div fxLayout="row" fxLayoutAlign="center end" fxFlex="14" style="margin-bottom:0.75%;;margin-right: 15px">
-        <label class="label" for="pending">Pending</label><br>
+        <label class="name-label" for="pending">Pending</label><br>
         <input type="checkbox" class="custom-checkbox" formControlName="pending">
       </div>
 
       <div fxLayout="row" fxLayoutAlign="center end" fxFlex="15" style="margin-bottom:0.75%">
-        <label class="label" for="completed">Completed</label><br>
+        <label class="name-label" for="completed">Completed</label><br>
         <input type="checkbox" class="custom-checkbox" formControlName="completed">
       </div>
 
@@ -52,11 +52,12 @@
 
       <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" fxFill>
         <p class="label">{{ booking.username }}</p>
-        <p class="label" style="margin-bottom: 25px;">{{ booking.name }} {{ booking.surname }}</p>
+        <p class="name-label" style="margin-bottom: 25px;">{{ booking.name }} {{ booking.surname }}</p>
         <!-- <p class="label">{{ booking.email }}</p> -->
         <p class="review-label">
           {{ booking.review?.length > 155 ? (booking.review | slice:0:155) + '...' : booking.review }}
-        </p>      </div>
+        </p>
+      </div>
 
       <div fxLayout="column" fxLayoutAlign="space-between end" fxFlex="20" fxFill>
         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;">
@@ -99,8 +100,8 @@
           </ng-container>
 
         </div>
-        <p class="label">{{ booking.booked_date }}</p>
-        <p class="label">
+        <p class="name-label">{{ booking.booked_date }}</p>
+        <p class="name-label">
           {{
             booking.status === 'cancelled'
               ? 'Cancelled'
@@ -113,6 +114,12 @@
         </p>
       </div>
 
+    </div>
+  </div>
+
+  <div class="guides-list-box" *ngIf="bookings.length === 0">
+    <div fxLayout="column" fxLayoutAlign="center center" fxFill>
+      <p class="label">No bookings match your filters.</p>
     </div>
   </div>
 </div>

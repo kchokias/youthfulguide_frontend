@@ -1,7 +1,7 @@
 <div class="guide-card" *ngIf="formReady" fxLayout="column" fxLayoutAlign="space-around center">
   <div class="guide-header">
     <div class="guide-avatar">
-      <img [src]="imageBase64 || '../../assets/images/user.png'" alt="Guide Profile" (click)="toggleAvatarSize('patch')">
+      <img [src]="imageBase64 || '../../assets/images/user.png'" alt="Guide Profile" (click)="toggleAvatarSize('patch')" class="responsive-image">
     </div>
     <div class="guide-details" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15px">
       <p class="name">{{ selectedUser.name }} {{ selectedUser.surname }}</p>

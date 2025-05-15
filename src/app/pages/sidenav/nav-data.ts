@@ -9,49 +9,49 @@ export const navbarData: NavItem[] = [
   },
   {
     routeLink: 'bookings',
-    icon: 'fa-solid fa-book',
+    icon: 'bi bi-book',
     label: 'Bookings',
     visibleFor: ['guide']
   },
   {
     routeLink: 'my-bookings',
-    icon: 'fa-solid fa-book',
+    icon: 'bi bi-book',
     label: 'My Bookings',
     visibleFor: ['visitor']
   },
   {
     routeLink: 'availability',
-    icon: 'fa-solid fa-calendar',
+    icon: 'bi bi-calendar-week-fill',
     label: 'Availability',
     visibleFor: ['guide']
   },
   {
-    routeLink: 'profile-preview',
-    icon: 'fa-solid fa-users-rectangle',
-    label: 'Profile Preview',
-    visibleFor: ['guide']
-  },
-  {
     routeLink: 'profile-settings',
-    icon: 'fa-solid fa-id-card',
-    label: 'Profile Settings',
+    icon: 'bi bi-file-person',
+    label: 'Edit Profile',
     visibleFor: ['guide']
   },
   {
     routeLink: 'visitor-preview',
-    icon: 'fa-solid fa-id-card',
-    label: 'Profile Settings',
+    icon: 'bi bi-file-person',
+    label: 'Edit Profile',
     visibleFor: ['visitor']
   },
   {
+    routeLink: 'profile-preview',
+    icon: 'bi bi-eye',
+    label: 'Profile Preview',
+    visibleFor: ['guide']
+  },
+  {
     routeLink: 'faq',
-    icon: 'fa solid fa-question',
+    icon: 'bi bi-signpost-2-fill',
     label: 'FAQ',
     visibleFor: ['guide']
   },
   {
     routeLink: 'help',
-    icon: 'fa solid fa-question',
+    icon: 'bi bi-signpost-2-fill',
     label: 'Help',
     visibleFor: ['visitor']
   },

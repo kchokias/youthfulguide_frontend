@@ -19,9 +19,9 @@
   width: 175px;
   height: 175px;
   border-radius: 50%;
-  border: 3px solid #fbe24c;
   margin: 0 auto;
   overflow: hidden;
+  background: #fee300;
 }
 
 .guide-details {
@@ -31,14 +31,6 @@
   font-weight: 500;
   line-height: 1.5;
   text-align: center;
-}
-
-.guide-avatar img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-top: 10px;
 }
 
 .guide-actions {
@@ -98,3 +90,13 @@
   border: 3px solid rgba(0, 0, 0, 1);
   border-radius: 10px;
 }
+
+.responsive-image {
+  height: auto;
+  width: 100%;
+  display: block;
+  max-height: 450px;
+  cursor: pointer;
+}
+
+
