@@ -13,7 +13,6 @@ export class AuthService {
 
   login(token: string, role: string): void {
     localStorage.setItem(this.tokenKey, token);
-    console.log(`role #1`, role);
     if (role === 'visitor') {
       this.router.navigate(['/find-a-guide']);
     } else {

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../../user/user.service';
 import { GuideService } from '../../guide/guide.service';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-availability',
@@ -15,7 +16,7 @@ import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-d
 export class AvailabilityComponent {
   private componentName: string = `AvailabilityComponent`;
   @Input() background: string = 'rgba(18, 19, 21, 0.85)';
-  @Input() guideId:number = 1;
+  @Input() guideId:any;
   private subscriptions: Subscription[] = [];
   private userId:number = 1;
   public calendarReady:boolean = false;
@@ -56,13 +57,22 @@ export class AvailabilityComponent {
     private userService: UserService,
     private guideService: GuideService,
     private cdRef: ChangeDetectorRef,
-    private confirmationDialog: ConfirmationDialogService) {}
+    private confirmationDialog: ConfirmationDialogService,
+    private route: ActivatedRoute) {}
 
   public async ngOnInit() {
     const functionName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
-    await this.getUserId();
+    const receivedId = Number(this.route.snapshot.paramMap.get('id'));
+
+    if (receivedId) {
+      this.guideId = receivedId;
+      console.log(`${logPath} ✅ Received ID from postMessage #1`, this.guideId);
+    } else {
+      await this.getUserId();
+      console.log(`${logPath} Fallback getUserId #1`, this.userId);
+    }
 
     await this.getUserProfile(this.userId);
 
@@ -95,11 +105,19 @@ export class AvailabilityComponent {
     const lifecycleName: string = `getAvailability`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
+    let selectedId:any;
+
+    if (!this.guideId) {
+      selectedId = this.userId;
+    } else {
+      selectedId = this.guideId;
+    }
+
     return new Promise<void>((resolve) => {
       this.subscriptions.push(
-        this.guideService.getGuideAvailability(this.userId).subscribe({
+        this.guideService.getGuideAvailability(selectedId).subscribe({
           next: (response) => {
-            console.log(`${logPath}/@User response`, response);
+            console.log(`${logPath}/@User response #1`, response);
             this.availableDates = response.availableDates.map((date: string) => this.convertToISO(date));
             this.bookedDates = response.bookedDates.map((date: string) => this.convertToISO(date));
             this.calendarReady = true;
