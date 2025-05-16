@@ -225,7 +225,6 @@ select {
   width: 150px;
   height: 100%;
   object-fit: fill;
-  border-radius: 50%;
 }
 
 @media (max-width: 900px) {

@@ -16,6 +16,7 @@
           <div class="select-wrapper">
             <select name="region" id="regionSelect" formControlName="region">
               <option value="all">All Regions</option>
+              <option value="Other">Other</option>
               <option value="Central_Greece">Central Greece</option>
               <option value="Macedonia">Macedonia</option>
               <option value="Crete">Crete</option>
@@ -71,9 +72,9 @@
         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">
           <p class="label">{{ guide.username }}</p>
           <p class="label">{{ guide.name }} {{ guide.surname }}</p>
-          <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px">
+          <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px" style="margin-top: 1rem!important;">
             <ng-container *ngIf="guide.average_rating !== '-1.0000'; else noRating">
-              <app-star-rating [rating]="guide.average_rating" [fontSize]="'1em'"></app-star-rating>
+              <app-star-rating [rating]="guide.average_rating" [readonly]="true" [fontSize]="'1.25em'"></app-star-rating>
             </ng-container>
             <ng-template #noRating>
               <p class="no-bookings">No Rating</p>

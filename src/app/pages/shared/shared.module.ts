@@ -17,6 +17,7 @@ import { AvailabilityComponent } from "./availability/availability.component";
 import { FullCalendarModule } from "@fullcalendar/angular";
 import { CustomGalleryComponent } from "./custom-gallery/custom-gallery.component";
 import { MatIconModule } from "@angular/material/icon";
+import { ConfirmationDialogComponent } from "./confirmation-dialog/confirmation-dialog.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatIconModule } from "@angular/material/icon";
     StarRatingComponent,
     MediaGalleryDialogComponent,
     AvailabilityComponent,
-    CustomGalleryComponent
+    CustomGalleryComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { MatIconModule } from "@angular/material/icon";
     StarRatingComponent,
     MediaGalleryDialogComponent,
     AvailabilityComponent,
-    CustomGalleryComponent
+    CustomGalleryComponent,
+    ConfirmationDialogComponent
   ]
 })
 export class SharedModule { }

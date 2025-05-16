@@ -165,6 +165,7 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
   }
 
   onMediaReady(): void {
+    console.log(`onMediaReady`);
     this.mediaReady = true;
   }
 

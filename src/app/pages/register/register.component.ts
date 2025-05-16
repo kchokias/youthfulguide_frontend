@@ -66,6 +66,17 @@ export class RegisterComponent implements OnInit {
     return;
     }
 
+    if (this.registerForm.get('role')!.value === 'pickARole') {
+      this.emailErrorFlag = false;
+      this.nameErrorFlag = false;
+      this.surnameErrorFlag = false;
+      this.usernameErrorFlag = false;
+      this.passErrorFlag = true;
+      this.errorMessage = 'Please select a role!';
+      this.snackbarService.open('Please select a role!', 'error');
+    return;
+    }
+
     if (this.registerForm.invalid) {
       console.warn(`${logPath}/ Form is invalid, aborting submission.`);
       return;
@@ -138,9 +149,9 @@ export class RegisterComponent implements OnInit {
       'email':  [undefined, [Validators.required, Validators.email]],
       'password':[undefined, [Validators.required]],
       'password2': [undefined, [Validators.required]],
-      'role':['guide', [Validators.required]],
+      'role':['pickARole', [Validators.required]],
       'country':['Greece', [Validators.required]],
-      'region':['Crete', [Validators.required]],
+      'region':['Other', [Validators.required]],
     });
   }
 

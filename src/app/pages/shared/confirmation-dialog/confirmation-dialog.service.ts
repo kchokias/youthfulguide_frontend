@@ -13,7 +13,10 @@ export class ConfirmationDialogService {
     private injector: Injector
   ) {}
 
-  open(description: string, type: 'info' | 'warning' | 'success' = 'info'): Promise<boolean> {
+  open(
+    description: string,
+    type: 'info' | 'warning' | 'success' = 'info'
+  ): Promise<boolean | { confirmed: boolean; rating: number; review: string }> {
     const componentRef = createComponent(ConfirmationDialogComponent, {
       environmentInjector: this.appRef.injector,
     });

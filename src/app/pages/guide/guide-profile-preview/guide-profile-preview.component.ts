@@ -214,23 +214,23 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
     const lifecycleName: string = `getGuideMedia`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
 
-      return new Promise<void>((resolve) => {
-        this.subscriptions.push(
-          this.userService.getGuideMedia(this.userId).subscribe({
-            next: (response) => {
-              console.log(`${logPath}/@User response`, response);
-              this.mediaFiles = response.data;
-              this.galleryReady = true;
-              // this.ready.emit();
-              resolve();
-            },
-            error: (err) => {
-              console.error(`${logPath}/@User error`, err);
-              this.galleryReady = false;
-              resolve();
-            }
-          })
-        );
-      });
+    return new Promise<void>((resolve) => {
+      this.subscriptions.push(
+        this.userService.getGuideMedia(this.userId).subscribe({
+          next: (response) => {
+            console.log(`${logPath}/@User response`, response);
+            this.mediaFiles = response.data;
+            this.galleryReady = true;
+            // this.ready.emit();
+            resolve();
+          },
+          error: (err) => {
+            console.error(`${logPath}/@User error`, err);
+            this.galleryReady = false;
+            resolve();
+          }
+        })
+      );
+    });
   }
 }

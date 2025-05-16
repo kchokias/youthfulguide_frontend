@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 
 const GET_TRAVELER_BOOKINGS = 'https://youthfulguides.app/api/TravelerBookings/';
+const REVIEW_BOOKING = 'https://youthfulguides.app/api/Traveler/LeaveReview/';
 const GET_TRAVELER_PROFILE_BY_ID = 'https://youthfulguides.app/api/TravelerProfile/';
 const CANCEL = 'https://youthfulguides.app/api/Traveler/CancelBooking/';
 
@@ -69,7 +70,26 @@ export class TravelerService {
         data,
         { headers }
       );
-    }
+  }
+
+  reviewBooking(_booking_id: number, _traveler_id: number, _rate: number, _review:string): Observable<any> {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.getAuthHeader(),
+      });
+
+      const data = {
+        "booking_id": _booking_id,
+        "traveler_id": _traveler_id,
+        "rate": _rate,
+        "review": _review
+      };
+
+      return this.http.post(`${REVIEW_BOOKING}`,
+        data,
+        { headers }
+      );
+  }
 
   getTravelerProfileById(id: number): Observable<any> {
     const headers = new HttpHeaders({

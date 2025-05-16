@@ -24,7 +24,7 @@
 }
 
 .guides-list-box {
-  height: 200px;
+  height: 185px;
   margin-bottom: 20px;
   padding: 1% 2%;
   width: 100%;
@@ -96,14 +96,14 @@
   color: rgba(241, 224, 43, 1);
   font-family: "Carter One", system-ui!important;
   font-weight: 400;
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 
 .name-label {
   color: rgba(241, 224, 43, 1);
   font-family: "Carter One", system-ui!important;
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .review-label {
@@ -247,10 +247,10 @@ select {
 }
 
 .responsive-image {
-  width: auto;
   height: 100%;
   object-fit: fill;
-  border-radius: 50%;
+  min-width: 200px;
+  max-height: 150px;
 }
 
 @media (max-width: 900px) {

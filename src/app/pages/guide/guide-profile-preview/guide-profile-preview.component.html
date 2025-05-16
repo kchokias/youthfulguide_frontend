@@ -8,7 +8,7 @@
         <span class="username">&#64;{{username}}</span>
         <span class="fullname">{{fullName}}</span>
         <div fxLayout="row" fxLayoutAlign="start start" fxFill fxLayoutGap="10px">
-          <app-star-rating [rating]="rating"></app-star-rating>
+          <app-star-rating [rating]="rating" [readonly]="true"></app-star-rating>
           <span class="username">({{total}})</span>
         </div>
       </div>
@@ -25,71 +25,70 @@
       <div class="large-box" fxLayout="row" fxLayoutAlign="start start" fxFlex="70" fxLayoutGap="20px" fxFill>
 
         <!-- Large Image -->
-        <div class="large-image" fxLayout="row" fxLayoutAlign="start start" fxFlex="70">
+        <div class="large-image" fxLayout="row" fxLayoutAlign="start start" fxFlex="70" [ngClass]="mediaFiles[0] ? 'custom-image-class' : 'fallback-image-class'">
           <img
             [src]="mediaFiles[0] ? mediaFiles[0].media_data : '../../assets/images/mountain.png'"
             alt="Large Image"
             class="responsive-image"
+            style="max-height: 380px;"
           />
         </div>
 
         <!-- Medium Box -->
         <div class="medium-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="30" fxFill fxLayoutGap="20px">
 
-          <div class="medium-image" fxLayout="column" fxLayoutAlign="center center" fxFlex="50">
+          <div class="medium-image" fxLayout="column" fxLayoutAlign="center center" fxFlex="50" [ngClass]="mediaFiles[1] ? 'custom-image-class' : 'fallback-image-class'">
             <img
               [src]="mediaFiles[1] ? mediaFiles[1].media_data : '../../assets/images/mountain.png'"
               alt="Medium Image 1"
               class="responsive-image"
-              style="width: 100%!important;"
+              [ngStyle]="{'max-height': mediaFiles[1] ? '170px' : '150px'}"
+              style="width: 100%!important"
             />
           </div>
 
-          <div class="medium-image" fxLayout="column" fxLayoutAlign="center center" fxFlex="50">
+          <div class="medium-image" fxLayout="column" fxLayoutAlign="center center" fxFlex="50" [ngClass]="mediaFiles[2] ? 'custom-image-class' : 'fallback-image-class'">
             <img
               [src]="mediaFiles[2] ? mediaFiles[2].media_data : '../../assets/images/mountain.png'"
               alt="Medium Image 2"
               class="responsive-image"
-              style="width: 100%!important;"
+              [ngStyle]="{'max-height': mediaFiles[2] ? '170px' : '150px'}"
+              style="width: 100%!important"
             />
           </div>
         </div>
       </div>
 
       <!-- SMALL BOX -->
-      <div class="small-box" fxLayout="row" fxLayoutAlign="start start" fxFlex="30" fxLayoutGap="25px" fxFill>
+      <div class="small-box" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="25px">
 
-        <!-- Render media images if they exist -->
-        <ng-container *ngIf="mediaFiles.length > 3; else showDefaultImages">
-          <ng-container *ngFor="let img of mediaFiles.slice(3, 7); let i = index">
-            <div class="small-image" fxLayout="column" fxLayoutAlign="start start" fxFlex="17.5">
-              <img
-                [src]="img.media_data || '../../assets/images/mountain.png'"
-                class="responsive-sm-image"
-              />
-            </div>
-            <div class="seeall" fxLayout="column" fxLayoutAlign="center end" fxFlex="15" *ngIf="i === 3">
-              <button mat-raised-button class="profile-button" (click)="openGallery()">
-                <span class="date-label">See All</span>
-              </button>
-            </div>
-          </ng-container>
+        <ng-container *ngFor="let img of mediaFiles.slice(3, 7)">
+          <div class="small-image" fxLayout="column" fxLayoutAlign="start start" fxFlex="17.5" [ngClass]="img ? 'custom-image-class' : 'fallback-image-class'">
+            <img
+              [src]="img.media_data || '../../assets/images/mountain.png'"
+              class="responsive-sm-image"
+              [ngClass]="img ? 'custom-image-height' : 'fallback-image-height'"
+              style="width: 100%!important;"
+            />
+          </div>
         </ng-container>
 
-        <!-- Fallback default images -->
-        <ng-template #showDefaultImages>
-          <ng-container *ngFor="let dummy of [0, 1, 2, 3]; let i = index">
-            <div class="small-image" fxLayout="column" fxLayoutAlign="start start" fxFlex="17.5">
-              <img src="../../assets/images/mountain.png" class="responsive-sm-image" />
-            </div>
+        <ng-container *ngFor="let dummy of [].constructor(4 - mediaFiles.slice(3, 7).length)">
+          <div class="small-image" fxLayout="column" fxLayoutAlign="center center" fxFlex="17.5">
+            <img
+              src="../../assets/images/mountain.png"
+              class="responsive-sm-image"
+              style="width: 100%!important;max-height: 85px;"
+            />
+          </div>
+        </ng-container>
 
-            <div class="seeall" fxLayout="column" fxLayoutAlign="center end" fxFlex="15" *ngIf="i === 3">
-              <button mat-raised-button class="profile-button" (click)="openGallery()">
-                <span class="date-label">See All</span>
-              </button>
-            </div>
-          </ng-container>
-        </ng-template>
+        <!-- See All button -->
+        <div class="seeall" fxLayout="column" fxLayoutAlign="center center" fxFlex="15">
+          <button mat-raised-button class="profile-button" (click)="openGallery()">
+            <span class="date-label">See All</span>
+          </button>
+        </div>
 
       </div>
 
@@ -128,7 +127,7 @@
             fxLayoutAlign="space-between end"
             fxFlex="20"
           >
-            <app-star-rating [rating]="review.rate"></app-star-rating>
+            <app-star-rating [rating]="review.rate" [readonly]="true"></app-star-rating>
             <p class="comment">
               {{ review.reviewed_at ? (review.reviewed_at | date: 'mediumDate') : (today | date: 'mediumDate') }}
             </p>

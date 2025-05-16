@@ -2,10 +2,9 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { UserService } from "../../user/user.service";
-import { MatDialog } from "@angular/material/dialog";
 import { TravelerService } from "../traveler.service";
+import { ConfirmationDialogService } from "../../shared/confirmation-dialog/confirmation-dialog.service";
 import { SnackbarService } from "../../shared/snackbar/snackbar.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-traveler-bookings',
@@ -28,8 +27,8 @@ export class TravelerBookingsComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private travelerService: TravelerService,
     private userService: UserService,
-    private snackbarService: SnackbarService,
-    private router: Router) {
+    private confirmationDialog: ConfirmationDialogService,
+    private snackbarService: SnackbarService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
@@ -144,14 +143,44 @@ export class TravelerBookingsComponent implements OnInit, OnDestroy {
       this.travelerService.cancelBooking(id, this.userId).subscribe({
         next: async (response: any) => {
           console.log(`${logPath}/@User response`, response);
+          this.snackbarService.open('Booking Canceled!', 'success');
           await this.getTravelerBookings();
           this.bookingsReady = false;
         },
         error: (err: any) => {
+          this.snackbarService.open(err.error.message, 'error'),
           console.log(`${logPath}/@User error`, err);
         }
       })
     );
+  }
+
+  public async onReviewBooking(id: number): Promise<void> {
+    const functionName: string = `onReviewBooking`;
+    const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    const result = await this.confirmationDialog.open('', 'success') as boolean | { confirmed: boolean, rating: number, review: string };
+
+    if (typeof result === 'boolean') {
+      if (!result) return;
+    } else {
+      if (!result.confirmed) return;
+        this.subscriptions.push(
+        this.travelerService.reviewBooking(id, this.userId,result.rating, result.review  ).subscribe({
+          next: async (response: any) => {
+            console.log(`${logPath}/@User response`, response);
+            this.snackbarService.open('Booking reviewed!', 'success');
+            await this.getTravelerBookings();
+            this.bookingsReady = false;
+          },
+          error: (err: any) => {
+            this.snackbarService.open(err.error.message, 'error'),
+            console.log(`${logPath}/@User error`, err);
+          }
+        })
+        );
+      }
+
   }
 
   public viewProfile(id: number): void {

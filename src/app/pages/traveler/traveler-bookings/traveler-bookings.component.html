@@ -51,12 +51,17 @@
       </div>
 
       <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" fxFill>
-        <p class="label">{{ booking.username }}</p>
-        <p class="label" style="margin-bottom: 25px;">{{ booking.name }} {{ booking.surname }}</p>
+        <p class="user-label">{{ booking.username }}</p>
+        <p class="label">{{ booking.name }} {{ booking.surname }}</p>
+        <p class="label">{{ booking.email }}</p>
         <!-- <p class="label">{{ booking.email }}</p> -->
-        <p class="review-label">
+        <p class="review-label" *ngIf="booking.review">
           {{ booking.review?.length > 155 ? (booking.review | slice:0:155) + '...' : booking.review }}
-        </p>      </div>
+        </p>
+        <p class="review-label" *ngIf="!booking.review">
+          Review - Traveller hasn't submitted a review yet.
+        </p>
+      </div>
 
       <div fxLayout="column" fxLayoutAlign="space-between end" fxFlex="20" fxFill>
         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;"  *ngIf="booking.status === 'confirmed' || booking.status === 'reviewed' || booking.status === 'pending'|| booking.status === 'completed'">
@@ -71,7 +76,8 @@
           <button
             *ngIf="booking.status === 'completed'"
             mat-raised-button
-            class="profile-button">
+            class="profile-button"
+            (click)="onReviewBooking(booking.booking_id)">
             <span class="date-label">Review</span>
           </button>
 
@@ -89,6 +95,7 @@
           <ng-container *ngIf="booking.status === 'reviewed'">
             <ng-container *ngIf="booking.rate !== '-1.0000'; else noRating">
               <app-star-rating
+                [readonly]="true"
                 [rating]="booking.rate"
                 [fontSize]="'1em'">
               </app-star-rating>

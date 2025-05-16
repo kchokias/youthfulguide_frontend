@@ -1,10 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common';
+import { SnackbarService } from '../snackbar/snackbar.service';
 
 @Component({
-  standalone: true,
   selector: 'app-confirmation-dialog',
-  imports: [CommonModule, NgClass],
   templateUrl: './confirmation-dialog.component.html',
   styleUrls: ['./confirmation-dialog.component.css'],
 })
@@ -12,11 +10,16 @@ export class ConfirmationDialogComponent {
   @Input() description: string = '';
   @Input() type: 'info' | 'warning' | 'success' = 'info';
 
-  private _resolve!: (value: boolean) => void;
+  userRating = 0;
+  review: string = '';
 
-  public open(description: string): Promise<boolean> {
+  public constructor(private snackbarService: SnackbarService) {}
+
+  private _resolve!: (value: boolean | { confirmed: boolean, rating: number, review: string }) => void;
+
+  public open(description: string): Promise<boolean | { confirmed: boolean, rating: number, review: string }> {
     this.description = description;
-    return new Promise<boolean>((resolve) => {
+    return new Promise((resolve) => {
       this._resolve = resolve;
     });
   }
@@ -24,6 +27,16 @@ export class ConfirmationDialogComponent {
   confirm() {
     this._resolve(true);
     this.destroy();
+  }
+
+  confirmIF() {
+    if(this.userRating === 0) {
+      this.snackbarService.open('Please rate at least 1 star to confirm.', 'error');
+      return;
+    } else {
+      this._resolve({ confirmed: true, rating: this.userRating, review: this.review });
+      this.destroy();
+    }
   }
 
   cancel() {

@@ -60,6 +60,7 @@ private componentName: string = `GuideProfileComponent`;
   public async getUserId(): Promise<void> {
     const lifecycleName: string = `getUserId`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+    console.log(`${logPath}/`);
 
     return new Promise<void>((resolve, reject) => {
       this.subscriptions.push(
@@ -82,6 +83,7 @@ private componentName: string = `GuideProfileComponent`;
   public async getUserProfile(_id: number): Promise<void> {
     const lifecycleName: string = `getUserProfile`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+    console.log(`${logPath}/`);
 
     return new Promise<void>((resolve, reject) => {
       this.subscriptions.push(
@@ -104,6 +106,7 @@ private componentName: string = `GuideProfileComponent`;
   public async getUserPhoto(): Promise<void> {
     const lifecycleName: string = `getUserPhoto`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+    console.log(`${logPath}/`);
 
       return new Promise<void>((resolve) => {
         this.subscriptions.push(
@@ -125,6 +128,7 @@ private componentName: string = `GuideProfileComponent`;
   public async getGuideMedia(): Promise<void> {
     const lifecycleName: string = `getGuideMedia`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+    console.log(`${logPath}/`);
 
       return new Promise<void>((resolve) => {
         this.subscriptions.push(
@@ -134,6 +138,7 @@ private componentName: string = `GuideProfileComponent`;
               this.mediaFiles = response.data;
               this.galleryReady = true;
               this.ready.emit();
+              console.log(`onMediaReady`);
               resolve();
             },
             error: (err) => {

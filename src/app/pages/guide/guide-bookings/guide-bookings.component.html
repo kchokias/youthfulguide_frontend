@@ -52,10 +52,15 @@
 
       <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" fxFill>
         <p class="label">{{ booking.username }}</p>
-        <p class="name-label" style="margin-bottom: 25px;">{{ booking.name }} {{ booking.surname }}</p>
+        <p class="name-label">{{ booking.name }} {{ booking.surname }}</p>
+        <p class="name-label">{{ booking.email }}</p>
+
         <!-- <p class="label">{{ booking.email }}</p> -->
-        <p class="review-label">
+        <p class="review-label" *ngIf="booking.review">
           {{ booking.review?.length > 155 ? (booking.review | slice:0:155) + '...' : booking.review }}
+        </p>
+        <p class="review-label" *ngIf="!booking.review">
+          Review - Traveller hasn't submitted a review yet.
         </p>
       </div>
 
@@ -91,6 +96,7 @@
             <ng-container *ngIf="booking.rate !== '-1.0000'; else noRating">
               <app-star-rating
                 [rating]="booking.rate"
+                [readonly]="true"
                 [fontSize]="'1em'">
               </app-star-rating>
             </ng-container>

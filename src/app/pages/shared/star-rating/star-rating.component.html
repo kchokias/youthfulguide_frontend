@@ -1,13 +1,16 @@
-<div class="star-rating" [ngStyle]="{ 'font-size': fontSize }">
-  <ng-container *ngFor="let star of starArray">
+<div class="star-rating" [ngStyle]="{ 'font-size': fontSize, 'display': readonly ? 'flex' : 'block' }">
+  <ng-container *ngFor="let star of starArray; let i = index">
     <i
-      style="margin-right: 5px;"
+      [ngStyle]="{ 'margin-right': '5px', cursor: readonly ? 'default' : 'pointer' }"
       class="stardom"
       [ngClass]="{
         'bi bi-star-fill': star === 'full',
         'bi bi-star-half': star === 'half',
         'bi bi-star': star === 'empty'
       }"
+      (mouseenter)="readonly ? null : hoverRating(i + 1)"
+      (mouseleave)="readonly ? null : resetHover()"
+      (click)="readonly ? null : setRating(i + 1)"
     ></i>
   </ng-container>
 </div>

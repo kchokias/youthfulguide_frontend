@@ -1,9 +1,26 @@
-<div class="overlay">
+<div class="overlay" *ngIf="type !== 'success'">
   <div class="dialog" [ngClass]="type">
     <p>{{ description }}</p>
     <div class="actions">
       <button class="confirm" (click)="confirm()">
         {{ type === 'warning' ? 'Request' : 'Yes' }}
+      </button>
+      <button class="cancel" (click)="cancel()">Go Back</button>
+    </div>
+  </div>
+</div>
+<div class="overlay" *ngIf="type === 'success'">
+  <div class="dialog-review" [ngClass]="type">
+    <p style="margin-bottom: 1rem;">Review</p>
+    <app-star-rating [(rating)]="userRating" [fontSize]="'2.5em'" [readonly]="false"></app-star-rating>
+    <div fxLayout="row" fxLayoutAlign="start center" style="width: 100%;min-width: 350px;">
+      <div class="form-group" style="margin-top: 15px;" fxFlex="100">
+        <textarea [(ngModel)]="review" rows="4"></textarea>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="confirm" (click)="confirmIF()">
+        Submit
       </button>
       <button class="cancel" (click)="cancel()">Go Back</button>
     </div>

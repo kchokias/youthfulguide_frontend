@@ -93,8 +93,7 @@
   width: 100%;
   height: auto;
   overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;;
   padding: 1.25rem;
 }
 
@@ -107,7 +106,7 @@
   height: auto;
   width: 100%;
   display: block;
-  max-height: 450px;
+  max-height: 300px;
   cursor: pointer;
 }
 
@@ -131,7 +130,6 @@
   border-radius: 15px;
   font-size: 16px;
   cursor: pointer;
-  padding: 1.5rem;
 }
 
 .date-label {
@@ -206,6 +204,26 @@
   border-radius: 50%;
   overflow: hidden;
   background: #fee300;
+}
+
+.custom-image-class {
+  background: transparent;
+  padding: 0.5rem;
+
+}
+.fallback-image-class {
+  background: #fee300;
+  padding: 0.5rem;
+}
+
+.custom-image-height {
+  max-height: 125px;
+  min-width: 175px;
+}
+
+.fallback-image-height {
+  max-height: 85px;
+  min-width: 175px;
 }
 
 @keyframes spin {
