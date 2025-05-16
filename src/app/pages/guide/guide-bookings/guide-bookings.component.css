@@ -253,7 +253,7 @@ select {
   max-height: 150px;
 }
 
-@media (max-width: 1400px) {
+@media (min-width: 800px) and (max-width: 1400px) {
   .form-field {
     width: 100%;
   }
@@ -274,6 +274,48 @@ select {
 
   .mobilizer2 {
     max-width: 30%!important;
+  }
+
+  .responsive-image {
+    min-width: 160px;
+    max-height: 175px;
+  }
+
+  .guides-list-box {
+    height: 200px;
+  }
+
+  .review-label {
+    font-size: 0.8rem;
+  }
+
+  .user-label {
+    font-size: 1.5rem;
+  }
+
+  .pending-class {
+    max-width: 32%!important;
+  }
+}
+
+@media (max-width: 799px) {
+  .form-field {
+    width: 100%;
+  }
+
+  .search-box {
+    width: 100%;
+    max-width: 100%;
+    height: 20rem;
+  }
+
+  form {
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .image-container {
+    max-width: 25%!important;
   }
 
   .responsive-image {

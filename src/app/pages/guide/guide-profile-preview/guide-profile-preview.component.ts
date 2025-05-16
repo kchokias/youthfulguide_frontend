@@ -121,6 +121,7 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
         this.guideService.getGuideReviews(_id).subscribe({
           next: (response) => {
             this.reviews = response.reviews;
+            this.total = response.reviews.length;
             console.log(`${logPath}/@Reviews response`, response);
             resolve();
           },
@@ -143,7 +144,6 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
     this.fullName = this.selectedUser.name + ' ' + this.selectedUser.surname;
     this.region = this.selectedUser.region + ', ' + this.selectedUser.country;
     this.rating = +this.selectedUser.average_rating;
-    this.total = this.selectedUser.total_bookings;
     this.profilePic64 = this.selectedUser.profile_picture;
     this.mediaFiles = this.selectedUser.media;
     this.description = this.selectedUser.description;

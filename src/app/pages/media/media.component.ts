@@ -144,6 +144,7 @@ private componentName: string = `GuideProfileComponent`;
             error: (err) => {
               console.error(`${logPath}/@User error`, err);
               this.galleryReady = false;
+              this.ready.emit();
               resolve();
             }
           })
