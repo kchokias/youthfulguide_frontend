@@ -7,3 +7,11 @@
     font-size: 1.5em!important;;
   }
 }
+
+@media (max-width: 574px) {
+  .star-rating {
+    font-size: 0.5em !important;
+    margin-top: 10%;
+    margin-left: -15%;
+  }
+}

@@ -311,11 +311,11 @@ select {
   .search-box {
     width: 100%;
     max-width: 100%;
-    height: 20rem;
+    height: 100%;
   }
 
   form {
-    height: 100%;
+    height: 85%;
     flex-direction: column!important
   }
 
@@ -324,8 +324,8 @@ select {
   }
 
   .responsive-image {
-    min-width: 160px;
-    max-height: 175px;
+    min-width: 100px;
+    max-height: 75px;
   }
 
   .guides-list-box {
@@ -334,13 +334,91 @@ select {
 
   .review-label {
     font-size: 0.8rem;
+    margin-left: -60%;
+  }
+
+  .name-label {
+    font-size: 0.75rem;
   }
 
   .user-label {
     font-size: 1.5rem;
   }
 
+  .label {
+    font-size: 1rem;
+  }
+
   .pending-class {
     max-width: 32%!important;
+  }
+
+  .mobilizer {
+    max-height: 15%!important;
+    padding: 25px;
+  }
+
+  .mobilizer3 {
+    place-content: center center!important;
+    margin: 2.5% auto;
+  }
+}
+
+@media (max-width: 574px) {
+   .date-picker {
+    transform: scale(0.7);
+  }
+
+  .mobilizer {
+    max-height: 15% !important;
+    padding: 25px;
+  }
+
+  .label {
+    font-size: 0.75rem;
+    margin-left: 22.5%!important;
+  }
+
+  .name-label {
+    font-size: 0.5rem;
+    margin-left: 22.5%!important;
+  }
+
+  .review-label {
+    font-size: 0.75rem;
+  }
+
+  .default-class {
+    place-content: flex-end flex-start!important;
+  }
+
+  .pending-class {
+    place-content: center center !important;
+    max-width: 25% !important;
+  }
+
+  .date-label {
+    font-size: 0.75rem;
+  }
+
+  .profile-button {
+    padding: 0!important;
+  }
+
+  .no-left {
+    margin-left: 0px!important;
+    margin-bottom: 1rem!important;
+  }
+
+  .custom-checkbox {
+    height: 15px;
+  }
+
+  .custom-checkbox:checked::before {
+    font-size: 0.75rem;
+  }
+
+  .custom-checkbox::before {
+    font-size: 0.75rem;
   }
 }

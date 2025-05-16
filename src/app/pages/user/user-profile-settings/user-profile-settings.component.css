@@ -249,12 +249,21 @@ select {
 
 @media screen and (max-width: 768px) {
   .container {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column!important;
+    align-items: center!important;
+    height: 100%!important;
   }
 
   .left-column, .right-column {
     width: 100%;
     max-width: 100%;
+  }
+
+  .card {
+    margin: 1.5rem -1rem !important;
+  }
+
+  button {
+    margin: 0 !important;
   }
 }

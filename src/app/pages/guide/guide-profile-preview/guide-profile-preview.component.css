@@ -270,3 +270,40 @@
 
 }
 
+@media screen and (max-width: 768px) {
+  .username {
+    font-size: 0.9rem;
+  }
+
+  .media-box {
+    padding: 0px !important;
+  }
+
+  .profile-button{
+    padding: 10px 0!important;
+    font-size: 11px;
+    transform: scaleX(0.75);
+  }
+
+  :host ::ng-deep .profile-button .mdc-button__label {
+    width: 40px;
+  }
+
+  .small-image {
+    margin-right: 5px!important;
+  }
+
+  .date-label {
+    font-size: 12px;
+  }
+
+  .container {
+    padding: 5px!important;
+  }
+
+  .details-box {
+    margin-bottom: 0!important;
+  }
+
+}
+

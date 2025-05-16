@@ -266,4 +266,23 @@ select {
   ::ng-deep .fc-toolbar-chunk:nth-child(2) {
     max-width: 225px;
   }
+
+}
+
+@media (max-width: 574px) {
+  ::ng-deep .fc .fc-toolbar-title {
+    font-size: 0.85em!important;
+  }
+
+  ::ng-deep .fc table {
+    font-size: 0.75em!important;
+  }
+
+  .title {
+    font-size: 0.85rem!important;
+  }
+
+  .availability-container {
+    margin-bottom: 10%!important;
+  }
 }

@@ -34,7 +34,7 @@
 
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="end center" fxFlex="25">
+      <div fxLayout="row" fxLayoutAlign="end center" fxFlex="25" class="mobilizer3">
         <button mat-raised-button class="search-button" (click)="onSearch()">
           <p class="date-label">Search</p>
         </button>
@@ -69,7 +69,7 @@
       </div>
 
       <div fxLayout="column" fxLayoutAlign="space-between end" fxFlex="20" fxFill [ngClass]="{ 'pending-class': booking.status === 'pending', 'default-class': true }">
-        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;">
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;" class="no-left">
           <button
             *ngIf="booking.status === 'confirmed'"
             mat-raised-button

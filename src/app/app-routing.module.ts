@@ -16,6 +16,7 @@ import { TravelerBookingsComponent } from './pages/traveler/traveler-bookings/tr
 import { roleGuard } from './helpers/role.guard';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { TravelerPreviewComponent } from './pages/traveler/traveler-preview/traveler-preview.component';
+import { HelpComponent } from './pages/help/help.component';
 
 
 const routes: Routes = [
@@ -35,7 +36,9 @@ const routes: Routes = [
   {path: 'bookings', component: GuideBookingsComponent, canActivate: [authGuard] },
   {path: 'my-bookings', component: TravelerBookingsComponent, canActivate: [authGuard, roleGuard], data: { expectedRole: 'visitor'} },
   {path: 'availability', component: AvailabilityComponent, canActivate: [authGuard] },
-  {path: 'profile-preview/:id', component: GuideProfilePreviewComponent, canActivate: [authGuard]}
+  {path: 'profile-preview/:id', component: GuideProfilePreviewComponent, canActivate: [authGuard]},
+  {path: 'help', component: HelpComponent, canActivate: [authGuard]},
+  {path: 'faq', component: HelpComponent, canActivate: [authGuard]}
 ];
 
 @NgModule({
