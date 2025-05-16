@@ -258,7 +258,7 @@ select {
   to { transform: rotate(360deg); }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1400px) {
   ::ng-deep .fc-toolbar-chunk:nth-child(1) {
     display: none!important;
   }
