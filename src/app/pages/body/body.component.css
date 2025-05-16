@@ -40,7 +40,7 @@
 
 @media screen and (max-width: 768px) {
   .body {
-    width: calc(100%-0.5rem);
+    width: calc(100% - 0.5rem);
     margin-left: 2.75rem;
   }
 }
