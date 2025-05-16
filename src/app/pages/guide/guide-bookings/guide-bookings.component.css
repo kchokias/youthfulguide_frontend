@@ -292,4 +292,8 @@ select {
   .user-label {
     font-size: 1.5rem;
   }
+
+  .pending-class {
+    max-width: 32%!important;
+  }
 }

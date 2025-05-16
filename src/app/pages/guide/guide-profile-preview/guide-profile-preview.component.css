@@ -239,10 +239,6 @@
     font-size: 1.25rem;
   }
 
-  ::ng-deep .fc-toolbar-chunk:nth-child(2) {
-    max-width: 100px;
-  }
-
   .comment {
     max-width: 85%;
     font-size: 0.8rem;

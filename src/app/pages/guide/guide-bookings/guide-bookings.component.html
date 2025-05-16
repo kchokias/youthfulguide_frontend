@@ -64,7 +64,7 @@
         </p>
       </div>
 
-      <div fxLayout="column" fxLayoutAlign="space-between end" fxFlex="20" fxFill>
+      <div fxLayout="column" fxLayoutAlign="space-between end" fxFlex="20" fxFill [ngClass]="{ 'pending-class': booking.status === 'pending', 'default-class': true }">
         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;">
           <button
             *ngIf="booking.status === 'confirmed'"
