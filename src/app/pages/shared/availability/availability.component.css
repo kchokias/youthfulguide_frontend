@@ -257,3 +257,13 @@ select {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+@media (max-width: 1100px) {
+  ::ng-deep .fc-toolbar-chunk:nth-child(1) {
+    display: none!important;
+  }
+
+  ::ng-deep .fc-toolbar-chunk:nth-child(2) {
+    max-width: 225px;
+  }
+}

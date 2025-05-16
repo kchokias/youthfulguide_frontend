@@ -128,7 +128,7 @@
             fxFlex="20"
           >
             <app-star-rating [rating]="review.rate" [readonly]="true"></app-star-rating>
-            <p class="comment">
+            <p class="comment" id="review-at">
               {{ review.reviewed_at ? (review.reviewed_at | date: 'mediumDate') : (today | date: 'mediumDate') }}
             </p>
           </div>

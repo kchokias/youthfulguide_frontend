@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../user.service';
 import { ObjectHelper } from 'src/app/helpers/object-helper.class';
 import { ConfirmationDialogService } from '../../shared/confirmation-dialog/confirmation-dialog.service';
+import { SnackbarService } from '../../shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-user-profile-settings',
@@ -32,7 +33,11 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
     { viewValue: 'Thrace', value: 'Τhrace' }
   ];
 
-  constructor(private fb: FormBuilder, private userService: UserService, private confirmationDialog: ConfirmationDialogService) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private confirmationDialog: ConfirmationDialogService,
+    private snackbarService: SnackbarService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -157,8 +162,8 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(
       (this.userService.patchUserById(this.userId,filteredProfileData).subscribe({
-        next: (response: any) => console.log('HTTP Response:', response),
-        error: (error: any) => console.log('HTTP Error:', error),
+        next: (response: any) => this.snackbarService.open('User updated!', 'success'),
+        error: (error: any) => this.snackbarService.open(error.error.message, 'error'),
         complete: () => console.log('HTTP Complete')
       }))
     );

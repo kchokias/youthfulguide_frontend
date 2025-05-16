@@ -230,3 +230,47 @@
   to { transform: rotate(360deg); }
 }
 
+@media (max-width: 1100px) {
+  :host ::ng-deep .profile-button .mdc-button__label {
+    width: 75px;
+  }
+
+  .username {
+    font-size: 1.25rem;
+  }
+
+  ::ng-deep .fc-toolbar-chunk:nth-child(2) {
+    max-width: 100px;
+  }
+
+  .comment {
+    max-width: 85%;
+    font-size: 0.8rem;
+  }
+
+  #review-at {
+    min-width: 115px;
+  }
+
+  .large-image.custom-image-class.img {
+    max-height: none!important;
+    height: 100%;
+    width: 100%;
+  }
+
+  .medium-image.custom-image-class {
+    max-height: 100%!important;
+    max-width: 100%!important;
+  }
+
+  .media-box {
+    padding: 0px!important;
+  }
+
+  .custom-image-height {
+    max-height: 100px;
+    min-width: 100px;
+  }
+
+}
+

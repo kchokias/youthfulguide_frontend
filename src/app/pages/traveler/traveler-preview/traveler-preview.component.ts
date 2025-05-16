@@ -164,7 +164,7 @@ export class TravelerPreviewComponent  implements OnInit, OnDestroy {
 
     this.subscriptions.push(
       (this.userService.patchUserById(this.userId,filteredProfileData).subscribe({
-        next: (response: any) => this.snackbarService.open('Login successfully!', 'success'),
+        next: (response: any) => this.snackbarService.open('User updated!', 'success'),
         error: (error: any) => this.snackbarService.open(error.error.message, 'error'),
         complete: () => console.log('HTTP Complete')
       }))

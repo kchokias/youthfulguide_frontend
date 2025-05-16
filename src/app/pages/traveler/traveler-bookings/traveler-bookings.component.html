@@ -2,7 +2,7 @@
   <div class="search-box">
   <!-- <div class="search-box" *ngIf="bookingsReady"> -->
     <form [formGroup]="searchForm">
-      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40"  style="margin-right: 15px!important;">
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40"  style="margin-right: 15px!important;" class="mobilizer2">
         <p class="label">Dates</p>
 
         <mat-form-field appearance="fill" class="date-picker">
@@ -15,17 +15,17 @@
         </mat-form-field>
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="center end" fxFlex="15" style="margin-bottom:0.75%;margin-right: 15px">
+      <div fxLayout="row" fxLayoutAlign="center end" fxFlex="15" style="margin-bottom:0.75%;margin-right: 15px" class="mobilizer">
         <label class="label" for="confirmed">Confirmed</label><br>
         <input type="checkbox" class="custom-checkbox" formControlName="confirmed">
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="center end" fxFlex="14" style="margin-bottom:0.75%;;margin-right: 15px">
+      <div fxLayout="row" fxLayoutAlign="center end" fxFlex="14" style="margin-bottom:0.75%;;margin-right: 15px" class="mobilizer">
         <label class="label" for="pending">Pending</label><br>
         <input type="checkbox" class="custom-checkbox" formControlName="pending">
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="center end" fxFlex="15" style="margin-bottom:0.75%">
+      <div fxLayout="row" fxLayoutAlign="center end" fxFlex="15" style="margin-bottom:0.75%" class="mobilizer">
         <label class="label" for="completed">Completed</label><br>
         <input type="checkbox" class="custom-checkbox" formControlName="completed">
       </div>
