@@ -135,9 +135,12 @@ export class TravelerBookingsComponent implements OnInit, OnDestroy {
     })
   }
 
-  public onCancelBooking(id: number) : void{
+  public async onCancelBooking(id: number): Promise<void> {
     const functionName: string = `onCancelBooking`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
+
+    const confirmed = await this.confirmationDialog.open('Are you sure you want to decline this booking?');
+    if (!confirmed) return;
 
     this.subscriptions.push(
       this.travelerService.cancelBooking(id, this.userId).subscribe({

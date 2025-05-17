@@ -55,10 +55,10 @@
         <p class="label">{{ booking.name }} {{ booking.surname }}</p>
         <p class="label">{{ booking.email }}</p>
         <!-- <p class="label">{{ booking.email }}</p> -->
-        <p class="review-label" *ngIf="booking.review">
+        <p class="review-label" *ngIf="booking.review  && (booking.status === 'completed' || booking.status === 'reviewed')">
           {{ booking.review?.length > 155 ? (booking.review | slice:0:155) + '...' : booking.review }}
         </p>
-        <p class="review-label" *ngIf="!booking.review">
+        <p class="review-label" *ngIf="!booking.review  && (booking.status === 'completed' || booking.status === 'reviewed')">
           Review - Traveller hasn't submitted a review yet.
         </p>
       </div>

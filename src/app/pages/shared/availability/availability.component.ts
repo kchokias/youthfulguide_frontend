@@ -235,12 +235,14 @@ export class AvailabilityComponent {
       this.guideService.setAvailability(this.userId, this.selectedDates[0], this.selectedDates[1], this.selectedAvailability).subscribe({
         next: async (response) => {
           console.log(`${logPath}/@User response`, response);
+          this.snackbarService.open('Availability Updated Successfully', 'success');
           this.selectedAvailability = '';
           this.calendarReady = false;
           await this.getAvailability();
         },
         error: (err) => {
           console.log(`${logPath}/@User error`, err);
+          this.snackbarService.open(err.error.message, 'error');
         }
       })
     );

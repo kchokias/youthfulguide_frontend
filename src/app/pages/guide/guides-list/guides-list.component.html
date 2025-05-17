@@ -66,7 +66,7 @@
     <div *ngFor="let guide of guides" class="guides-list-box">
       <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="15" class="image-container">
-          <img [src]="guide.profile_picture" class="responsive-image">
+          <img [src]="guide.profile_picture || '../../assets/images/user.png'" class="responsive-image">
         </div>
 
         <div fxLayout="column" fxLayoutAlign="start start" fxFlex="45">

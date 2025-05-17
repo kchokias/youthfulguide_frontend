@@ -123,6 +123,8 @@ export class TravelerPreviewComponent  implements OnInit, OnDestroy {
         ])
     );
 
+    this.travelerForm.get('role')?.setValue(_user.role === 'visitor' ? 'traveller' : _user.role);
+
     this.formReady = true;
   }
 

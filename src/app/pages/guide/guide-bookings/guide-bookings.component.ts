@@ -148,11 +148,13 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
       this.guideService.cancelBooking(id).subscribe({
         next: async (response) => {
           console.log(`${logPath}/@User response`, response);
+          this.snackbarService.open('Booking Cancelled', 'success');
           await this.getGuideBookings();
           this.bookingsReady = false;
         },
         error: (err) => {
           console.log(`${logPath}/@User error`, err);
+          this.snackbarService.open(err.error.message, 'error');
         }
       })
     );
@@ -169,11 +171,13 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
       this.guideService.acceptBooking(id).subscribe({
         next: async (response) => {
           console.log(`${logPath}/@User response`, response);
+          this.snackbarService.open('Booking Accepted', 'success');
           await this.getGuideBookings();
           this.bookingsReady = false;
         },
         error: (err) => {
           console.log(`${logPath}/@User error`, err);
+          this.snackbarService.open(err.error.message, 'error');
         }
       })
     );
@@ -190,11 +194,13 @@ export class GuideBookingsComponent implements OnInit, OnDestroy {
       this.guideService.declineBooking(id).subscribe({
         next: async (response) => {
           console.log(`${logPath}/@User response`, response);
+          this.snackbarService.open('Bookind declined', 'success');
           await this.getGuideBookings();
           this.bookingsReady = false;
         },
         error: (err) => {
           console.log(`${logPath}/@User error`, err);
+          this.snackbarService.open(err.error.message, 'error');
         }
       })
     );

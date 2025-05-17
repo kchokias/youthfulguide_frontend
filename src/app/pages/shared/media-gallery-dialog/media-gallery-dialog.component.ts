@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MediaItem } from '../../guide/guide.model';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../user/user.service';
+import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-media-gallery-dialog',
@@ -18,7 +19,7 @@ export class MediaGalleryDialogComponent implements OnInit {
   public role: string = '';
 
   constructor(
-    public dialogRef: MatDialogRef<MediaGalleryDialogComponent>,
+    public dialogRef: MatDialogRef<MediaGalleryDialogComponent>, private confirmationDialog: ConfirmationDialogService,
     @Inject(MAT_DIALOG_DATA) public data: { images: MediaItem[] },
     private gallery: Gallery,
     private userService: UserService
@@ -69,9 +70,13 @@ export class MediaGalleryDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  deleteImage(index: number): void {
+  public async deleteImage(index: number): Promise<void> {
+
     const lifecycleName: string = `getGuideMedia`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    const confirmed = await this.confirmationDialog.open('Are you sure you want to delete this image?');
+    if (!confirmed) return;
 
     this.subscriptions.push(
       this.userService.deleteMediaPhoto(this.images[index].id).subscribe({

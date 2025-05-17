@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../user/user.service';
 import { ImageCropperDgComponent } from '../shared/image-cropper/image-cropper.component';
 import { MediaGalleryDialogComponent } from '../shared/media-gallery-dialog/media-gallery-dialog.component';
+import { SnackbarService } from '../shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-media',
@@ -32,7 +33,8 @@ private componentName: string = `GuideProfileComponent`;
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private snackbarService: SnackbarService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -230,9 +232,11 @@ private componentName: string = `GuideProfileComponent`;
             this.userService.postUserProfilePhoto(this.userId, result).subscribe({
               next: (response) => {
                 this.imageBase64 = result;
+                this.snackbarService.open('Profiile Photo changed', 'success');
               },
               error: (err) => {
                 console.log(`${logPath}/@User error`, err);
+                this.snackbarService.open(err.error.message, 'error');
               }
             })
           );
@@ -356,9 +360,11 @@ private componentName: string = `GuideProfileComponent`;
                     next: (response) => {
                         this.galleryReady = true;
                         console.log(`${logPath}/@User response`, response);
+                        this.snackbarService.open('Media uploaded successfully', 'success');
                     },
                     error: (err) => {
                         console.log(`${logPath}/@User error`, err);
+                        this.snackbarService.open(err.error.message, 'error');
                     }
                 })
             );
