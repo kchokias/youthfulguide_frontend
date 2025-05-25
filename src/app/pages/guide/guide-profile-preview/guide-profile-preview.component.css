@@ -146,13 +146,16 @@
   border-radius: 20px;
   display: flex;
   padding: 10px 15px;
+  width: 100%;
 }
 
-.description-box p {
+.description-box pre {
   font-family: "Carter One", system-ui!important;
   font-weight: 400;
   font-size: 16px;
   color: rgba(251, 226, 76, 1);
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .title {
