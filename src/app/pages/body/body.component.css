@@ -31,7 +31,7 @@
   overflow-x: hidden;
 }
 
-@media (max-width: 799px) {
+@media (max-width: 899px) {
   .body {
     width: calc(100% - 1rem);
     margin-left: 2.5rem;

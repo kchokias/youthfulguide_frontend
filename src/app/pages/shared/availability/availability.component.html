@@ -1,4 +1,4 @@
-<div class="availability-container" [ngStyle]="{ 'background': background }" *ngIf="calendarReady">
+<div class="availability-container" [ngStyle]="{ 'background': background }" [ngClass]="{ 'has-transform': background === 'transparent' }" *ngIf="calendarReady">
 
   <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 20px;">
     <span class="title" *ngIf="background !== 'transparent'">Availability</span>
@@ -18,10 +18,10 @@
   </ng-container>
 
   <div style="padding-top: 30px;" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px" fxFill *ngIf="background === 'transparent'">
-    <button mat-raised-button class="profile-button available">
+    <button mat-raised-button class="available-button available">
       <span class="date-label">Available</span>
     </button>
-    <button mat-raised-button class="profile-button not-available">
+    <button mat-raised-button class="available-button not-available">
       <span class="date-label">Not Available</span>
     </button>
   </div>

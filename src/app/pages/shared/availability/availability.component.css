@@ -199,7 +199,7 @@ select {
   color: black;
 }
 
-.profile-button {
+.available-button {
   color: black;
   border: 2px solid rgba(0, 0, 0, 1);
   border-radius: 2px;
@@ -284,5 +284,23 @@ select {
 
   .availability-container {
     margin-bottom: 10%!important;
+  }
+}
+
+@media (max-width: 554px) {
+  .availability-container.has-transform {
+    transform: scaleX(0.95);
+  }
+}
+
+@media (max-width: 524px) {
+  .availability-container.has-transform {
+    transform: scaleX(0.9);
+  }
+}
+
+@media (max-width: 500px) {
+  .availability-container.has-transform {
+    transform: scaleX(0.8);
   }
 }

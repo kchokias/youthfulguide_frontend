@@ -72,7 +72,7 @@ export class SidenavComponent implements OnInit {
 
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
-    this.collapsed = this.screenWidth > 768;
+    this.collapsed = this.screenWidth > 868;
     this.onToggleSidenav.emit({collapsed:this.collapsed, screenWidth: this.screenWidth});
   }
 
