@@ -17,17 +17,17 @@
 
       <div fxLayout="row" fxLayoutAlign="center center" fxFlex="35" fxLayoutGap="30px" class="mobilizer">
 
-        <div fxLayout="row" fxLayoutAlign="center end" fxFlex="33" style="margin-bottom:0.75%;margin-right: 15px">
+        <div fxLayout="row" fxLayoutAlign="center end" fxFlex="33" style="margin-bottom:0.75%;margin-right: 15px" class="confirmed-stage">
           <label class="name-label" for="confirmed">Confirmed</label><br>
           <input type="checkbox" class="custom-checkbox" formControlName="confirmed">
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="center end" fxFlex="33" style="margin-bottom:0.75%;;margin-right: 15px">
+        <div fxLayout="row" fxLayoutAlign="center end" fxFlex="33" style="margin-bottom:0.75%;;margin-right: 15px" class="pending-stage">
           <label class="name-label" for="pending">Pending</label><br>
-          <input type="checkbox" class="custom-checkbox" formControlName="pending">
+          <input type="checkbox" class="custom-checkbox" id="pend" formControlName="pending">
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="center end" fxFlex="33" style="margin-bottom:0.75%">
+        <div fxLayout="row" fxLayoutAlign="center end" fxFlex="33" style="margin-bottom:0.75%" class="completed-stage">
           <label class="name-label" for="completed">Completed</label><br>
           <input type="checkbox" class="custom-checkbox" formControlName="completed">
         </div>

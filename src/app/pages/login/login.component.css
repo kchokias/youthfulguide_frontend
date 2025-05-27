@@ -160,3 +160,13 @@ form {
     margin-bottom: 7.5%;
   }
 }
+
+@media screen and (max-width: 568px) {
+  .full-width {
+    width: 70%!important;
+  }
+
+  .login-container {
+    max-height: 100%!important;
+  }
+}
