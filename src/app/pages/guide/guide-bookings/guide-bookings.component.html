@@ -44,87 +44,167 @@
   </div>
 
   <div class="guides-list-box" *ngFor="let booking of bookings">
-    <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
+    <ng-container *ngIf="windowWidth > 700">
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
 
-      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="20" class="image-container">
-        <img
-          [src]="booking.profile_picture || '../../assets/images/user.png'"
-          class="responsive-image"
-          alt="Traveler Picture"
-        />
-      </div>
-
-      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" fxFill class="text-space">
-        <p class="label">{{ booking.username }}</p>
-        <p class="name-label">{{ booking.name }} {{ booking.surname }}</p>
-        <p class="name-label">{{ booking.email }}</p>
-
-        <!-- <p class="label">{{ booking.email }}</p> -->
-        <p class="review-label" *ngIf="booking.review && booking.status === 'completed'">
-          {{ booking.review?.length > 155 ? (booking.review | slice:0:155) + '...' : booking.review }}
-        </p>
-        <p class="review-label" *ngIf="!booking.review && booking.status === 'completed'">
-          Review - Traveller hasn't submitted a review yet.
-        </p>
-      </div>
-
-      <div fxLayout="column" fxLayoutAlign="space-between end" fxFlex="20" fxFill [ngClass]="{ 'pending-class': booking.status === 'pending', 'default-class': true }">
-        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;" class="no-left">
-          <button
-            *ngIf="booking.status === 'confirmed'"
-            mat-raised-button
-            class="profile-button"
-            (click)="onCancelBooking(booking.booking_id)">
-            <span class="date-label">Cancel</span>
-          </button>
-
-          <ng-container *ngIf="booking.status === 'pending'">
-            <button
-              mat-raised-button
-              class="profile-button accept-button"
-              color="primary"
-              (click)="onAcceptBooking(booking.booking_id)">
-              <span class="date-label">Accept</span>
-            </button>
-
-            <button
-              mat-raised-button
-              class="profile-button decline-button"
-              color="warn"
-              (click)="onDeclineBooking(booking.booking_id)">
-              <span class="date-label">Decline</span>
-            </button>
-          </ng-container>
-
-          <ng-container *ngIf="booking.status === 'completed'">
-            <ng-container *ngIf="booking.rate !== '-1.0000'; else noRating">
-              <app-star-rating
-                [rating]="booking.rate"
-                [readonly]="true"
-                [fontSize]="'1em'">
-              </app-star-rating>
-            </ng-container>
-            <ng-template #noRating>
-              <p class="no-bookings">No Rating</p>
-            </ng-template>
-          </ng-container>
-
+        <!-- IMAGE -->
+        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="20" class="image-container">
+          <img
+            [src]="booking.profile_picture || '../../assets/images/user.png'"
+            class="responsive-image"
+            alt="Traveler Picture"
+          />
         </div>
-        <p class="name-label">{{ booking.booked_date }}</p>
-        <p class="name-label">
-          {{
-            booking.status === 'cancelled'
-              ? 'Cancelled'
-              : booking.status === 'pending'
-              ? 'Pending'
-              : booking.status === 'completed'
-              ? 'Completed'
-              : 'Confirmed'
-          }}
-        </p>
+
+        <!-- TEXT INFO -->
+        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" fxFill class="text-space">
+          <p class="label">{{ booking.username }}</p>
+          <p class="name-label">{{ booking.name }} {{ booking.surname }}</p>
+          <p class="name-label">{{ booking.email }}</p>
+          <p class="review-label" *ngIf="booking.review && booking.status === 'completed'">
+            {{ booking.review?.length > 155 ? (booking.review | slice:0:155) + '...' : booking.review }}
+          </p>
+          <p class="review-label" *ngIf="!booking.review && booking.status === 'completed'">
+            Review - Traveller hasn't submitted a review yet.
+          </p>
+        </div>
+
+        <!-- ACTIONS + STATUS -->
+        <div fxLayout="column" fxLayoutAlign="space-between end" fxFlex="20" fxFill [ngClass]="{ 'pending-class': booking.status === 'pending', 'default-class': true }">
+          <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;" class="no-left">
+            <button
+              *ngIf="booking.status === 'confirmed'"
+              mat-raised-button
+              class="profile-button"
+              (click)="onCancelBooking(booking.booking_id)">
+              <span class="date-label">Cancel</span>
+            </button>
+
+            <ng-container *ngIf="booking.status === 'pending'">
+              <button
+                mat-raised-button
+                class="profile-button accept-button"
+                color="primary"
+                (click)="onAcceptBooking(booking.booking_id)">
+                <span class="date-label">Accept</span>
+              </button>
+              <button
+                mat-raised-button
+                class="profile-button decline-button"
+                color="warn"
+                (click)="onDeclineBooking(booking.booking_id)">
+                <span class="date-label">Decline</span>
+              </button>
+            </ng-container>
+
+            <ng-container *ngIf="booking.status === 'completed'">
+              <ng-container *ngIf="booking.rate !== '-1.0000'; else noRating">
+                <app-star-rating [rating]="booking.rate" [readonly]="true" [fontSize]="'1em'"></app-star-rating>
+              </ng-container>
+              <ng-template #noRating>
+                <p class="no-bookings">No Rating</p>
+              </ng-template>
+            </ng-container>
+          </div>
+
+          <p class="name-label">{{ booking.booked_date }}</p>
+          <p class="name-label">
+            {{
+              booking.status === 'cancelled'
+                ? 'Cancelled'
+                : booking.status === 'pending'
+                ? 'Pending'
+                : booking.status === 'completed'
+                ? 'Completed'
+                : 'Confirmed'
+            }}
+          </p>
+        </div>
+
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="windowWidth <= 700">
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
+
+        <!-- IMAGE -->
+        <div fxLayout="column" fxLayoutAlign="start start" class="image-container">
+          <img
+            [src]="booking.profile_picture || '../../assets/images/user.png'"
+            class="responsive-image"
+            alt="Traveler Picture"
+          />
+        </div>
+
+        <!-- TEXT INFO -->
+        <div fxLayout="column" fxLayoutAlign="start start" class="text-space">
+          <p class="label">{{ booking.username }}</p>
+          <p class="name-label">{{ booking.name }} {{ booking.surname }}</p>
+          <p class="name-label">{{ booking.email }}</p>
+          <p class="review-label" *ngIf="booking.review && booking.status === 'completed'">
+            {{ booking.review?.length > 155 ? (booking.review | slice:0:155) + '...' : booking.review }}
+          </p>
+          <p class="review-label" *ngIf="!booking.review && booking.status === 'completed'">
+            Review - Traveller hasn't submitted a review yet.
+          </p>
+        </div>
       </div>
 
-    </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex class="guides-container" fxLayoutGap="15px" style="margin-top: 0.75rem">
+        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15px">
+          <p class="name-label">{{ booking.booked_date }}</p>
+          <p class="name-label">
+            {{
+              booking.status === 'cancelled'
+                ? 'Cancelled'
+                : booking.status === 'pending'
+                ? 'Pending'
+                : booking.status === 'completed'
+                ? 'Completed'
+                : 'Confirmed'
+            }}
+          </p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" [ngClass]="{ 'pending-class': booking.status === 'pending', 'default-class': true }">
+          <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+            <button
+              *ngIf="booking.status === 'confirmed'"
+              mat-raised-button
+              class="profile-button"
+              (click)="onCancelBooking(booking.booking_id)">
+              <span class="date-label">Cancel</span>
+            </button>
+
+            <ng-container *ngIf="booking.status === 'pending'">
+              <button
+                mat-raised-button
+                class="profile-button accept-button"
+                color="primary"
+                (click)="onAcceptBooking(booking.booking_id)">
+                <span class="date-label">Accept</span>
+              </button>
+              <button
+                mat-raised-button
+                class="profile-button decline-button"
+                color="warn"
+                (click)="onDeclineBooking(booking.booking_id)">
+                <span class="date-label">Decline</span>
+              </button>
+            </ng-container>
+
+            <ng-container *ngIf="booking.status === 'completed'">
+              <ng-container *ngIf="booking.rate !== '-1.0000'; else noRating">
+                <app-star-rating [rating]="booking.rate" [readonly]="true" [fontSize]="'1em'"></app-star-rating>
+              </ng-container>
+              <ng-template #noRating>
+                <p class="no-bookings">No Rating</p>
+              </ng-template>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
   </div>
 
   <div class="guides-list-box" *ngIf="bookings.length === 0">

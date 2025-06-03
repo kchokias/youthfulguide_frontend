@@ -356,38 +356,16 @@ select {
     flex-direction: column!important
   }
 
-  .image-container {
-    max-width: 25%!important;
-  }
-
-  .responsive-image {
-    min-width: 100px;
-    max-height: 75px;
-  }
-
   .guides-list-box {
     height: 200px;
-  }
-
-  .review-label {
-    font-size: 0.8rem;
-    margin-left: -60%;
   }
 
   .name-label {
     font-size: 0.75rem;
   }
 
-  .user-label {
-    font-size: 1.5rem;
-  }
-
   .label {
     font-size: 1rem;
-  }
-
-  .pending-class {
-    max-width: 40%!important;
   }
 
   .mobilizer {
@@ -432,67 +410,6 @@ select {
     font-size: .7rem;
   }
 
-  /* #pend {
-    margin-left:22.5px;
-  } */
-
-
-   /* .date-picker {
-    transform: scale(0.7);
-  }
-
-  .mobilizer {
-    max-height: 15% !important;
-    padding: 25px;
-  }
-
-  .label {
-    font-size: 0.75rem;
-    margin-left: 22.5%!important;
-  }
-
-  .name-label {
-    font-size: 0.5rem;
-    margin-left: 22.5%!important;
-  }
-
-  .review-label {
-    font-size: 0.75rem;
-  }
-
-  .default-class {
-    place-content: flex-end flex-start!important;
-  }
-
-  .pending-class {
-    place-content: center center !important;
-    max-width: 25% !important;
-  }
-
-  .date-label {
-    font-size: 0.75rem;
-  }
-
-  .profile-button {
-    padding: 0!important;
-  }
-
-  .no-left {
-    margin-left: 0px!important;
-    margin-bottom: 1rem!important;
-  }
-
-  .custom-checkbox {
-    height: 15px;
-  }
-
-  .custom-checkbox:checked::before {
-    font-size: 0.75rem;
-  }
-
-  .custom-checkbox::before {
-    font-size: 0.75rem;
-  } */
 }
 
 @media (max-width: 499px) {
@@ -517,5 +434,58 @@ select {
 
   .guides-list-box {
     padding: 3% 3%;
+  }
+
+  .profile-button {
+    padding: 7.5px 10px!important;
+    font-size: 0.4rem!important;
+  }
+
+  .responsive-image {
+    min-width: 75px!important;
+    max-height: 50px!important;
+  }
+
+  .name-label {
+    font-size: 0.6rem!important;
+  }
+
+  .label {
+    font-size: 0.8rem!important;
+  }
+}
+
+@media (max-width: 699px) {
+  .responsive-image {
+    min-width: 100px;
+    max-height: 75px;
+  }
+
+  .guides-list-box {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 0.5rem;
+  }
+
+  .image-container {
+    width: auto;
+  }
+
+  .review-label {
+    font-size: 0.7rem;
+    margin-top: 15px;
+  }
+
+  .guides-list-box {
+    flex-direction: column;
+  }
+
+  .profile-button {
+    font-size: 0.5rem;
+    padding: 15px 20px;
+  }
+
+  .search-button {
+    height: 42.5px;
   }
 }
