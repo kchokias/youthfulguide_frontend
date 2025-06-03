@@ -6,7 +6,9 @@
     <div class="guide-details" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15px">
       <p class="name">{{ selectedUser.name }} {{ selectedUser.surname }}</p>
       <p class="description">{{'@' +selectedUser.username}}</p>
-      <app-star-rating *ngIf="selectedUser.role === 'guide'" [readonly]="true" [rating]="4.5" [fontSize]="'3em'"></app-star-rating>
+      <div class="rtg">
+        <app-star-rating *ngIf="selectedUser.role === 'guide'" [readonly]="true" [rating]="4.5" [fontSize]="'3em'"></app-star-rating>
+      </div>
     </div>
   </div>
   <div class="guide-actions" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">

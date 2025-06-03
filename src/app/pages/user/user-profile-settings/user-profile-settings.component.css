@@ -267,3 +267,24 @@ select {
     margin: 0 !important;
   }
 }
+
+@media screen and (max-width: 568px) {
+  .card {
+    margin: 0.5rem 0 !important;
+  }
+
+  .left-column {
+    margin-right: 0px!important;
+  }
+}
+
+@media screen and (max-width: 411px) {
+  .import {
+    font-size: 0.75rem!important;
+  }
+
+  .left-column {
+    margin-right: 0px!important;
+  }
+}
+
