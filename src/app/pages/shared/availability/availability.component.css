@@ -271,7 +271,7 @@ select {
 
 @media (max-width: 574px) {
   ::ng-deep .fc .fc-toolbar-title {
-    font-size: 0.85em!important;
+    font-size: 1.25em;
   }
 
   ::ng-deep .fc table {
@@ -279,11 +279,24 @@ select {
   }
 
   .title {
-    font-size: 0.85rem!important;
+    font-size: 1.5rem!important;
   }
 
   .availability-container {
     margin-bottom: 10%!important;
+  }
+
+  .select-wrapper {
+    width: 200px;
+  }
+
+  :host ::ng-deep .fc .fc-button {
+    font-size: 0.8em;
+    width: auto;
+    min-width: 105px;
+    height: 100%;
+    padding: 0.4em 0.65em!important;
+    text-align: center;
   }
 }
 
@@ -302,5 +315,40 @@ select {
 @media (max-width: 500px) {
   .availability-container.has-transform {
     transform: scaleX(0.8);
+  }
+
+  :host ::ng-deep .fc .fc-button {
+    font-size: 0.6em;
+    min-width: 90px;
+  }
+
+  .title {
+    font-size: 1.25rem!important;
+  }
+
+  .select-wrapper {
+    width: 175px;
+  }
+
+  #availability {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 410px) {
+  .title {
+    font-size: 1rem!important;
+  }
+
+  .select-wrapper {
+    width: 150px;
+  }
+
+  #availability {
+    font-size: 0.75rem;
+  }
+
+  ::ng-deep .fc .fc-toolbar-title {
+    font-size: 0.75rem!important;
   }
 }
