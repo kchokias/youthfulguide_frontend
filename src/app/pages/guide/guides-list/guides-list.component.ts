@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MaterialModule } from 'src/app/material.module';
@@ -9,7 +9,7 @@ import { GuideService } from '../guide.service';
   templateUrl: './guides-list.component.html',
   styleUrls: ['./guides-list.component.css']
 })
-export class GuidesListComponent implements OnInit {
+export class GuidesListComponent implements OnInit, OnDestroy {
   private componentName: string = `GuidesListComponent`;
   searchForm: FormGroup;
   private subscriptions: Subscription[] = [];
@@ -17,6 +17,8 @@ export class GuidesListComponent implements OnInit {
   public guides: any[] = [];
   private today: Date = new Date();
   private endOfYear: Date = new Date( new Date().getFullYear(), 11, 31);
+  public windowWidth: number = window.innerWidth;
+  private resizeListener: any;
 
   constructor(private fb: FormBuilder,private guideService: GuideService) {
     const functionName: string = `constructor`;
@@ -31,13 +33,33 @@ export class GuidesListComponent implements OnInit {
       anywhere: [false],
       anytime: [false]
     });
+
+    console.log(`${logPath}/@windowWidth `, this.windowWidth);
   }
 
   public async ngOnInit() {
     const functionName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
 
+    this.resizeListener = () => {
+      this.windowWidth = window.innerWidth;
+      console.log(`${logPath}/@windowWidth `, this.windowWidth);
+    };
+    window.addEventListener('resize', this.resizeListener);
+
     await this.getGuides();
+  }
+
+  public ngOnDestroy(): void {
+    const lifecycleName: string = `ngOnDestroy`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+    // console.log(`${logPath}/ @Clients`);
+
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+
+    window.removeEventListener('resize', this.resizeListener);
   }
 
   public async onSearch() {

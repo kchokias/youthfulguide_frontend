@@ -70,6 +70,8 @@
   font-size: 16px;
   cursor: pointer;
   height: 61px;
+  font-family: "Carter One", system-ui!important;
+  font-weight: 600;
 }
 
 .profile-button {
@@ -97,8 +99,8 @@
 
 .date-label {
   color: black;
-  font-family: "Aclonica", serif;
-  font-weight: 400;
+  font-family: "Carter One", system-ui!important;
+  font-weight: 600;
   color: black;
   font-size: 16px;
 }
@@ -239,5 +241,101 @@ select {
 
   .image-container {
     max-width: 25%!important;
+  }
+}
+
+@media (max-width: 900px) {
+  .search-button {
+    height: 42px;
+    padding: 4px 15px 0 16px!important;
+  }
+
+  :host ::ng-deep .mat-mdc-form-field-infix {
+    min-height: 19px;
+    width: 120px!important;
+    min-width: 50px!important;
+  }
+
+  :host ::ng-deep .date-picker .mat-date-range-input-wrapper {
+    min-width: 100px;
+  }
+
+  .date-picker {
+    min-width: 275px;
+  }
+
+  :host ::ng-deep .mat-mdc-text-field-wrapper {
+    width: 100%;
+  }
+
+  :host ::ng-deep .mat-mdc-icon-button {
+    --mdc-icon-button-icon-size: 20px!important;
+  }
+
+  :host ::ng-deep .date-picker .mat-date-range-input-inner {
+    font-size: .85rem;
+  }
+}
+
+@media (max-width: 751px) {
+  .container {
+    width: 90vw;
+    margin-left: -1.35rem;
+    padding: 5px;
+  }
+
+  .search-box {
+    padding: 2% 4%;
+  }
+
+  :host ::ng-deep .date-picker .mat-date-range-input-wrapper {
+    min-width: 125px;
+  }
+
+  .date-picker {
+    min-width: 300px;
+  }
+
+  :host ::ng-deep .mat-mdc-text-field-wrapper {
+    width: 100%;
+  }
+
+  :host ::ng-deep .mat-mdc-icon-button {
+    --mdc-icon-button-icon-size: 20px!important;
+  }
+
+  :host ::ng-deep .date-picker .mat-date-range-input-inner {
+    font-size: 1rem;
+  }
+
+  #regionSelect {
+    font-size: 1rem;
+  }
+
+  .search-button {
+    margin-top: 1.5rem;
+    height: 50px;
+    padding: 3px 16px 3px 16px!important;
+  }
+
+  .app-description-box {
+    margin-bottom: 25px;
+  }
+
+  .guides-list-box {
+    height: 100%;
+  }
+
+  .responsive-image {
+    width: 75px;
+  }
+
+  .image-container {
+    max-width: 50%!important;
+    align-items : center!important;
+  }
+
+  .guides-container {
+    align-items: stretch!important;
   }
 }

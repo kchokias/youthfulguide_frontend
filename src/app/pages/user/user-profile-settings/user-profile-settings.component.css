@@ -276,6 +276,16 @@ select {
   .left-column {
     margin-right: 0px!important;
   }
+
+  /* .guide-card {
+    width: 95% !important;
+  } */
+}
+
+@media screen and (max-width: 450px) {
+  .name {
+    font-size: 1.5rem!important;
+  }
 }
 
 @media screen and (max-width: 411px) {

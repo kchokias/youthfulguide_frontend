@@ -351,4 +351,26 @@ select {
   ::ng-deep .fc .fc-toolbar-title {
     font-size: 0.75rem!important;
   }
+
+  .availability-container.has-transform {
+    transform: scaleX(0.65);
+    margin-bottom: 2.5%!important;
+  }
+
+  :host ::ng-deep .fc .fc-scrollgrid-section table {
+    width: 100%!important;
+  }
+
+  .two {
+    font-size: 1.5rem!important;
+  }
+
+  :host ::ng-deep .availability-container.has-transform .fc .fc-toolbar-title {
+    font-size: 1.25rem!important;
+  }
+
+  :host ::ng-deep .availability-container.has-transform .fc .fc-button {
+    font-size: 1em;
+    min-width: 100px;
+  }
 }

@@ -2,7 +2,7 @@
 
   <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 20px;">
     <span class="title" *ngIf="background !== 'transparent'">Availability</span>
-    <span class="title" *ngIf="background === 'transparent'">Make a request for booking</span>
+    <span class="title two" *ngIf="background === 'transparent'">Make a request for booking</span>
     <div class="select-wrapper" *ngIf="background !== 'transparent'">
       <select name="availability" id="availability" [(ngModel)]="selectedAvailability" (change)="onAvailabilityChange()">
         <option value="" disabled>Set Availability</option>

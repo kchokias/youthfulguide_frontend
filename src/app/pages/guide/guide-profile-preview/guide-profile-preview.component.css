@@ -330,3 +330,46 @@
     min-width: 100%!important;
 }
 }
+
+@media screen and (max-width: 468px) {
+  .profile-box {
+    margin-top: 0%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile-box {
+    margin-top: 0%;
+  }
+
+  .details-box {
+    margin-bottom: 2.5% !important;
+  }
+
+  .username {
+    font-size: 0.75rem;
+  }
+
+  .fullname{
+    font-size: 0.7rem;
+  }
+
+  .no-bookings {
+    font-size: 0.7rem;
+  }
+
+  .rating-box {
+    margin-left: 10%;
+  }
+
+  .profile-button {
+    padding: 5px 0 !important;
+    font-size: 13px;
+    transform: scaleX(0.6);
+    height: 30px;
+  }
+
+  .title {
+    font-size: 1rem!important;
+  }
+}

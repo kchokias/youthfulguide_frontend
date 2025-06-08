@@ -41,3 +41,9 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+@media (max-width: 570px) {
+  .container {
+    padding: 2.5px;
+  }
+}
