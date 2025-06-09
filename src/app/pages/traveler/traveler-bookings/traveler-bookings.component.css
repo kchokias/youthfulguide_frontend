@@ -70,6 +70,7 @@
   font-size: 16px;
   cursor: pointer;
   height: 61px;
+  font-family: "Carter One", system-ui!important;
 }
 
 .profile-button {
@@ -80,6 +81,7 @@
   font-size: 16px;
   cursor: pointer;
   padding: 25px 36px;
+  font-family: "Carter One", system-ui!important;
 }
 
 .accept-button {
@@ -291,5 +293,31 @@ select {
 
   .user-label {
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .mobilizer {
+    margin-right: 25px!important;
+  }
+
+  .search-button {
+    height: 42px;
+    padding: 4px 15px 0 16px!important;
+    margin-left: -1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .mobilizer {
+    margin-right: 50px!important;
+  }
+
+  .mobilizer2 {
+    margin-right: 0px!important;
+  }
+
+  .mobilizer3 {
+    margin-left: -7rem;
   }
 }
