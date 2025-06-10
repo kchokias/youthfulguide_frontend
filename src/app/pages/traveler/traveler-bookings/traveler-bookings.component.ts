@@ -16,12 +16,14 @@ export class TravelerBookingsComponent implements OnInit, OnDestroy {
   private componentName: string = `TravelerBookingsComponent`;
   private subscriptions: Subscription[] = [];
   private userId:number = 1;
+  public windowWidth: number = window.innerWidth;
   public formReady:boolean = false;
   searchForm: FormGroup;
   private today: Date = new Date();
   private endOfYear: Date = new Date( new Date().getFullYear(), 11, 31);
   public bookingsReady:boolean = false;
   public bookings: any[] = [];
+  private resizeListener: any;
 
   constructor(
     private fb: FormBuilder,
@@ -46,6 +48,11 @@ export class TravelerBookingsComponent implements OnInit, OnDestroy {
   public async ngOnInit() {
     const lifecycleName: string = `ngOnInit`;
     const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    this.resizeListener = () => {
+      this.windowWidth = window.innerWidth;
+    };
+    window.addEventListener('resize', this.resizeListener);
 
     await this.getUserId();
 
@@ -132,7 +139,9 @@ export class TravelerBookingsComponent implements OnInit, OnDestroy {
 
     this.subscriptions.forEach((subscription: Subscription) => {
       subscription.unsubscribe();
-    })
+    });
+
+    window.removeEventListener('resize', this.resizeListener);
   }
 
   public async onCancelBooking(id: number): Promise<void> {

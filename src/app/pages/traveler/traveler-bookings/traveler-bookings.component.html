@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="search-box">
+  <div class="search-box" *ngIf="windowWidth > 775">
   <!-- <div class="search-box" *ngIf="bookingsReady"> -->
     <form [formGroup]="searchForm">
       <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40"  style="margin-right: 15px!important;" class="mobilizer2">
@@ -35,6 +35,51 @@
           <p class="date-label">Search</p>
         </button>
       </div>
+
+    </form>
+  </div>
+
+  <div class="search-box" *ngIf="windowWidth <= 775">
+  <!-- <div class="search-box" *ngIf="bookingsReady"> -->
+    <form [formGroup]="searchForm">
+      <div fxLayout="row" fxLayoutAlign="start start" style="margin-bottom: 1rem;">
+        <div fxLayout="column" fxLayoutAlign="start start">
+          <p class="label">Dates</p>
+
+          <mat-form-field appearance="fill" class="date-picker">
+            <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange" >
+              <input matStartDate placeholder="Start date" formControlName="start">
+              <input matEndDate placeholder="End date" formControlName="end">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start start" style="margin-bottom: 1rem;">
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <label class="label" for="confirmed">Confirmed</label><br>
+          <input type="checkbox" class="custom-checkbox" formControlName="confirmed">
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center end">
+          <label class="label" for="pending">Pending</label><br>
+          <input type="checkbox" class="custom-checkbox" formControlName="pending">
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center end">
+          <label class="label" for="completed">Completed</label><br>
+          <input type="checkbox" class="custom-checkbox" formControlName="completed">
+        </div>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start start" style="margin-bottom: 1rem;">
+          <button mat-raised-button class="search-button" (click)="onSearch()">
+            <p class="date-label">Search</p>
+          </button>
+        </div>
 
     </form>
   </div>
