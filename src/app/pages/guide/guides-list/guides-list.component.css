@@ -106,7 +106,7 @@
 }
 
 select {
-  font-size: 1rem;
+  font-size: 16px;
   font-family: "Aclonica", serif;
   font-weight: 400;
   color: black;
@@ -275,6 +275,10 @@ select {
   :host ::ng-deep .date-picker .mat-date-range-input-inner {
     font-size: .85rem;
   }
+
+  select {
+    font-size: 0.8rem!important;
+  }
 }
 
 @media (max-width: 751px) {
@@ -362,7 +366,7 @@ select {
   }
 
   #regionSelect {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .label {
@@ -419,7 +423,7 @@ select {
   }
 
   #regionSelect {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
 
   .label {

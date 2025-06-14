@@ -29,7 +29,7 @@ export class GuidesListComponent implements OnInit, OnDestroy {
         start: [this.today],
         end: [this.endOfYear]
       }),
-      region: ['all'],
+      country: ['all'],
       anywhere: [false],
       anytime: [false]
     });
@@ -77,11 +77,11 @@ export class GuidesListComponent implements OnInit, OnDestroy {
 
     let start = this.formatDateToString(this.searchForm.get('dateRange.start')?.value);
     let end = this.formatDateToString(this.searchForm.get('dateRange.end')?.value);
-    let region = this.searchForm.get('region')?.value;
+    let country = this.searchForm.get('country')?.value;
 
     return new Promise<void>((resolve) => {
       this.subscriptions.push(
-        this.guideService.getAvailableGuides(start, end, region).subscribe({
+        this.guideService.getAvailableGuides(start, end, country).subscribe({
           next: (response) => {
             console.log(`${logPath}/@User response`, response);
             this.guides = response.guides;
@@ -117,10 +117,10 @@ export class GuidesListComponent implements OnInit, OnDestroy {
 
     const isChecked = (event.target as HTMLInputElement).checked;
     if(isChecked) {
-      this.searchForm.get('region')?.patchValue('all');
-      this.searchForm.get('region')?.disable();
+      this.searchForm.get('country')?.patchValue('all');
+      this.searchForm.get('country')?.disable();
     } else {
-      this.searchForm.get('region')?.enable();
+      this.searchForm.get('country')?.enable();
     }
   }
 

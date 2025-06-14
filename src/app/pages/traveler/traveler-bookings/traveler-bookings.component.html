@@ -5,7 +5,7 @@
       <div fxLayout="column" fxLayoutAlign="start start" fxFlex="40"  style="margin-right: 15px!important;" class="mobilizer2">
         <p class="label">Dates</p>
 
-        <mat-form-field appearance="fill" class="date-picker">
+        <mat-form-field appearance="fill" class="traveler-date-picker">
           <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange" >
             <input matStartDate placeholder="Start date" formControlName="start">
             <input matEndDate placeholder="End date" formControlName="end">
@@ -42,11 +42,11 @@
   <div class="search-box" *ngIf="windowWidth <= 775">
   <!-- <div class="search-box" *ngIf="bookingsReady"> -->
     <form [formGroup]="searchForm">
-      <div fxLayout="row" fxLayoutAlign="start start" style="margin-bottom: 1rem;">
+      <div fxLayout="row" fxLayoutAlign="start start" class="date-box">
         <div fxLayout="column" fxLayoutAlign="start start">
           <p class="label">Dates</p>
 
-          <mat-form-field appearance="fill" class="date-picker">
+          <mat-form-field appearance="fill" class="traveler-date-picker">
             <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange" >
               <input matStartDate placeholder="Start date" formControlName="start">
               <input matEndDate placeholder="End date" formControlName="end">
@@ -57,8 +57,8 @@
         </div>
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="start start" style="margin-bottom: 1rem;">
-        <div fxLayout="row" fxLayoutAlign="start start">
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="choice-box">
+        <div fxLayout="row" fxLayoutAlign="center end">
           <label class="label" for="confirmed">Confirmed</label><br>
           <input type="checkbox" class="custom-checkbox" formControlName="confirmed">
         </div>
@@ -75,7 +75,7 @@
 
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="start start" style="margin-bottom: 1rem;">
+        <div fxLayout="row" fxLayoutAlign="center end" class="button-box">
           <button mat-raised-button class="search-button" (click)="onSearch()">
             <p class="date-label">Search</p>
           </button>
@@ -95,13 +95,17 @@
         />
       </div>
 
-      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" fxFill>
+      <div fxLayout="column" fxLayoutAlign="start start" fxFlex="60" fxFill class="info-container">
         <p class="user-label">{{ booking.username }}</p>
-        <p class="label">{{ booking.name }} {{ booking.surname }}</p>
-        <p class="label">{{ booking.email }}</p>
+        <p class="name-label">{{ booking.name }} {{ booking.surname }}</p>
+        <p class="name-label">{{ booking.email }}</p>
         <!-- <p class="label">{{ booking.email }}</p> -->
-        <p class="review-label" *ngIf="booking.review  && (booking.status === 'completed' || booking.status === 'reviewed')">
-          {{ booking.review?.length > 155 ? (booking.review | slice:0:155) + '...' : booking.review }}
+        <p class="review-label" *ngIf="booking.review && (booking.status === 'completed' || booking.status === 'reviewed')">
+          {{
+            booking.review?.length > (windowWidth > 775 ? 155 : 95)
+              ? (booking.review | slice:0:(windowWidth > 775 ? 155 : 95)) + '...'
+              : booking.review
+          }}
         </p>
         <p class="review-label" *ngIf="!booking.review  && (booking.status === 'completed' || booking.status === 'reviewed')">
           Review - Traveller hasn't submitted a review yet.
@@ -109,13 +113,13 @@
       </div>
 
       <div fxLayout="column" fxLayoutAlign="space-between end" fxFlex="20" fxFill>
-        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="margin-left: auto;"  *ngIf="booking.status === 'confirmed' || booking.status === 'reviewed' || booking.status === 'pending'|| booking.status === 'completed'">
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" class="some-state"  *ngIf="booking.status === 'confirmed' || booking.status === 'reviewed' || booking.status === 'pending'|| booking.status === 'completed'">
           <button
             *ngIf="booking.status === 'confirmed' || booking.status === 'pending'"
             mat-raised-button
             class="profile-button"
             (click)="onCancelBooking(booking.booking_id)">
-            <span class="date-label">Cancel</span>
+            <span class="btn-label">Cancel</span>
           </button>
 
           <button
@@ -123,7 +127,7 @@
             mat-raised-button
             class="profile-button"
             (click)="onReviewBooking(booking.booking_id)">
-            <span class="date-label">Review</span>
+            <span class="btn-label">Review</span>
           </button>
 
           <ng-container *ngIf="booking.status === 'pending'">
@@ -151,14 +155,15 @@
           </ng-container>
         </div>
         <button
-            mat-raised-button
-            class="profile-button"
-            style="background-color: white!important;"
-            (click)="viewProfile(booking.guide_id)">
-            <span class="date-label">View<br>Profile</span>
-          </button>
-        <p class="label">{{ booking.booked_date }}</p>
-        <p class="label">
+          mat-raised-button
+          class="profile-button"
+          style="background-color: white!important;"
+          (click)="viewProfile(booking.guide_id)">
+          <span *ngIf="windowWidth > 775" class="btn-label">View<br>Profile</span>
+          <span *ngIf="windowWidth <= 775" class="btn-label">View Profile</span>
+        </button>
+        <p class="name-label">{{ booking.booked_date }}</p>
+        <p class="name-label">
           {{
             booking.status === 'cancelled'
               ? 'Cancelled'

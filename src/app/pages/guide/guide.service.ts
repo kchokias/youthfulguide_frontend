@@ -135,7 +135,7 @@ export class GuideService {
     );
   }
 
-  getAvailableGuides(_start: string, _end: string, _region: string): Observable<any> {
+  getAvailableGuides(_start: string, _end: string, _country: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.getAuthHeader(),
@@ -144,7 +144,7 @@ export class GuideService {
     const params = new HttpParams()
       .set('start', _start)
       .set('end', _end)
-      .set('region', _region);
+      .set('country', _country);
 
     return this.http.get(GET_AVAILABLE_GUIDES, { headers, params });
   }

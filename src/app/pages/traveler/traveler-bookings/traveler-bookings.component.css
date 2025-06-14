@@ -94,7 +94,7 @@
   background-color: rgba(240, 112, 114, 1)!important;
 }
 
-.label {
+.label, .name-label {
   color: rgba(241, 224, 43, 1);
   font-family: "Carter One", system-ui!important;
   font-weight: 400;
@@ -122,9 +122,9 @@
   transform: translateY(-2px);
 }
 
-.date-label {
+.date-label, .btn-label {
   color: black;
-  font-family: "Aclonica", serif;
+  font-family: "Carter One", system-ui!important;
   font-weight: 400;
   color: black;
   font-size: 13px;
@@ -225,18 +225,18 @@ select {
   padding: 0 11px;
 }
 
-:host ::ng-deep .date-picker .mat-mdc-icon-button {
+:host ::ng-deep .traveler-date-picker .mat-mdc-icon-button {
   color: black;
   transform: translateY(-5px);
 }
 
-:host ::ng-deep .date-picker .mat-date-range-input-inner {
+:host ::ng-deep .traveler-date-picker .mat-date-range-input-inner {
   color: black;
   font-size: 16px;
   font-family: "Aclonica", serif;
 }
 
-:host ::ng-deep .date-picker .mat-date-range-input-wrapper {
+:host ::ng-deep .traveler-date-picker .mat-date-range-input-wrapper {
   max-width: 115px;
   width: 115px;
   min-width: 115px;
@@ -254,6 +254,15 @@ select {
   min-width: 200px;
   max-height: 150px;
 }
+
+.button-box, .date-box, .choice-box {
+  margin-bottom: 1rem;
+}
+
+.some-state {
+    margin-left: auto;
+  }
+
 
 @media (max-width: 1400px) {
   .form-field {
@@ -320,6 +329,18 @@ select {
   .mobilizer3 {
     margin-left: -7rem;
   }
+
+  .search-box {
+    margin-bottom: 2rem;
+  }
+
+  .profile-button {
+    margin-right: -0.5rem;
+  }
+
+  .image-container {
+    max-width: 25%!important;
+  }
 }
 
 @media (max-width: 750px) {
@@ -327,5 +348,184 @@ select {
     width: 100%;
     max-width: 100%;
     height: 100%;
+    padding: 1rem;
+  }
+
+  .button-box {
+    margin-bottom: 0px;
+  }
+
+  .date-box, .choice-box {
+    margin-bottom: 1.75rem;
+  }
+
+  .search-button {
+    padding: 0 1rem !important;
+    margin-left: 0!important;
+    width: 115px;
+  }
+
+  .responsive-image {
+    min-width: 110px;
+    max-height: 90px;
+  }
+
+  .some-state {
+    margin-left: 0;
+  }
+
+  .profile-button {
+    padding: 0 1rem !important;
+  }
+
+  :host ::ng-deep .mdc-button--raised {
+    padding: 0!important;
+  }
+
+  .guides-list-box {
+    height: 195px;
+  }
+
+  .profile-button {
+    width: 115px;
+  }
+
+  .btn-label {
+    font-size: 0.8rem;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .label, .name-label {
+    font-size: 0.75rem;
+  }
+
+  .custom-checkbox {
+    height: 20px;
+    width: 20px;
+  }
+
+  .custom-checkbox:checked::before {
+    font-size: 1.1rem;
+  }
+
+  .container {
+    padding: 5px;
+    width: 100%;
+  }
+
+  .responsive-image {
+    min-width: 90px;
+    max-height: 75px;
+  }
+
+  .image-container {
+    max-width: 25%!important;
+  }
+
+  :host ::ng-deep .mat-mdc-form-field-infix {
+    min-height: 19px;
+    width: 120px!important;
+    min-width: 50px!important;
+  }
+
+  :host ::ng-deep .traveler-date-picker .mat-date-range-input-wrapper {
+    min-width: 80px;
+  }
+
+  .traveler-date-picker {
+    min-width: 235px;
+  }
+
+  :host ::ng-deep .mat-mdc-text-field-wrapper {
+    width: 100%;
+  }
+
+  :host ::ng-deep .mat-mdc-icon-button {
+    --mdc-icon-button-icon-size: 20px!important;
+  }
+
+  :host ::ng-deep .traveler-date-picker .mat-date-range-input-inner {
+    font-size: .7rem;
+  }
+
+}
+
+@media (max-width: 475px) {
+  .user-label {
+    font-size: 1.25rem;
+  }
+
+  .responsive-image {
+    min-width: 75px;
+    max-height: 50px;
+  }
+
+  /* .image-container, .info-container {
+    place-content: center!important;
+  } */
+
+  .btn-label {
+    font-size: 0.6rem;
+  }
+
+  .profile-button {
+    width: 90px;
+    margin-right: 0!important;
+    height: 30px;
+    line-height: 0!important;
+  }
+
+  .guides-list-box {
+    height: 150px;
+  }
+
+  .container {
+    width: 102%;
+  }
+
+  .review-label {
+    font-size: 0.6rem;
   }
 }
+
+@media (max-width: 430px) {
+  .search-box {
+    padding: 0.25rem;
+  }
+
+  .button-box {
+    margin-bottom:.5rem;
+  }
+
+  .container {
+    width: 102%;
+    padding: 1.5px;
+  }
+
+  .custom-checkbox {
+    margin-left: 5PX;
+  }
+
+  .user-label {
+    font-size: 1rem;
+  }
+
+  .btn-label {
+    font-size: 0.55rem;
+  }
+
+  .profile-button {
+    width: 80px;
+    margin-right: 0!important;
+    height: 25px;
+    line-height: 0!important;
+  }
+
+  .name-label {
+    font-size: 0.65rem;
+  }
+}
+
+
