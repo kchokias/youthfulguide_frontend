@@ -12,10 +12,19 @@
           <span class="username">({{total}})</span>
         </div>
       </div>
-      <div class="region-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="25" fxFill>
-        <div fxLayout="row" fxLayoutAlign="end start" fxFill fxLayoutGap="10px">
-          <i class="bi bi-pin-map-fill no-bookings"></i>
-          <span class="username">{{region}}</span>
+      <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px">
+        <div class="region-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="25" fxFill>
+          <div fxLayout="row" fxLayoutAlign="end start" fxFill fxLayoutGap="10px">
+            <i class="bi bi-pin-map-fill no-bookings"></i>
+            <span class="username">{{region}}</span>
+          </div>
+        </div>
+
+        <div class="region-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="25" fxFill>
+          <div fxLayout="row" fxLayoutAlign="end start" fxFill fxLayoutGap="10px">
+            <i class="bi bi-instagram no-bookings"></i>
+            <span class="username insta" (click)="openInstagramProfile()">{{instagram}}</span>
+          </div>
         </div>
       </div>
     </div>

@@ -19,8 +19,8 @@
   <div class="right-column" [style.visibility]="mediaReady ? 'visible' : 'hidden'">
     <div class="card" fxLayout="column" fxLayoutAlign="space-evenly start">
       <p class="name">Edit Profile Settings</p>
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="space-evenly center" style="margin-top: 15px;">
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" style="width: 100%;">
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="space-evenly center" style="margin-top: 7.55px;">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12.55px" style="width: 100%;">
 
           <div class="form-group" fxFlex="50">
             <label>Name</label>
@@ -120,12 +120,19 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="selectedUser.role === 'guide'" style="width: 100%;">
-          <div class="form-group" style="margin-top: 15px;" fxFlex="100">
+          <div class="form-group" style="margin-top: 7.5px;" fxFlex="100">
             <label>Description</label>
             <textarea formControlName="description" rows="4"></textarea>
           </div>
         </div>
 
+
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="12.55px" style="width: 100%;">
+          <div class="form-group" fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
+            <label>Instagram</label>
+            <input type="text"  formControlName="instagram">
+          </div>
+        </div>
 
         <button type="submit" [disabled]="profileForm.disabled || profileForm.invalid">Update Profile</button>
       </form>

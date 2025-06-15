@@ -29,6 +29,7 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
   public fullName: string = '';
   public region: string = '';
   public description: string = '';
+  public instagram: string = '';
   public rating: number = 0;
   public total: number = 0;
   public mediaFiles: { media_data: string }[] = [];
@@ -147,6 +148,7 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
     this.profilePic64 = this.selectedUser.profile_picture;
     this.mediaFiles = this.selectedUser.media;
     this.description = this.selectedUser.description;
+    this.instagram = this.selectedUser.instagram;
 
     this.formReady = true;
   }
@@ -233,4 +235,10 @@ export class GuideProfilePreviewComponent implements OnInit, OnDestroy {
       );
     });
   }
+
+  openInstagramProfile(): void {
+  if (this.instagram) {
+    window.open(`https://instagram.com/${this.instagram}`, '_blank');
+  }
+}
 }

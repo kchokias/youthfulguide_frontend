@@ -67,6 +67,7 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
       region: [undefined],
       role: [{ value:undefined, disabled: true}],
       country: [undefined],
+      instagram: [undefined],
       description: [undefined]
     });
 
@@ -89,6 +90,7 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
         'region',
         'role',
         'country',
+        'instagram',
         'description'
       ])
     );
