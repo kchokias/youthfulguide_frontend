@@ -339,6 +339,34 @@
   .profile-box {
     margin-top: 0%;
   }
+
+  .review-box {
+    padding: 10px 20px;
+    min-height: 15px;
+    max-width: 100%!important;
+  }
+
+  .review-container {
+    flex-direction: column!important;
+  }
+
+  .review-username {
+    font-size: 1rem!important;
+    margin-bottom: 15px!important;
+  }
+
+  .review-comment {
+    max-width: 100%!important;
+  }
+
+  #review-box2 {
+    flex-direction: row!important;
+    margin-left: 1rem!important;
+  }
+
+  #review-at {
+    min-width: 15px!important;
+  }
 }
 
 @media screen and (max-width: 400px) {

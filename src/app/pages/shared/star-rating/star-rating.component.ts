@@ -9,6 +9,7 @@ export class StarRatingComponent {
   @Input() rating: number = 0;
   @Input() fontSize: string = '2em';
   @Input() readonly: boolean = false;
+  @Input() stateWindow: boolean = false;
 
   @Output() ratingChange = new EventEmitter<number>();
   hoverValue: number | null = null;

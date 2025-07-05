@@ -370,7 +370,7 @@ select {
   }
 
   :host ::ng-deep .availability-container.has-transform .fc .fc-button {
-    font-size: 1em;
-    min-width: 100px;
+    font-size: 0.9rem;
+    min-width: 15px;
   }
 }

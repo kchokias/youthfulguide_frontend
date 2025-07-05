@@ -14,4 +14,10 @@
     margin-top: 10%;
     margin-left: -15%;
   }
+
+  .window-state-class {
+    font-size: 2rem !important;
+    margin-top: 0%!important;
+    margin-left: 0%!important;
+  }
 }

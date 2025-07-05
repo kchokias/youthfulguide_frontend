@@ -396,6 +396,21 @@ select {
 
 }
 
+@media (max-width: 650px) {
+  .review-label {
+    margin-top: 0!important;
+  }
+
+  .guides-list-box {
+    padding: 3%;
+    height: 180px;
+  }
+
+  .toper {
+    margin-top: 2.5px!important;
+  }
+}
+
 @media (max-width: 600px) {
   .label, .name-label {
     font-size: 0.75rem;
@@ -449,7 +464,6 @@ select {
   :host ::ng-deep .traveler-date-picker .mat-date-range-input-inner {
     font-size: .7rem;
   }
-
 }
 
 @media (max-width: 475px) {
@@ -475,10 +489,6 @@ select {
     margin-right: 0!important;
     height: 30px;
     line-height: 0!important;
-  }
-
-  .guides-list-box {
-    height: 150px;
   }
 
   .container {

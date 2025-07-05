@@ -1,4 +1,4 @@
-<div class="star-rating" [ngStyle]="{ 'font-size': fontSize, 'display': readonly ? 'flex' : 'block' }">
+<div class="star-rating" [ngStyle]="{ 'font-size': fontSize, 'display': readonly ? 'flex' : 'block' }" [ngClass]="{ 'window-state-class': stateWindow }">
   <ng-container *ngFor="let star of starArray; let i = index">
     <i
       [ngStyle]="{ 'margin-right': '5px', cursor: readonly ? 'default' : 'pointer' }"

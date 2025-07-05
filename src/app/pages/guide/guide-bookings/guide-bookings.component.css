@@ -415,17 +415,19 @@ select {
 @media (max-width: 499px) {
   .mobilizer {
     flex-direction: column!important;
-    align-items: flex-start!important;
+    align-items: center!important;
     padding: 15px;
   }
 
   .pending-stage {
     max-width: 100%!important;
-    margin: 15px 15px;
+    margin: 15px 0;
+    margin-right: 0!important;
   }
 
   .confirmed-stage, .completed-stage {
     max-width: 100%!important;
+    margin-right: 0!important;
   }
 
   .search-button {
@@ -452,6 +454,10 @@ select {
 
   .label {
     font-size: 0.8rem!important;
+  }
+
+  #pend {
+    margin-left: 22px;
   }
 }
 

@@ -85,7 +85,7 @@
   </div>
 
   <div class="guides-list-box" *ngFor="let booking of bookings">
-    <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px">
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="15px" *ngIf="windowWidth > 700">
 
       <div fxLayout="column" fxLayoutAlign="start start" fxFlex="20" class="image-container">
         <img
@@ -177,6 +177,88 @@
       </div>
 
     </div>
+
+    <div fxLayout="column" fxLayoutAlign="start start" fxFlex class="guides-container" fxLayoutGap="10px" *ngIf="windowWidth <= 700">
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px">
+        <img
+          [src]="booking.profile_picture || '../../assets/images/user.png'"
+          class="responsive-image"
+          alt="Traveler Picture"
+          fxFlex="20"
+        />
+        <div fxLayout="column" fxLayoutAlign="start start" fxFlex="80">
+          <p class="user-label">{{ booking.username }}</p>
+          <p class="name-label">{{ booking.name }} {{ booking.surname }}</p>
+          <p class="name-label">{{ booking.email }}</p>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px" fxFill *ngIf="booking.status === 'completed' || booking.status === 'reviewed'">
+        <p class="review-label" *ngIf="booking.review && (booking.status === 'completed' || booking.status === 'reviewed')">
+          {{
+            booking.review?.length > (windowWidth > 775 ? 155 : 125)
+              ? (booking.review | slice:0:(windowWidth > 775 ? 155 : 125)) + '...'
+              : booking.review
+          }}
+        </p>
+        <p class="review-label" *ngIf="!booking.review  && (booking.status === 'completed' || booking.status === 'reviewed')">
+          Review - Traveller hasn't submitted a review yet.
+        </p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-around start" fxFlex fxLayoutGap="15px" fxFill>
+        <div *ngIf="booking.status === 'reviewed'">
+          <ng-container *ngIf="booking.rate !== '-1.0000'; else noRating">
+            <app-star-rating
+              [readonly]="true"
+              [rating]="booking.rate"
+              [fontSize]="'1em'">
+            </app-star-rating>
+          </ng-container>
+          <ng-template #noRating>
+            <p class="no-bookings">No Rating</p>
+          </ng-template>
+        </div>
+
+        <p class="name-label toper">{{ booking.booked_date }}</p>
+        <p class="name-label toper">
+          {{
+            booking.status === 'cancelled'
+              ? 'Cancelled'
+              : booking.status === 'pending'
+              ? 'Pending'
+              : booking.status === 'completed' || booking.status === 'reviewed'
+              ? 'Completed'
+              : 'Confirmed'
+          }}
+        </p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-around start" fxFlex fxLayoutGap="15px" fxFill>
+        <button
+          *ngIf="booking.status === 'confirmed' || booking.status === 'pending'"
+          mat-raised-button
+          class="profile-button"
+          (click)="onCancelBooking(booking.booking_id)">
+          <span class="btn-label">Cancel</span>
+        </button>
+
+        <button
+          *ngIf="booking.status === 'completed'"
+          mat-raised-button
+          class="profile-button"
+          (click)="onReviewBooking(booking.booking_id)">
+          <span class="btn-label">Review</span>
+        </button>
+
+        <button
+          mat-raised-button
+          class="profile-button"
+          style="background-color: white!important;"
+          (click)="viewProfile(booking.guide_id)">
+          <span *ngIf="windowWidth > 775" class="btn-label">View<br>Profile</span>
+          <span *ngIf="windowWidth <= 775" class="btn-label">View Profile</span>
+          </button>
+      </div>
+    </div>
+
   </div>
 
   <div class="guides-list-box" *ngIf="bookings.length === 0">

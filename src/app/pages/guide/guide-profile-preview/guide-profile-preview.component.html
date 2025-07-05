@@ -128,10 +128,11 @@
             fxFlex="80"
             fxLayoutGap="30px"
           >
-            <p class="username">{{ review.username }}</p>
-            <p class="comment">{{ review.comment }}</p>
+            <p class="username review-username">{{ review.username }}</p>
+            <p class="comment review-comment">{{ review.comment }}</p>
           </div>
           <div
+            id="review-box2"
             class="review-box"
             fxLayout="column"
             fxLayoutAlign="space-between end"

@@ -202,3 +202,9 @@ select {
     margin-bottom: 2rem!important;
   }
 }
+
+@media screen and (max-width: 400px) {
+  :host ::ng-deep .passwrd .mat-mdc-form-field-infix {
+    max-width: 67.5%!important;
+  }
+}
