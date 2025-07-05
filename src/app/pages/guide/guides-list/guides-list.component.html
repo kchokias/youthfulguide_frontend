@@ -189,7 +189,7 @@
               <ng-template #noRating>
                 <p class="no-bookings">No Rating</p>
               </ng-template>
-              <p class="no-bookings">({{ guide.total_bookings }})</p>
+              <p class="no-bookings">({{ guide.total_reviews }})</p>
             </div>
           </div>
 
@@ -216,14 +216,14 @@
               <div fxLayout="column" fxLayoutAlign="start start" class="image-container">
                 <img [src]="guide.profile_picture || '../../assets/images/user.png'" class="responsive-image">
               </div>
-              <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px" style="margin-top: 1rem!important;">
+              <div fxLayout="row" fxLayoutAlign="start start" fxFlex fxLayoutGap="15px" style="margin-top: 1rem!important;" class="some-rating">
                 <ng-container *ngIf="guide.average_rating !== '-1.0000'; else noRating">
                   <app-star-rating [rating]="guide.average_rating" [readonly]="true" [fontSize]="'1.25em'"></app-star-rating>
                 </ng-container>
                 <ng-template #noRating>
                   <p class="no-bookings">No Rating</p>
                 </ng-template>
-                <p class="no-bookings">({{ guide.total_bookings }})</p>
+                <p class="no-bookings">({{ guide.total_reviews }})</p>
               </div>
           </div>
 

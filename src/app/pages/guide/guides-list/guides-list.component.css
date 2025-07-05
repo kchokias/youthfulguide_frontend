@@ -455,4 +455,20 @@ select {
     max-width: 75%!important;
     align-items: center!important;
   }
+
+  .custom-checkbox:checked::before {
+    font-size: 0.8rem!important;
+  }
+
+  .select-wrapper {
+    width: 105%;
+  }
+
+  .some-rating {
+    margin-left: 1rem!important;
+  }
+
+  .no-bookings {
+    font-size: 0.85rem;
+  }
 }
