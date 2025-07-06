@@ -3,4 +3,6 @@ export interface NavItem {
   icon: string;
   label: string;
   visibleFor: string[];
+  external?: boolean;
+  targetBlank?: boolean;
 }

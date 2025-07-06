@@ -56,6 +56,14 @@ export const navbarData: NavItem[] = [
     visibleFor: ['visitor']
   },
   {
+    routeLink: 'https://youthfulguides.eu/',
+    icon: 'bi bi-info-lg',
+    label: 'More Information',
+    visibleFor: ['guide', 'visitor'],
+    external: true,
+    targetBlank: true
+  },
+  {
     routeLink: 'logout',
     icon: 'bi bi-box-arrow-left',
     label: 'Sign Out',

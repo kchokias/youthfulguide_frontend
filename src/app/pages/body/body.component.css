@@ -43,6 +43,13 @@
     width: calc(100% - 0.5rem);
     margin-left: 2.75rem;
   }
+
+  .body-auth {
+    width: 100%;
+    margin-left: 0!important;
+    padding: 0%!important;
+    height: 100%!important;
+  }
 }
 
 @media screen and (max-width: 568px) {

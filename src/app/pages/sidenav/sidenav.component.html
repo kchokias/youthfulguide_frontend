@@ -16,22 +16,45 @@
 
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item" *ngFor="let data of filteredNavData">
-      <a class="sidenav-nav-link"
-        *ngIf="data.routeLink !== 'logout'; else logoutTemplate"
-        [routerLink]="data.routeLink"
-         routerLinkActive="active"
-         [routerLinkActiveOptions]="{exact: true}"
-         fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- Case 1: External link (open in new tab) -->
+      <a *ngIf="data.external; else internalOrLogout"
+        class="sidenav-nav-link"
+        [href]="data.routeLink"
+        target="_blank"
+        rel="noopener noreferrer"
+        fxLayout="row"
+        fxLayoutAlign="space-between center">
         <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{ data.label }}</span>
         <i class="sidenav-link-icon" [class]="data.icon"></i>
       </a>
 
-      <ng-template #logoutTemplate>
-        <a class="sidenav-nav-link" (click)="logout()" fxLayout="row" fxLayoutAlign="space-between center">
+      <!-- Case 2: Internal route or logout (handled in ng-template) -->
+      <ng-template #internalOrLogout>
+        <!-- Logout button -->
+        <a *ngIf="data.routeLink === 'logout'; else internalRoute"
+          class="sidenav-nav-link"
+          (click)="logout()"
+          fxLayout="row"
+          fxLayoutAlign="space-between center">
           <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{ data.label }}</span>
           <i class="sidenav-link-icon" [class]="data.icon"></i>
         </a>
+
+        <!-- Internal router link -->
+        <ng-template #internalRoute>
+          <a class="sidenav-nav-link"
+            [routerLink]="data.routeLink"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            fxLayout="row"
+            fxLayoutAlign="space-between center">
+            <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{ data.label }}</span>
+            <i class="sidenav-link-icon" [class]="data.icon"></i>
+          </a>
+        </ng-template>
       </ng-template>
+
     </li>
   </ul>
 

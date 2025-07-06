@@ -7,7 +7,7 @@
     alt="App Logo"/>
   </div>
   <div class="login-box" fxFlex="30" fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-    <div class="login-container" fxFlex="80" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="50px" fxFlexFill>
+    <div class="login-container" fxFlex="85" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px" fxFlexFill>
       <h2>Embark on a journey where local heritage meets modern innovation.</h2>
       <form action="#" [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="formReady" fxLayout="column" fxLayoutAlign="center center">
         <mat-form-field appearance="fill" class="full-width" hideRequiredMarker="true">
@@ -47,12 +47,18 @@
 
         <button mat-raised-button type="button" class="profile-button rgs" routerLink="/register" style="margin-top: 15px">Sign up</button>
 
-        <div class="forgot-pass" style="margin-top: 30px">
+        <div class="forgot-pass" style="margin-top: 20px">
           <a routerLink='/forgot'>Forgot your password?</a>
+        </div>
+
+        <div class="more-info" style="margin-top: 10px">
+          <a href="https://youthfulguides.eu/" target="_blank" rel="noopener noreferrer">
+            More information
+          </a>
         </div>
       </form>
     </div>
-    <div class="euro-container" fxFlex="20" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+    <div class="euro-container" fxFlex="15" fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
       <div class="eu-container" fxFlex="60" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px" fxFlexFill>
         <img
           [src]="'../../assets/images/eu.png'"
