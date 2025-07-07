@@ -8,6 +8,7 @@
   background: #F1E02B;
   padding: 1rem 3rem 0 4rem;
   overflow-y: auto;
+  min-height: 100vh;
 }
 
 .body-trimmed {

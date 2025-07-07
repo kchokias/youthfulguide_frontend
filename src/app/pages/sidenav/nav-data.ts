@@ -46,7 +46,7 @@ export const navbarData: NavItem[] = [
   {
     routeLink: 'faq',
     icon: 'bi bi-signpost-2-fill',
-    label: 'FAQ',
+    label: 'Help',
     visibleFor: ['guide']
   },
   {

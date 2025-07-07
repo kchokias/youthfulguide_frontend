@@ -20,7 +20,7 @@
           </div>
         </div>
 
-        <div class="region-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="25" fxFill>
+        <div class="region-box" fxLayout="column" fxLayoutAlign="start start" fxFlex="25" fxFill *ngIf="instagram">
           <div fxLayout="row" fxLayoutAlign="end start" fxFill fxLayoutGap="10px">
             <i class="bi bi-instagram no-bookings"></i>
             <span class="username insta" (click)="openInstagramProfile()">{{instagram}}</span>

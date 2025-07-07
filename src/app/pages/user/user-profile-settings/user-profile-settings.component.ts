@@ -162,6 +162,10 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
       delete filteredProfileData.password;
     }
 
+    if (filteredProfileData.instagram === '') {
+      filteredProfileData.instagram = null;
+    }
+
     this.subscriptions.push(
       (this.userService.patchUserById(this.userId,filteredProfileData).subscribe({
         next: (response: any) => this.snackbarService.open('User updated!', 'success'),

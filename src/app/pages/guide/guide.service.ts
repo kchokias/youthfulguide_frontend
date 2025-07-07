@@ -158,6 +158,8 @@ export class GuideService {
     });
 
     const params = new HttpParams()
+    .set('skip', 0)
+    .set('take', 100)
     .set('guide_id', _guideId)
     .set('start', _start)
     .set('end', _end)
