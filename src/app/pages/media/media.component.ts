@@ -7,6 +7,7 @@ import { UserService } from '../user/user.service';
 import { ImageCropperDgComponent } from '../shared/image-cropper/image-cropper.component';
 import { MediaGalleryDialogComponent } from '../shared/media-gallery-dialog/media-gallery-dialog.component';
 import { SnackbarService } from '../shared/snackbar/snackbar.service';
+import { GuideService } from '../guide/guide.service';
 
 @Component({
   selector: 'app-media',
@@ -26,6 +27,7 @@ private componentName: string = `GuideProfileComponent`;
   public role: string = '';
   public mediaFiles: string[] = [];
   public safeUrl: any;
+  public rating: number = 0;
   @Output() ready = new EventEmitter<void>();
   @ViewChild('singleFileInput') singleFileInput!: ElementRef<HTMLInputElement>;
   @ViewChild('multipleFileInput') multipleFileInput!: ElementRef<HTMLInputElement>;
@@ -34,7 +36,8 @@ private componentName: string = `GuideProfileComponent`;
     private fb: FormBuilder,
     private userService: UserService,
     public dialog: MatDialog,
-    private snackbarService: SnackbarService) {
+    private snackbarService: SnackbarService,
+    private guideService: GuideService) {
     const functionName: string = `constructor`;
     const logPath: string = `/${this.componentName}/${functionName}()`;
   }
@@ -45,11 +48,14 @@ private componentName: string = `GuideProfileComponent`;
 
     await this.getUserId();
 
+    await this.getUserRole();
+
     await this.getUserProfile(this.userId);
 
     await this.getUserPhoto();
 
     if(this.selectedUser.role === 'guide') {
+      await this.getGuideRating(this.userId);
       await this.getGuideMedia();
     } else {
       this.galleryReady = true;
@@ -382,6 +388,50 @@ private componentName: string = `GuideProfileComponent`;
       width: '80%',
       maxHeight: '90%',
       data: { images: this.mediaFiles }
+    });
+  }
+
+  public async getUserRole(): Promise<void> {
+    const lifecycleName: string = `getUserRole`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    return new Promise<void>((resolve, reject) => {
+      this.subscriptions.push(
+        this.userService.getUserRoleFromToken().subscribe({
+          next: (response) => {
+            this.role = response.role;
+            console.log(`${logPath}/@User response`, response);
+            resolve();
+          },
+          error: (err) => {
+            // this.error = err; // Handle errors
+            console.log(`${logPath}/@User error`, err);
+            reject(err);
+          }
+        })
+      );
+    });
+  }
+
+  public async getGuideRating(_id: number): Promise<void> {
+    const lifecycleName: string = `getGuideRating`;
+    const logPath: string = `/${this.componentName}/${lifecycleName}()`;
+
+    return new Promise<void>((resolve, reject) => {
+      this.subscriptions.push(
+        this.guideService.getGuideProfileById(_id).subscribe({
+          next: (response) => {
+            this.rating = response.average_rating;
+            console.log(`${logPath}/@User response #0`, response);
+            resolve();
+          },
+          error: (err) => {
+            // this.error = err; // Handle errors
+            console.log(`${logPath}/@User error`, err);
+            reject(err);
+          }
+        })
+      );
     });
   }
 }

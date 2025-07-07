@@ -7,7 +7,7 @@
       <p class="name">{{ selectedUser.name }} {{ selectedUser.surname }}</p>
       <p class="description">{{'@' +selectedUser.username}}</p>
       <div class="rtg">
-        <app-star-rating *ngIf="selectedUser.role === 'guide'" [readonly]="true" [rating]="4.5" [fontSize]="'3em'"></app-star-rating>
+        <app-star-rating *ngIf="selectedUser.role === 'guide'" [readonly]="true" [rating]="rating" [fontSize]="'3em'"></app-star-rating>
       </div>
     </div>
   </div>

@@ -53,7 +53,7 @@ export class MediaGalleryDialogComponent implements OnInit {
         this.userService.getUserRoleFromToken().subscribe({
           next: (response) => {
             this.role = response.role;
-            console.log(`${logPath}/@User response #1`, response);
+            console.log(`${logPath}/@User response`, response);
             resolve();
           },
           error: (err) => {
