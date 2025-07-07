@@ -142,6 +142,8 @@ export class GuideService {
     });
 
     const params = new HttpParams()
+      .set('skip', 0)
+      .set('take', 100)
       .set('start', _start)
       .set('end', _end)
       .set('country', _country);
