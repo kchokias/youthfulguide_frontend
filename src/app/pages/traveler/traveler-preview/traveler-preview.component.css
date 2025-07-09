@@ -79,6 +79,10 @@ form {
   margin-bottom: 15px;
 }
 
+.form-group-region {
+  margin-bottom: 0!important;
+}
+
 .form-group label, .labela {
   font-size: 20px;
   color: rgba(241, 224, 43, 1);

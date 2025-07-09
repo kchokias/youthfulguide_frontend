@@ -151,7 +151,7 @@ export class RegisterComponent implements OnInit {
       'password2': [undefined, [Validators.required]],
       'role':['pickARole', [Validators.required]],
       'country':['Greece', [Validators.required]],
-      'region':['Other', [Validators.required]],
+      'region':[undefined, [Validators.required]],
     });
   }
 

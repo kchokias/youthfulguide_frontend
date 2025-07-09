@@ -137,7 +137,7 @@
           </div>
         </div>
 
-        <div fxLayout="column" fxLayoutAlign="start start" style="width: 80%;">
+        <!-- <div fxLayout="column" fxLayoutAlign="start start" style="width: 80%;">
           <label for="regionSelect" style="font-weight: 600;">Select Region</label>
           <div class="select-wrapper">
             <select name="region" id="regionSelect" formControlName="region">
@@ -149,7 +149,12 @@
             </select>
             <i class="bi bi-eject-fill select-icon"></i>
           </div>
-        </div>
+        </div> -->
+
+        <mat-form-field appearance="fill" class="full-width" hideRequiredMarker="true" style="padding: 10px 0">
+          <mat-label>Region</mat-label>
+          <input matInput type="text" formControlName="region" required>
+        </mat-form-field>
 
         <div fxLayout="column" fxLayoutAlign="start start" style="width: 80%;">
           <label for="regionSelect" style="font-weight: 600;">Select Role</label>
