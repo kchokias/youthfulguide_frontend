@@ -403,7 +403,7 @@ select {
 
   .guides-list-box {
     padding: 3%;
-    height: 180px;
+    min-height: 180px;
   }
 
   .toper {
