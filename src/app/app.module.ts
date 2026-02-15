@@ -28,6 +28,7 @@ import { LoginModule } from './pages/login/login.module';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { TravelerPreviewComponent } from './pages/traveler/traveler-preview/traveler-preview.component';
 import { HelpComponent } from './pages/help/help.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { HelpComponent } from './pages/help/help.component';
     UserProfileSettingsComponent,
     ResetPasswordComponent,
     TravelerPreviewComponent,
-    HelpComponent
+    HelpComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
