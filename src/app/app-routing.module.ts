@@ -38,7 +38,9 @@ const routes: Routes = [
   {path: 'availability', component: AvailabilityComponent, canActivate: [authGuard] },
   {path: 'profile-preview/:id', component: GuideProfilePreviewComponent, canActivate: [authGuard]},
   {path: 'help', component: HelpComponent, canActivate: [authGuard]},
-  {path: 'faq', component: HelpComponent, canActivate: [authGuard]}
+  {path: 'faq', component: HelpComponent, canActivate: [authGuard]},
+  {path: 'terms-of-use', component: HelpComponent, canActivate: [authGuard]},
+  {path: 'privacy-policy', component: HelpComponent, canActivate: [authGuard]}
 ];
 
 @NgModule({

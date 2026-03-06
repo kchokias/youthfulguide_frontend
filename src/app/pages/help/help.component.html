@@ -1,7 +1,9 @@
 <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px" *ngIf="lastSegment">
   <div class="container" fxLayout="column" fxLayoutAlign="space-evenly center" fxLayoutGap="30px" fxFlex>
-    <img [src]="'../../assets/images/help_traveller.png'" alt="Guide Profile" class="responsive-image" *ngIf="lastSegment === 'help'">
-    <img [src]="'../../assets/images/help_guide.png'" alt="Guide Profile" class="responsive-image" *ngIf="lastSegment === 'faq'">
+    <img [src]="'../../assets/images/help_traveller.png'" alt="Help Traveller" class="responsive-image" *ngIf="lastSegment === 'help'">
+    <img [src]="'../../assets/images/help_guide.png'" alt="Help Guide" class="responsive-image" *ngIf="lastSegment === 'faq'">
+    <img [src]="'../../assets/images/termsofservice.png'" alt="Terms of Service" class="responsive-image" *ngIf="lastSegment === 'terms-of-use'">
+    <img [src]="'../../assets/images/privacypolicy.png'" alt="Privacy Policy" class="responsive-image" *ngIf="lastSegment === 'privacy-policy'">
   </div>
 </div>
 <div fxLayout="row" class="non-container" fxLayoutAlign="start start" fxLayoutGap="30px" *ngIf="!lastSegment">

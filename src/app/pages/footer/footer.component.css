@@ -43,6 +43,10 @@
   color: #F1E02B;
 }
 
+.footer-links a.active {
+  color: #F1E02B;
+}
+
 .divider {
   color: rgba(255, 255, 255, 0.25);
   font-size: 10px;
